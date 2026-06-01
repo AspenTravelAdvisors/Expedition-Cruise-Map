@@ -234,8 +234,9 @@ function logoEl(opName, big){
 }
 
 /* ===== Map ===== */
-const map=L.map('map',{worldCopyJump:true,minZoom:2,maxZoom:8,zoomControl:true})
+const map=L.map('map',{worldCopyJump:true,minZoom:2,maxZoom:8,zoomControl:false})
   .setView([22,-20],2.4);
+L.control.zoom({position:'bottomleft'}).addTo(map);
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
   attribution:'Imagery © Esri, Maxar, Earthstar Geographics &middot; Expedition data: Brian Harris / Virtuoso',
   maxZoom:8
