@@ -24,13 +24,21 @@
     background:linear-gradient(180deg,rgba(4,12,20,.92),rgba(4,12,20,.55) 70%,transparent);
     pointer-events:none;
   }
-  .topbar .brand{pointer-events:auto;display:flex;align-items:center;gap:12px}
-  .globe{width:34px;height:34px;border-radius:50%;
-    background:radial-gradient(circle at 32% 30%,#7fe0ff,#1d6fa5 55%,#0a2f4a);
-    box-shadow:0 0 0 2px rgba(255,255,255,.15),0 0 22px rgba(70,194,255,.55);flex:0 0 auto}
+  .topbar .brand{pointer-events:auto;display:flex;align-items:center;gap:13px}
   .topbar h1{font-size:18px;margin:0;letter-spacing:.3px;font-weight:700}
   .topbar h1 span{color:var(--accent)}
   .topbar p{margin:1px 0 0;font-size:12px;color:var(--muted)}
+  .logochip{background:#fff;border-radius:11px;flex:0 0 auto;display:flex;align-items:center;
+    justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.25)}
+  .logochip img{display:block;object-fit:contain}
+  .logochip.ebl{height:48px;padding:6px 10px}
+  .logochip.ebl img{height:36px;max-width:160px}
+  .logochip.ata{height:40px;padding:5px 9px}
+  .logochip.ata img{height:30px;max-width:120px}
+  .partner{pointer-events:auto;margin-left:auto;display:flex;align-items:center;gap:9px;
+    text-decoration:none;color:var(--muted);transition:.15s}
+  .partner:hover{color:var(--ink)}
+  .partner span{font-size:11px;letter-spacing:.6px;text-transform:uppercase;font-weight:600;white-space:nowrap}
 
   /* ---------- Operator filter rail ---------- */
   .rail{
@@ -113,6 +121,8 @@
     .rail{display:none}
     .panel{width:100%}
     .topbar p{display:none}
+    .partner span{display:none}
+    .logochip.ebl{height:42px}.logochip.ebl img{height:30px;max-width:120px}
     .hint{display:none}
   }
 </style>
@@ -122,12 +132,20 @@
 
 <div class="topbar">
   <div class="brand">
-    <div class="globe"></div>
+    <div class="logochip ebl">
+      <img src="https://images.squarespace-cdn.com/content/v1/57d86bcd46c3c49c625850a1/54c90494-d588-412d-9643-5d5650d856fd/ebl+2026+Gemini.png?format=750w" alt="Expedition Bucket List">
+    </div>
     <div>
       <h1>Expedition Cruise <span>Atlas</span></h1>
       <p>Explore the world's expedition operators &middot; tap a region to see who sails there</p>
     </div>
   </div>
+  <a class="partner" href="https://www.expeditionbucketlist.com" target="_blank" rel="noopener">
+    <span>Presented&nbsp;by</span>
+    <div class="logochip ata">
+      <img src="https://images.squarespace-cdn.com/content/v1/57d86bcd46c3c49c625850a1/8c7b524b-9951-4a51-aaf2-44982357ccfe/ATA+logo+clear+2025+black.png?format=750w" alt="Aspen Travel Advisors">
+    </div>
+  </a>
 </div>
 
 <aside class="rail">
