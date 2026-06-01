@@ -335,5 +335,60 @@ document.getElementById('close').addEventListener('click',()=>{panel.classList.r
 map.on('click',()=>{panel.classList.remove('open');});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remove('open');});
 </script>
+
+<!-- ===== Menu show/hide toggle (mobile-friendly) ===== -->
+<style>
+  #menuToggle{position:absolute;z-index:1200;left:14px;bottom:84px;width:44px;height:44px;
+    border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--ink);
+    font-size:19px;line-height:1;cursor:pointer;box-shadow:var(--shadow);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    display:flex;align-items:center;justify-content:center;padding:0}
+  #menuToggle:hover{border-color:var(--accent)}
+  #menuToggle:active{transform:scale(.93)}
+  body.rail-hidden .rail{display:none !important}
+  body.rail-shown .rail{display:flex !important}
+</style>
+<button id="menuToggle" type="button" aria-label="Show or hide menus" title="Show / hide menus">☰</button>
+<script>
+(function(){
+  var btn=document.getElementById('menuToggle');
+  if(!btn)return;
+  var panel=document.querySelector('.panel');
+  var rail=document.querySelector('.rail');
+  var mq=window.matchMedia('(max-width:640px)');
+  function railVisible(){return rail&&getComputedStyle(rail).display!=='none';}
+  function sync(){
+    var open=(panel&&panel.classList.contains('open'))||railVisible();
+    btn.textContent=open?'✕':'☰';
+  }
+  btn.addEventListener('click',function(){
+    if(panel&&panel.classList.contains('open')){
+      panel.classList.remove('open');
+    }else if(railVisible()){
+      document.body.classList.add('rail-hidden');
+      document.body.classList.remove('rail-shown');
+    }else{
+      document.body.classList.add('rail-shown');
+      document.body.classList.remove('rail-hidden');
+    }
+    sync();
+  });
+  if(panel){
+    new MutationObserver(function(){
+      if(panel.classList.contains('open')){
+        if(mq.matches){
+          document.body.classList.add('rail-hidden');
+          document.body.classList.remove('rail-shown');
+        }
+      }else{
+        document.body.classList.remove('rail-hidden');
+        document.body.classList.remove('rail-shown');
+      }
+      sync();
+    }).observe(panel,{attributes:true,attributeFilter:['class']});
+  }
+  sync();
+})();
+</script>
 </body>
 </html>
