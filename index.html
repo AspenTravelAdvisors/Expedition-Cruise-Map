@@ -186,6 +186,17 @@
     maxZoom:8
   }).addTo(map);
 
+  /* WebKit (Safari + iOS, incl. iOS Chrome) lays out lazily: when the map is
+     created synchronously at script start the #map container can still report
+     0 height, so Leaflet computes bad tile bounds and the map appears frozen.
+     Recalculate the size once layout settles and whenever the viewport changes. */
+  function _fixMapSize(){ map.invalidateSize(false); }
+  requestAnimationFrame(_fixMapSize);
+  window.addEventListener('load', _fixMapSize);
+  window.addEventListener('resize', _fixMapSize);
+  window.addEventListener('orientationchange', _fixMapSize);
+  setTimeout(_fixMapSize, 300);
+
   const _dataReady = fetch('itinerary.json')
     .then(r => { if(!r.ok) throw new Error('itinerary.json HTTP '+r.status); return r.json(); })
     .then(d => { OPERATORS = d.OPERATORS; COORDS = d.COORDS; REGIONS = d.REGIONS; })
