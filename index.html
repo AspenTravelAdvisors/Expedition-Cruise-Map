@@ -17,6 +17,18 @@
   body{font-family:var(--sans);background:var(--bg);color:var(--ink);overflow:hidden}
   #map{position:absolute;inset:0;background:#06121f;z-index:1}
 
+  /* ---------- Loading animation ---------- */
+  .loader{position:absolute;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 42%,rgba(70,194,255,.16),rgba(6,18,31,.92) 45%,rgba(6,18,31,.98));
+    transition:opacity .35s ease,visibility .35s ease;pointer-events:auto}
+  .loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+  .loader .loadbox{display:flex;flex-direction:column;align-items:center;gap:13px;color:var(--accent2);
+    font-size:12px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700}
+  .loader .wheel{width:46px;height:46px;border-radius:50%;border:2px solid rgba(159,182,203,.18);
+    border-top-color:var(--accent);border-right-color:rgba(255,209,102,.75);
+    animation:ecaSpin .9s linear infinite;box-shadow:0 0 22px rgba(70,194,255,.18)}
+  @keyframes ecaSpin{to{transform:rotate(360deg)}}
+
   /* ---------- Title bar ---------- */
   .topbar{
     position:absolute;top:0;left:0;right:0;z-index:1000;
@@ -129,6 +141,7 @@
 </head>
 <body>
 <div id="map"></div>
+<div class="loader" id="loader" aria-live="polite" aria-label="Loading expedition cruise map"><div class="loadbox"><div class="wheel"></div><div>Loading expedition atlas</div></div></div>
 
 <div class="topbar">
   <div class="brand">
@@ -237,14 +250,17 @@ function logoEl(opName, big){
 const map=L.map('map',{worldCopyJump:true,minZoom:2,maxZoom:8,zoomControl:false})
   .setView([22,-20],2.4);
 L.control.zoom({position:'bottomleft'}).addTo(map);
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
+function finishLoading(){const l=document.getElementById('loader');if(l)l.classList.add('hide');}
+const baseLayer=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
   attribution:'Imagery © Esri, Maxar, Earthstar Geographics &middot; Expedition data: Brian Harris / Virtuoso',
   maxZoom:8
 }).addTo(map);
+baseLayer.on('load',finishLoading);
 // subtle place labels on top of satellite
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{
   maxZoom:8,opacity:.55
 }).addTo(map);
+setTimeout(finishLoading,4500);
 
 /* ===== Build markers ===== */
 const markers={}; // region -> {marker, el}
@@ -338,56 +354,62 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
 
 <!-- ===== Menu show/hide toggle (mobile-friendly) ===== -->
 <style>
-  #menuToggle{position:absolute;z-index:1200;left:14px;bottom:84px;width:44px;height:44px;
-    border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--ink);
-    font-size:19px;line-height:1;cursor:pointer;box-shadow:var(--shadow);
-    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-    display:flex;align-items:center;justify-content:center;padding:0}
-  #menuToggle:hover{border-color:var(--accent)}
-  #menuToggle:active{transform:scale(.93)}
-  body.rail-hidden .rail{display:none !important}
-  body.rail-shown .rail{display:flex !important}
+  /* Frosted-glass pill controls that the menus collapse into */
+  .menupill{position:absolute;z-index:1200;display:inline-flex;align-items:center;gap:9px;height:44px;
+    padding:0 16px;border-radius:30px;cursor:pointer;font-family:var(--sans);font-size:12.5px;
+    font-weight:700;letter-spacing:.3px;color:var(--ink);
+    background:rgba(17,21,29,.5);border:1px solid rgba(236,223,194,.18);box-shadow:var(--shadow);
+    -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
+    transition:background .16s,border-color .16s,transform .12s,opacity .2s}
+  .menupill:hover{background:rgba(23,28,38,.82);border-color:var(--accent)}
+  .menupill:active{transform:scale(.95)}
+  .menupill .pi{font-size:16px;line-height:1;color:var(--accent);width:16px;text-align:center}
+  #railPill{left:14px;bottom:84px}
+  #panelPill{right:14px;bottom:84px;opacity:0;pointer-events:none}
+  body.panel-active #panelPill{opacity:1;pointer-events:auto}
+  /* Left rail fades to transparent + blurred, then collapses into its pill */
+  .rail{transition:opacity .26s ease,transform .26s ease,visibility .26s}
+  body.rail-hidden .rail{opacity:0;transform:translateX(-12px) scale(.97);visibility:hidden;pointer-events:none}
+  /* Right detail panel collapses into its pill */
+  body.panel-collapsed .panel.open{transform:translateX(105%)}
+  @media (max-width:640px){
+    .menupill .pl{display:none}
+    .menupill{padding:0;width:44px;justify-content:center}
+    body.rail-shown .rail{display:flex !important;opacity:1;visibility:visible;transform:none}
+  }
 </style>
-<button id="menuToggle" type="button" aria-label="Show or hide menus" title="Show / hide menus">☰</button>
+<button id="railPill" class="menupill" type="button" aria-label="Show or hide the filters menu" title="Show / hide filters"><span class="pi">&#9776;</span><span class="pl">Filters</span></button>
+<button id="panelPill" class="menupill" type="button" aria-label="Show or hide the details panel" title="Show / hide details"><span class="pi">&#8249;</span><span class="pl">Details</span></button>
 <script>
 (function(){
-  var btn=document.getElementById('menuToggle');
-  if(!btn)return;
+  var body=document.body;
+  var railPill=document.getElementById('railPill');
+  var panelPill=document.getElementById('panelPill');
   var panel=document.querySelector('.panel');
-  var rail=document.querySelector('.rail');
   var mq=window.matchMedia('(max-width:640px)');
-  function railVisible(){return rail&&getComputedStyle(rail).display!=='none';}
-  function sync(){
-    var open=(panel&&panel.classList.contains('open'))||railVisible();
-    btn.textContent=open?'✕':'☰';
+  var railCollapsed=mq.matches;               // start collapsed on small screens
+  function setIcon(el,ch){ var p=el&&el.querySelector('.pi'); if(p)p.innerHTML=ch; }
+  function syncRail(){
+    body.classList.toggle('rail-hidden',railCollapsed);
+    body.classList.toggle('rail-shown',!railCollapsed);
+    setIcon(railPill,railCollapsed?'&#9776;':'&#10005;');
   }
-  btn.addEventListener('click',function(){
-    if(panel&&panel.classList.contains('open')){
-      panel.classList.remove('open');
-    }else if(railVisible()){
-      document.body.classList.add('rail-hidden');
-      document.body.classList.remove('rail-shown');
-    }else{
-      document.body.classList.add('rail-shown');
-      document.body.classList.remove('rail-hidden');
-    }
-    sync();
-  });
+  function syncPanel(){
+    setIcon(panelPill, body.classList.contains('panel-collapsed')?'&#8249;':'&#10005;');
+  }
+  railPill.addEventListener('click',function(){ railCollapsed=!railCollapsed; syncRail(); });
+  panelPill.addEventListener('click',function(){ body.classList.toggle('panel-collapsed'); syncPanel(); });
   if(panel){
     new MutationObserver(function(){
-      if(panel.classList.contains('open')){
-        if(mq.matches){
-          document.body.classList.add('rail-hidden');
-          document.body.classList.remove('rail-shown');
-        }
-      }else{
-        document.body.classList.remove('rail-hidden');
-        document.body.classList.remove('rail-shown');
-      }
-      sync();
+      var open=panel.classList.contains('open');
+      body.classList.toggle('panel-active',open);
+      if(!open){ body.classList.remove('panel-collapsed'); }
+      if(open && mq.matches){ railCollapsed=true; syncRail(); }
+      syncPanel();
     }).observe(panel,{attributes:true,attributeFilter:['class']});
   }
-  sync();
+  if(mq.addEventListener){ mq.addEventListener('change',function(e){ railCollapsed=e.matches; syncRail(); }); }
+  syncRail(); syncPanel();
 })();
 </script>
 </body>
