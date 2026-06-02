@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Expedition Cruise Atlas — Where Each Operator Sails</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="preconnect" href="https://server.arcgisonline.com" crossorigin>
+<link rel="stylesheet" href="vendor/leaflet.min.css">
 <style>
   :root{
     --bg:#06121f; --panel:#0d1f30; --panel2:#12283c; --line:#24445e;
@@ -167,7 +168,7 @@
 
 <div class="hint">🌍 Drag to explore &middot; scroll to zoom &middot; click a <b>glowing pin</b> for operators</div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="vendor/leaflet.min.js"></script>
 <script>
   // ── DATA LOADING ─────────────────────────────────────────────────────────
   let OPERATORS, COORDS, REGIONS;
@@ -199,6 +200,7 @@ function logoEl(opName, big){
   }
   if(!m.domain){ initials(); return wrap; }
   const sources=[
+    'logos/'+m.domain+'.png',
     'https://www.google.com/s2/favicons?sz=128&domain='+m.domain,
     'https://icons.duckduckgo.com/ip3/'+m.domain+'.ico'
   ];
@@ -219,10 +221,6 @@ L.control.zoom({position:'bottomleft'}).addTo(map);
 const baseLayer=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
   attribution:'Imagery © Esri, Maxar, Earthstar Geographics &middot; Expedition data: Brian Harris / Virtuoso',
   maxZoom:8
-}).addTo(map);
-// subtle place labels on top of satellite
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{
-  maxZoom:8,opacity:.55
 }).addTo(map);
 
 /* ===== Build markers ===== */
