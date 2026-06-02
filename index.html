@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Expedition Cruise Atlas — Where Each Operator Sails</title>
 <link rel="preconnect" href="https://server.arcgisonline.com" crossorigin>
+<link rel="preconnect" href="https://images.squarespace-cdn.com" crossorigin>
 <link rel="stylesheet" href="vendor/leaflet.min.css">
 <style>
   :root{
@@ -172,11 +173,23 @@
 <script>
   // ── DATA LOADING ─────────────────────────────────────────────────────────
   let OPERATORS, COORDS, REGIONS;
+
+  /* Init the map + satellite imagery IMMEDIATELY. Previously the whole map was
+     created inside _dataReady.then(), so nothing rendered until itinerary.json
+     (~210KB) finished downloading — any slowness looked like a broken/blank map.
+     Now the base imagery paints right away and markers are added when data lands. */
+  const map=L.map('map',{worldCopyJump:true,minZoom:2,maxZoom:8,zoomControl:false})
+    .setView([22,-20],2.4);
+  L.control.zoom({position:'bottomleft'}).addTo(map);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
+    attribution:'Imagery © Esri, Maxar, Earthstar Geographics &middot; Expedition data: Brian Harris / Virtuoso',
+    maxZoom:8
+  }).addTo(map);
+
   const _dataReady = fetch('itinerary.json')
-    .then(r => r.json())
-    .then(d => {
-      OPERATORS = d.OPERATORS; COORDS = d.COORDS; REGIONS = d.REGIONS;
-    });
+    .then(r => { if(!r.ok) throw new Error('itinerary.json HTTP '+r.status); return r.json(); })
+    .then(d => { OPERATORS = d.OPERATORS; COORDS = d.COORDS; REGIONS = d.REGIONS; })
+    .catch(err => { console.error('Expedition Atlas: itinerary data failed to load —', err); });
 
 /* ===== Operator display metadata ===== */
 ;
@@ -215,13 +228,7 @@ function logoEl(opName, big){
 
 /* ===== Map ===== */
 _dataReady.then(() => {
-const map=L.map('map',{worldCopyJump:true,minZoom:2,maxZoom:8,zoomControl:false})
-  .setView([22,-20],2.4);
-L.control.zoom({position:'bottomleft'}).addTo(map);
-const baseLayer=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
-  attribution:'Imagery © Esri, Maxar, Earthstar Geographics &middot; Expedition data: Brian Harris / Virtuoso',
-  maxZoom:8
-}).addTo(map);
+if(!REGIONS){ return; }   // data failed to load — base imagery still renders
 
 /* ===== Build markers ===== */
 const markers={}; // region -> {marker, el}
