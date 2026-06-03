@@ -135,15 +135,16 @@
 
 <div class="topbar">
   <div class="brand">
-    <div class="logochip ebl">
+    <a class="logochip ebl" href="https://www.expeditionbucketlist.com" target="_blank" rel="noopener">
       <img src="https://images.squarespace-cdn.com/content/v1/57d86bcd46c3c49c625850a1/54c90494-d588-412d-9643-5d5650d856fd/ebl+2026+Gemini.png?format=750w" alt="Expedition Bucket List">
-    </div>
+    </a>
     <div>
       <h1>Expedition Cruise <span>Atlas</span></h1>
       <p>Explore the world's expedition operators &middot; tap a region to see who sails there</p>
     </div>
   </div>
-  <a class="partner" href="https://www.expeditionbucketlist.com" target="_blank" rel="noopener">
+  <a class="helplink" href="mailto:Book@BeVvip.com" data-help-open><span class="hi">?</span><span class="ht">Need Help</span></a>
+  <a class="partner" href="https://www.aspentraveladvisors.com" target="_blank" rel="noopener">
     <span>Presented&nbsp;by</span>
     <div class="logochip ata">
       <img src="https://images.squarespace-cdn.com/content/v1/57d86bcd46c3c49c625850a1/8c7b524b-9951-4a51-aaf2-44982357ccfe/ATA+logo+clear+2025+black.png?format=750w" alt="Aspen Travel Advisors">
@@ -167,7 +168,7 @@
   <div class="list" id="pList"></div>
 </section>
 
-<div class="hint">🌍 Drag to explore &middot; scroll to zoom &middot; click a <b>glowing pin</b> for operators</div>
+<div class="hint">🌍 Drag to explore &middot; click a <b>glowing pin</b> for operators &middot; <a class="hintcta" href="mailto:Book@BeVvip.com" data-help-open>Need help? <b>Contact us</b></a></div>
 
 <script src="vendor/leaflet.min.js"></script>
 <script>
@@ -390,6 +391,93 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
   }
   if(mq.addEventListener){ mq.addEventListener('change',function(e){ railCollapsed=e.matches; syncRail(); }); }
   syncRail(); syncPanel();
+})();
+</script>
+
+<!-- ===== Need Help contact modal + CTAs ===== -->
+<style>
+  .topbar .partner{margin-left:18px}
+  .helplink{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;margin-left:auto;
+    text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.3px;color:var(--ink);
+    padding:8px 14px;border-radius:30px;border:1px solid var(--accent);background:rgba(255,255,255,.05);
+    transition:.15s;cursor:pointer;white-space:nowrap}
+  .helplink:hover{background:rgba(255,255,255,.12)}
+  .helplink .hi{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;
+    border-radius:50%;background:var(--accent);color:var(--bg);font-size:11px;font-weight:900;line-height:1}
+  .hint .hintcta{color:var(--accent);text-decoration:none;cursor:pointer;font-weight:700}
+  .hint .hintcta:hover{text-decoration:underline}
+  .helpoverlay{position:fixed;inset:0;z-index:3000;display:none;align-items:center;justify-content:center;
+    background:rgba(3,6,11,.62);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);padding:18px}
+  .helpoverlay.open{display:flex}
+  .helpmodal{position:relative;width:420px;max-width:100%;max-height:calc(100% - 36px);overflow-y:auto;
+    background:linear-gradient(180deg,var(--panel),var(--bg));border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);padding:26px 24px 22px}
+  .helpclose{position:absolute;top:13px;right:13px;width:30px;height:30px;border-radius:8px;
+    border:1px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer;font-size:15px}
+  .helpkicker{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .helpmodal h3{font-family:var(--serif,inherit);margin:7px 0 8px;font-size:24px;line-height:1.15;font-weight:600}
+  .helpqual{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 16px}
+  .helpform{display:flex;flex-direction:column;gap:10px}
+  .helpform input,.helpform textarea{width:100%;background:var(--panel2);border:1px solid var(--line);
+    border-radius:10px;color:var(--ink);font:inherit;font-size:13.5px;padding:11px 12px;resize:vertical}
+  .helpform input:focus,.helpform textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+  .helpform input::placeholder,.helpform textarea::placeholder{color:var(--muted)}
+  .helpsubmit{margin-top:4px;padding:12px;border:none;border-radius:10px;cursor:pointer;font:inherit;
+    font-weight:700;font-size:14px;color:#06121f;background:linear-gradient(135deg,var(--accent),var(--accent2));transition:.16s}
+  .helpsubmit:hover{filter:brightness(1.06)}
+  .helpsubmit:active{transform:scale(.985)}
+  .helpsubmit[disabled]{opacity:.6;cursor:default}
+  .helpfallback{font-size:11.5px;color:var(--muted);text-align:center;margin-top:2px}
+  .helpfallback a{color:var(--accent);text-decoration:none}
+  .helpfallback a:hover{text-decoration:underline}
+  .helpstatus{font-size:12.5px;text-align:center;margin-top:4px;line-height:1.4}
+  .helpstatus.ok{color:var(--accent2)}
+  .helpstatus.err{color:#ff8a8a}
+  .helpstatus.err a{color:var(--accent)}
+  @media (max-width:640px){.helplink .ht{display:none}.helplink{padding:8px}.topbar .partner{margin-left:12px}}
+</style>
+<div class="helpoverlay" id="helpOverlay" aria-hidden="true">
+  <div class="helpmodal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <button class="helpclose" id="helpClose" type="button" aria-label="Close">&#10005;</button>
+    <div class="helpkicker">Need help?</div>
+    <h3 id="helpTitle">We're here to assist</h3>
+    <p class="helpqual">For any questions about these service providers, for preferred-partner benefits, or for assistance with pre- and post-trip extensions &mdash; send us a note and we'll be in touch.</p>
+    <form id="helpForm" class="helpform">
+      <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
+      <input type="email" name="email" placeholder="Your email" autocomplete="email" required>
+      <textarea name="message" placeholder="How can we help?" rows="4" required></textarea>
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
+      <input type="hidden" name="_subject" value="Need Help — Expedition Cruise Atlas">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <button type="submit" class="helpsubmit">Send message</button>
+      <div class="helpfallback">or email us directly at <a href="mailto:Book@BeVvip.com?subject=Need%20Help%20%E2%80%94%20Expedition%20Cruise%20Atlas">Book@BeVvip.com</a></div>
+      <div class="helpstatus" id="helpStatus" role="status"></div>
+    </form>
+  </div>
+</div>
+<script>
+(function(){
+  var overlay=document.getElementById('helpOverlay');
+  if(!overlay) return;
+  var form=document.getElementById('helpForm');
+  var statusEl=document.getElementById('helpStatus');
+  var btn=form.querySelector('.helpsubmit');
+  function openHelp(e){ if(e) e.preventDefault(); overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); }
+  function closeHelp(){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); }
+  document.querySelectorAll('[data-help-open]').forEach(function(el){ el.addEventListener('click',openHelp); });
+  document.getElementById('helpClose').addEventListener('click',closeHelp);
+  overlay.addEventListener('click',function(e){ if(e.target===overlay) closeHelp(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&overlay.classList.contains('open')) closeHelp(); });
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    btn.disabled=true; statusEl.className='helpstatus'; statusEl.textContent='Sending…';
+    fetch('https://formsubmit.co/ajax/Book@BeVvip.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
+      .then(function(r){return r.json();})
+      .then(function(){ statusEl.className='helpstatus ok'; statusEl.textContent='Thank you — your message is on its way. We’ll be in touch shortly.'; form.reset(); })
+      .catch(function(){ statusEl.className='helpstatus err'; statusEl.innerHTML='Sorry, something went wrong. Please email us directly at <a href="mailto:Book@BeVvip.com">Book@BeVvip.com</a>.'; })
+      .then(function(){ btn.disabled=false; });
+  });
 })();
 </script>
 </body>
