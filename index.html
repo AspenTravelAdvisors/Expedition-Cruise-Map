@@ -377,7 +377,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
   var panelPill=document.getElementById('panelPill');
   var panel=document.querySelector('.panel');
   var mq=window.matchMedia('(max-width:640px)');
-  var railCollapsed=mq.matches;               // start collapsed on small screens
+  var railCollapsed=false;                    // filters visible on load (incl. mobile)
   function setIcon(el,ch){ var p=el&&el.querySelector('.pi'); if(p)p.innerHTML=ch; }
   function syncRail(){
     body.classList.toggle('rail-hidden',railCollapsed);
@@ -394,11 +394,11 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
       var open=panel.classList.contains('open');
       body.classList.toggle('panel-active',open);
       if(!open){ body.classList.remove('panel-collapsed'); }
-      if(open && mq.matches){ railCollapsed=true; syncRail(); }
+      railCollapsed=open; syncRail();   // hide filters while details open, restore on close
       syncPanel();
     }).observe(panel,{attributes:true,attributeFilter:['class']});
   }
-  if(mq.addEventListener){ mq.addEventListener('change',function(e){ railCollapsed=e.matches; syncRail(); }); }
+  /* viewport changes no longer force the filter menu closed */
   syncRail(); syncPanel();
   /* Auto-hide the top bar while dragging the map; tap the map to bring it back */
   (function(){ function hook(m){ m.on('dragstart',function(){ body.classList.add('nav-hidden'); });
