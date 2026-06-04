@@ -30,6 +30,8 @@
   .topbar .brand{pointer-events:auto;display:flex;align-items:center;gap:13px}
   .topbar h1{font-size:18px;margin:0;letter-spacing:.3px;font-weight:700}
   .topbar h1 span{color:var(--accent)}
+  .topbar h1 a.bev{color:inherit;text-decoration:none;transition:.15s;pointer-events:auto}
+  .topbar h1 a.bev:hover{color:var(--accent)}
   .topbar p{margin:1px 0 0;font-size:12px;color:var(--muted)}
   .logochip{background:#fff;border-radius:11px;flex:0 0 auto;display:flex;align-items:center;
     justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.25)}
@@ -139,11 +141,10 @@
       <img src="https://images.squarespace-cdn.com/content/v1/57d86bcd46c3c49c625850a1/54c90494-d588-412d-9643-5d5650d856fd/ebl+2026+Gemini.png?format=750w" alt="Expedition Bucket List">
     </a>
     <div>
-      <h1>Expedition Cruise <span>Atlas</span></h1>
+      <h1>Expedition Cruise <span>Atlas</span><a class="bev" href="https://bevvip.com" target="_blank" rel="noopener"> - BeVvip.com</a></h1>
       <p>Explore the world's expedition operators &middot; tap a region to see who sails there</p>
     </div>
   </div>
-  <a class="helplink" href="mailto:Book@BeVvip.com" data-help-open><span class="hi">?</span><span class="ht">Need Help</span></a>
   <a class="partner" href="https://www.aspentraveladvisors.com" target="_blank" rel="noopener">
     <span>Presented&nbsp;by</span>
     <div class="logochip ata">
@@ -168,7 +169,6 @@
   <div class="list" id="pList"></div>
 </section>
 
-<div class="hint">🌍 Drag to explore &middot; click a <b>glowing pin</b> for operators &middot; <a class="hintcta" href="mailto:Book@BeVvip.com" data-help-open>Need help? <b>Contact us</b></a></div>
 
 <script src="vendor/leaflet.min.js"></script>
 <script>
@@ -182,6 +182,7 @@
   const map=L.map('map',{worldCopyJump:true,minZoom:2,maxZoom:8,zoomControl:false})
     .setView([22,-20],2.4);
   L.control.zoom({position:'bottomleft'}).addTo(map);
+  window.__atlasMap=map;
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
     attribution:'Imagery © Esri, Maxar, Earthstar Geographics &middot; Expedition data: Brian Harris / Virtuoso',
     maxZoom:8
@@ -335,18 +336,23 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
 
 <!-- ===== Menu show/hide toggle (mobile-friendly) ===== -->
 <style>
-  /* Frosted-glass pill controls that the menus collapse into */
-  .menupill{position:absolute;z-index:1200;display:inline-flex;align-items:center;gap:9px;height:44px;
-    padding:0 16px;border-radius:30px;cursor:pointer;font-family:var(--sans);font-size:12.5px;
-    font-weight:700;letter-spacing:.3px;color:var(--ink);
-    background:rgba(17,21,29,.5);border:1px solid rgba(236,223,194,.18);box-shadow:var(--shadow);
+  /* ---------- Auto-hiding top bar ---------- */
+  .topbar{transition:transform .3s ease,opacity .3s ease}
+  body.nav-hidden .topbar{transform:translateY(-115%);opacity:0;pointer-events:none}
+  /* ---------- Unified bottom toolbar (dock) ---------- */
+  .dock{position:absolute;z-index:1200;left:50%;bottom:16px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:6px;padding:6px;border-radius:34px;
+    background:rgba(17,21,29,.62);border:1px solid rgba(236,223,194,.16);box-shadow:var(--shadow);
     -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
-    transition:background .16s,border-color .16s,transform .12s,opacity .2s}
-  .menupill:hover{background:rgba(23,28,38,.82);border-color:var(--accent)}
-  .menupill:active{transform:scale(.95)}
-  .menupill .pi{font-size:16px;line-height:1;color:var(--accent);width:16px;text-align:center}
-  #railPill{left:14px;bottom:84px}
-  #panelPill{right:14px;bottom:84px;opacity:0;pointer-events:none}
+    max-width:calc(100vw - 24px)}
+  .dockbtn{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;gap:8px;height:42px;
+    padding:0 16px;border:0;border-radius:28px;cursor:pointer;text-decoration:none;
+    font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.3px;color:var(--ink);
+    background:transparent;transition:background .15s,opacity .2s,transform .12s;white-space:nowrap}
+  .dockbtn:hover{background:rgba(255,255,255,.08)}
+  .dockbtn:active{transform:scale(.95)}
+  .dockbtn .pi{font-size:16px;line-height:1;color:var(--accent);width:16px;text-align:center}
+  #panelPill{opacity:.4;pointer-events:none}
   body.panel-active #panelPill{opacity:1;pointer-events:auto}
   /* Left rail fades to transparent + blurred, then collapses into its pill */
   .rail{transition:opacity .26s ease,transform .26s ease,visibility .26s}
@@ -354,13 +360,16 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
   /* Right detail panel collapses into its pill */
   body.panel-collapsed .panel.open{transform:translateX(105%)}
   @media (max-width:640px){
-    .menupill .pl{display:none}
-    .menupill{padding:0;width:44px;justify-content:center}
+    .dockbtn .pl{display:none}
+    .dockbtn{padding:0 13px}
     body.rail-shown .rail{display:flex !important;opacity:1;visibility:visible;transform:none}
   }
 </style>
-<button id="railPill" class="menupill" type="button" aria-label="Show or hide the filters menu" title="Show / hide filters"><span class="pi">&#9776;</span><span class="pl">Filters</span></button>
-<button id="panelPill" class="menupill" type="button" aria-label="Show or hide the details panel" title="Show / hide details"><span class="pi">&#8249;</span><span class="pl">Details</span></button>
+<div class="dock" role="toolbar" aria-label="Map controls">
+  <button id="railPill" class="dockbtn" type="button" aria-label="Show or hide the filters menu" title="Show / hide filters"><span class="pi">&#9776;</span><span class="pl">Filters</span></button>
+  <button id="panelPill" class="dockbtn" type="button" aria-label="Show or hide the details panel" title="Show / hide details"><span class="pi">&#8249;</span><span class="pl">Details</span></button>
+  <a id="helpDock" class="dockbtn" href="mailto:Book@BeVvip.com" data-help-open role="button" aria-label="Need help — contact us"><span class="pi">?</span><span class="pl">Need Help</span></a>
+</div>
 <script>
 (function(){
   var body=document.body;
@@ -391,19 +400,16 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
   }
   if(mq.addEventListener){ mq.addEventListener('change',function(e){ railCollapsed=e.matches; syncRail(); }); }
   syncRail(); syncPanel();
+  /* Auto-hide the top bar while dragging the map; tap the map to bring it back */
+  (function(){ function hook(m){ m.on('dragstart',function(){ body.classList.add('nav-hidden'); });
+    m.on('click',function(){ body.classList.remove('nav-hidden'); }); }
+    (function wait(){ if(window.__atlasMap){ hook(window.__atlasMap); } else { setTimeout(wait,150); } })(); })();
 })();
 </script>
 
 <!-- ===== Need Help contact modal + CTAs ===== -->
 <style>
-  .topbar .partner{margin-left:18px}
-  .helplink{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;margin-left:auto;
-    text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.3px;color:var(--ink);
-    padding:8px 14px;border-radius:30px;border:1px solid var(--accent);background:rgba(255,255,255,.05);
-    transition:.15s;cursor:pointer;white-space:nowrap}
-  .helplink:hover{background:rgba(255,255,255,.12)}
-  .helplink .hi{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;
-    border-radius:50%;background:var(--accent);color:var(--bg);font-size:11px;font-weight:900;line-height:1}
+  .topbar .partner{margin-left:auto}
   .hint .hintcta{color:var(--accent);text-decoration:none;cursor:pointer;font-weight:700}
   .hint .hintcta:hover{text-decoration:underline}
   .helpoverlay{position:fixed;inset:0;z-index:3000;display:none;align-items:center;justify-content:center;
@@ -434,7 +440,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
   .helpstatus.ok{color:var(--accent2)}
   .helpstatus.err{color:#ff8a8a}
   .helpstatus.err a{color:var(--accent)}
-  @media (max-width:640px){.helplink .ht{display:none}.helplink{padding:8px}.topbar .partner{margin-left:12px}}
+  @media (max-width:640px){.topbar .partner{margin-left:auto}.topbar h1 a.bev{display:none}
+    .logochip.ata{height:30px;padding:2px 5px}.logochip.ata img{height:24px;max-width:96px}}
 </style>
 <div class="helpoverlay" id="helpOverlay" aria-hidden="true">
   <div class="helpmodal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
