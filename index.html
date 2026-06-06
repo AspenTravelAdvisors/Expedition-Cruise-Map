@@ -394,7 +394,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
       var open=panel.classList.contains('open');
       body.classList.toggle('panel-active',open);
       if(!open){ body.classList.remove('panel-collapsed'); }
-      railCollapsed=open; syncRail();   // hide filters while details open, restore on close
+      if(mq.matches){ railCollapsed=open; syncRail(); }   // only auto-hide filters on mobile/small screens
       syncPanel();
     }).observe(panel,{attributes:true,attributeFilter:['class']});
   }
