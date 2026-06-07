@@ -285,6 +285,7 @@ function toggleOp(name,row){
   else { activeOp=name; row.classList.add('active'); }
   applyFilter();
   document.getElementById('reset').classList.toggle('show', !!activeOp);
+  if(activeRegion) openRegion(activeRegion);   // re-filter the open region to this operator
 }
 function applyFilter(){
   Object.entries(markers).forEach(([region,obj])=>{
@@ -296,6 +297,7 @@ function applyFilter(){
 document.getElementById('reset').addEventListener('click',()=>{
   activeOp=null;document.querySelectorAll('.op').forEach(r=>r.classList.remove('active'));
   applyFilter();document.getElementById('reset').classList.remove('show');
+  if(activeRegion) openRegion(activeRegion);   // restore all operators in the open region
 });
 
 /* ===== Region detail panel ===== */
@@ -303,13 +305,15 @@ const panel=document.getElementById('panel');
 function openRegion(region){
   activeRegion=region;
   let ops=REGIONS[region].slice();
-  // sort: filtered operator first, then alpha
-  ops.sort((a,b)=>{
-    if(activeOp){ if(a.company===activeOp)return -1; if(b.company===activeOp)return 1; }
-    return (OPERATORS[a.company]?.short||a.company).localeCompare(OPERATORS[b.company]?.short||b.company);
-  });
+  // when an operator filter is active, show ONLY that operator in this region
+  if(activeOp) ops=ops.filter(o=>o.company===activeOp);
+  ops.sort((a,b)=>(OPERATORS[a.company]?.short||a.company).localeCompare(OPERATORS[b.company]?.short||b.company));
   document.getElementById('pTitle').textContent=region;
-  document.getElementById('pSub').textContent=ops.length+' expedition operator'+(ops.length>1?'s':'')+' sail here · tap a card to view live cruises';
+  if(activeOp && !ops.length){
+    document.getElementById('pSub').textContent=(OPERATORS[activeOp]?.short||activeOp)+' does not sail this region · tap “Show all” to clear the filter';
+  } else {
+    document.getElementById('pSub').textContent=ops.length+' expedition operator'+(ops.length!==1?'s':'')+' sail here · tap a card to view live cruises';
+  }
   const list=document.getElementById('pList');
   list.innerHTML='';
   ops.forEach(o=>{
@@ -328,9 +332,18 @@ function openRegion(region){
   const c=COORDS[region];
   map.flyTo([c[0],c[1]], Math.max(map.getZoom(),3.2), {duration:.8});
 }
-document.getElementById('close').addEventListener('click',()=>{panel.classList.remove('open');activeRegion=null;});
-map.on('click',()=>{panel.classList.remove('open');});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remove('open');});
+function closePanel(){ panel.classList.remove('open'); activeRegion=null; }
+/* Full reset: clear operator filter, un-dim every region, close the panel */
+function showAll(){
+  activeOp=null; document.querySelectorAll('.op').forEach(r=>r.classList.remove('active'));
+  document.getElementById('reset').classList.remove('show');
+  applyFilter(); closePanel();
+}
+window.__atlasShowAll=showAll;
+document.getElementById('close').addEventListener('click',closePanel);
+// Click on open water (not a pin) backs out of the region; dragging the map never fires this.
+map.on('click',closePanel);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel();});
 });
 </script>
 
@@ -368,6 +381,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
 <div class="dock" role="toolbar" aria-label="Map controls">
   <button id="railPill" class="dockbtn" type="button" aria-label="Show or hide the filters menu" title="Show / hide filters"><span class="pi">&#9776;</span><span class="pl">Filters</span></button>
   <button id="panelPill" class="dockbtn" type="button" aria-label="Show or hide the details panel" title="Show / hide details"><span class="pi">&#8249;</span><span class="pl">Details</span></button>
+  <button id="resetAll" class="dockbtn" type="button" aria-label="Show all regions" title="Show all regions"><span class="pi">&#8634;</span><span class="pl">Show all</span></button>
   <a id="helpDock" class="dockbtn" href="mailto:Book@BeVvip.com" data-help-open role="button" aria-label="Need help — contact us"><span class="pi">?</span><span class="pl">Need Help</span></a>
 </div>
 <script>
@@ -388,6 +402,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panel.classList.remo
     setIcon(panelPill, body.classList.contains('panel-collapsed')?'&#8249;':'&#10005;');
   }
   railPill.addEventListener('click',function(){ railCollapsed=!railCollapsed; syncRail(); });
+  var resetAll=document.getElementById('resetAll');
+  if(resetAll){ resetAll.addEventListener('click',function(){ if(window.__atlasShowAll) window.__atlasShowAll(); }); }
   panelPill.addEventListener('click',function(){ body.classList.toggle('panel-collapsed'); syncPanel(); });
   if(panel){
     new MutationObserver(function(){
