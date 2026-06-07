@@ -1,0 +1,238 @@
+{
+ "OPERATORS": {
+  "PONANT EXPLORATIONS": {
+   "short": "Ponant",
+   "domain": "ponant.com",
+   "color": "#0b1f44",
+   "count": 588
+  },
+  "National Geographic-Lindblad Expeditions": {
+   "short": "Nat Geo–Lindblad",
+   "domain": "expeditions.com",
+   "color": "#f5c518",
+   "count": 1194
+  },
+  "HX Expeditions": {
+   "short": "HX · Hurtigruten",
+   "domain": "travelhx.com",
+   "color": "#c8102e",
+   "count": 322
+  },
+  "Aqua Expeditions": {
+   "short": "Aqua Expeditions",
+   "domain": "aquaexpeditions.com",
+   "color": "#1f6f8b",
+   "count": 516
+  },
+  "Aurora Expeditions": {
+   "short": "Aurora Expeditions",
+   "domain": "auroraexpeditions.com",
+   "color": "#00467f",
+   "count": 101
+  },
+  "Swan Hellenic": {
+   "short": "Swan Hellenic",
+   "domain": "swanhellenic.com",
+   "color": "#0a2b4a",
+   "count": 120
+  },
+  "Quark Expeditions": {
+   "short": "Quark Expeditions",
+   "domain": "quarkexpeditions.com",
+   "color": "#d2232a",
+   "count": 109
+  },
+  "Atlas Ocean Voyages": {
+   "short": "Atlas Ocean Voyages",
+   "domain": "atlasoceanvoyages.com",
+   "color": "#0e3d5c",
+   "count": 129
+  },
+  "Silversea": {
+   "short": "Silversea",
+   "domain": "silversea.com",
+   "color": "#1f3a5f",
+   "count": 177
+  },
+  "Seabourn": {
+   "short": "Seabourn",
+   "domain": "seabourn.com",
+   "color": "#0a2747",
+   "count": 286
+  },
+  "Coral Expeditions": {
+   "short": "Coral Expeditions",
+   "domain": "coralexpeditions.com",
+   "color": "#e35205",
+   "count": 61
+  },
+  "UnCruise Adventures": {
+   "short": "UnCruise Adventures",
+   "domain": "uncruise.com",
+   "color": "#1c6b3c",
+   "count": 188
+  }
+ },
+ "REGIONS": {
+  "Australia, NZ & South Pacific": {
+   "name": "Australia, NZ & South Pacific",
+   "coord": [
+    -27.0,
+    150.0
+   ],
+   "count": 140
+  },
+  "Hawaii & Tahiti": {
+   "name": "Hawaii & Tahiti",
+   "coord": [
+    0.0,
+    -152.0
+   ],
+   "count": 24
+  },
+  "Norway, Fjords & Coast": {
+   "name": "Norway, Fjords & Coast",
+   "coord": [
+    66.0,
+    12.0
+   ],
+   "count": 119
+  },
+  "Amazon & South America": {
+   "name": "Amazon & South America",
+   "coord": [
+    -14.0,
+    -66.0
+   ],
+   "count": 410
+  },
+  "Central America & Panama": {
+   "name": "Central America & Panama",
+   "coord": [
+    9.0,
+    -80.0
+   ],
+   "count": 82
+  },
+  "Alaska & Yukon": {
+   "name": "Alaska & Yukon",
+   "coord": [
+    60.5,
+    -149.0
+   ],
+   "count": 319
+  },
+  "Arctic": {
+   "name": "Arctic",
+   "coord": [
+    78.5,
+    16.0
+   ],
+   "count": 416
+  },
+  "Antarctica": {
+   "name": "Antarctica",
+   "coord": [
+    -64.5,
+    -62.0
+   ],
+   "count": 555
+  },
+  "Caribbean & Bermuda": {
+   "name": "Caribbean & Bermuda",
+   "coord": [
+    16.0,
+    -66.0
+   ],
+   "count": 58
+  },
+  "Galápagos": {
+   "name": "Galápagos",
+   "coord": [
+    -0.7,
+    -90.5
+   ],
+   "count": 1084
+  },
+  "Mediterranean": {
+   "name": "Mediterranean",
+   "coord": [
+    39.0,
+    14.0
+   ],
+   "count": 198
+  },
+  "Other": {
+   "name": "Other & Repositioning",
+   "coord": [
+    28.0,
+    -40.0
+   ],
+   "count": 79
+  },
+  "Northern Europe & British Isles": {
+   "name": "Northern Europe & British Isles",
+   "coord": [
+    58.0,
+    -3.0
+   ],
+   "count": 131
+  },
+  "Asia & Mekong": {
+   "name": "Asia & Mekong",
+   "coord": [
+    14.0,
+    105.0
+   ],
+   "count": 55
+  },
+  "Atlantic Islands": {
+   "name": "Atlantic Islands",
+   "coord": [
+    32.0,
+    -23.0
+   ],
+   "count": 45
+  },
+  "Canada & New England": {
+   "name": "Canada & New England",
+   "coord": [
+    48.0,
+    -65.0
+   ],
+   "count": 21
+  },
+  "Europe Rivers": {
+   "name": "Europe Rivers",
+   "coord": [
+    49.0,
+    8.0
+   ],
+   "count": 11
+  },
+  "Africa & Indian Ocean": {
+   "name": "Africa & Indian Ocean",
+   "coord": [
+    -12.0,
+    45.0
+   ],
+   "count": 18
+  },
+  "US Rivers & Coast": {
+   "name": "US Rivers & Coast",
+   "coord": [
+    40.0,
+    -95.0
+   ],
+   "count": 21
+  },
+  "Great Lakes": {
+   "name": "Great Lakes",
+   "coord": [
+    45.5,
+    -84.0
+   ],
+   "count": 5
+  }
+ }
+}
