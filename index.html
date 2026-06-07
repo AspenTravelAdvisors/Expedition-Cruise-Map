@@ -56,7 +56,7 @@
   .month{height:30px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-size:11.5px;cursor:pointer}
   .month:hover{border-color:rgba(202,164,78,.65);color:var(--ink)}
   .month.active{background:linear-gradient(135deg,#caa44e,#ffe9b0);border-color:#fff;color:#3a2c0d;font-weight:800}
-  .op{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.15s;margin-bottom:2px}
+  .op{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:7px 8px;border-radius:10px;cursor:pointer;border:1px solid transparent;transition:.15s;margin-bottom:2px}
   .op:hover{background:var(--panel2)}
   .op.active{background:var(--panel2);border-color:var(--accent)}
   .op .lg{width:30px;height:30px;border-radius:7px;background:#fff;flex:0 0 auto;display:flex;align-items:center;justify-content:center;overflow:hidden;font-weight:800;font-size:13px}
@@ -64,6 +64,8 @@
   .op .nm{font-size:12.5px;line-height:1.15;font-weight:600}
   .op .ct{font-size:10.5px;color:var(--muted);margin-top:1px}
   .op .dot{width:8px;height:8px;border-radius:50%;margin-left:auto;flex:0 0 auto;opacity:.9}
+  .op .desc{display:none;flex-basis:100%;width:100%;font-size:11px;color:var(--muted);line-height:1.45;margin:3px 1px 1px}
+  .op.active .desc{display:block}
   .rail .reset{margin:6px 10px 12px;text-align:center;font-size:11.5px;color:var(--accent);cursor:pointer;padding:7px;border:1px dashed var(--line);border-radius:9px;display:none}
   .rail .reset.show{display:block}
   .panel{position:absolute;z-index:1001;top:0;right:0;height:100%;width:392px;max-width:92vw;background:linear-gradient(180deg,var(--panel),#080b10);border-left:1px solid var(--line);box-shadow:-12px 0 40px rgba(0,0,0,.55);transform:translateX(105%);transition:transform .32s cubic-bezier(.22,.61,.36,1);display:flex;flex-direction:column}
@@ -218,6 +220,7 @@ function boot(a){
     txt.innerHTML='<div class="nm">'+esc(m.short)+'</div><div class="ct">'+m.count+' sailing'+(m.count!==1?'s':'')+'</div>';
     const dot=document.createElement('div');dot.className='dot';dot.style.background=m.color;
     row.appendChild(logoEl(name));row.appendChild(txt);row.appendChild(dot);
+    if(m.blurb){const ds=document.createElement('div');ds.className='desc';ds.textContent=m.blurb;row.title=m.blurb;row.appendChild(ds);}
     row.addEventListener('click',()=>toggleOp(name,row));opList.appendChild(row);
   });
   function toggleOp(name,row){
