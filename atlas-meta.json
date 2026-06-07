@@ -4,73 +4,71 @@
    "short": "Ponant",
    "domain": "ponant.com",
    "color": "#0b1f44",
-   "count": 588
+   "count": 588,
+   "blurb": "A French expedition line that somehow pairs glacial wilderness with foie gras and a proper Bordeaux. The polar ice may groan outside, but inside the ship someone is quietly polishing crystal stemware as if this were the Riviera."
   },
   "National Geographic-Lindblad Expeditions": {
    "short": "Nat Geo–Lindblad",
    "domain": "expeditions.com",
    "color": "#f5c518",
-   "count": 1194
+   "count": 1194,
+   "blurb": "The professors of the wild frontier. Less champagne pyramid, more zodiac launch at dawn with a marine biologist who has spent thirty winters in Antarctica. You leave with wet boots, 4,000 photos, and the unsettling realization that penguins may be better organized than most governments."
   },
   "HX Expeditions": {
    "short": "HX · Hurtigruten",
    "domain": "travelhx.com",
    "color": "#c8102e",
-   "count": 322
+   "count": 322,
+   "blurb": "The practical Scandinavians of expedition cruising. Serious science, strong guides, robust ships, and fewer theatrics. Feels less like a floating resort and more like a capable research vessel that accidentally became comfortable."
   },
   "Aqua Expeditions": {
    "short": "Aqua Expeditions",
    "domain": "aquaexpeditions.com",
    "color": "#1f6f8b",
-   "count": 516
+   "count": 516,
+   "blurb": "Floating boutique hotels for rivers and remote seas where design matters almost as much as destination. The kind of journey where the jungle hums outside your suite while lunch arrives looking Michelin-starred and suspiciously photogenic."
   },
   "Aurora Expeditions": {
    "short": "Aurora Expeditions",
    "domain": "auroraexpeditions.com",
    "color": "#00467f",
-   "count": 101
+   "count": 101,
+   "blurb": "An Australian-born line with a mountaineer's spirit. More adventurous, more active, and often more rugged than luxury competitors. The crowd tends to care more about the next landing than the wine list."
   },
   "Swan Hellenic": {
    "short": "Swan Hellenic",
    "domain": "swanhellenic.com",
    "color": "#0a2b4a",
-   "count": 120
+   "count": 120,
+   "blurb": "Quietly intellectual ships for travelers who still read museum placards all the way through. The onboard atmosphere feels less like a cruise and more like an elegant floating salon for curious adults."
   },
   "Quark Expeditions": {
    "short": "Quark Expeditions",
    "domain": "quarkexpeditions.com",
    "color": "#d2232a",
-   "count": 109
+   "count": 109,
+   "blurb": "Polar specialists who treat the Arctic and Antarctica not as destinations, but as obsessions. Expedition-first, comfort-second, with guides who can discuss sea ice, emperor penguins, and survival history before breakfast."
   },
   "Atlas Ocean Voyages": {
    "short": "Atlas Ocean Voyages",
    "domain": "atlasoceanvoyages.com",
    "color": "#0e3d5c",
-   "count": 129
+   "count": 129,
+   "blurb": "A younger line with yacht energy and expedition ambitions. Less formal than classic luxury brands, more social, more active, and often surprisingly strong value for travelers who want polar scenery without the ultra-luxury stiffness."
   },
   "Silversea": {
    "short": "Silversea",
    "domain": "silversea.com",
    "color": "#1f3a5f",
-   "count": 177
+   "count": 177,
+   "blurb": "Old-world luxury draped over serious expedition hardware. Butler service and polar immersion coexist in a way that feels faintly absurd until you return from a zodiac landing to Dom Pérignon and heated bathroom floors."
   },
   "Seabourn": {
    "short": "Seabourn",
    "domain": "seabourn.com",
    "color": "#0a2747",
-   "count": 286
-  },
-  "Coral Expeditions": {
-   "short": "Coral Expeditions",
-   "domain": "coralexpeditions.com",
-   "color": "#e35205",
-   "count": 61
-  },
-  "UnCruise Adventures": {
-   "short": "UnCruise Adventures",
-   "domain": "uncruise.com",
-   "color": "#1c6b3c",
-   "count": 188
+   "count": 286,
+   "blurb": "If a private club decided to start exploring the polar regions, it would resemble Seabourn. Caviar appears in places where no caviar has any business appearing, often within sight of glaciers the size of cathedrals."
   }
  },
  "REGIONS": {
@@ -80,7 +78,7 @@
     -27.0,
     150.0
    ],
-   "count": 140
+   "count": 79
   },
   "Hawaii & Tahiti": {
    "name": "Hawaii & Tahiti",
@@ -120,7 +118,7 @@
     60.5,
     -149.0
    ],
-   "count": 319
+   "count": 131
   },
   "Arctic": {
    "name": "Arctic",
