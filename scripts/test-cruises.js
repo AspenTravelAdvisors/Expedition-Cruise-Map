@@ -21,18 +21,36 @@ test("dataset loaded (unique ids, every record has a bookable URL)", () => {
 });
 
 // --- filtering -------------------------------------------------------------
-test("region filter only accepts marquee keys and matches them", () => {
+test("region filter accepts marquee keys and known non-marquee aliases", () => {
   const r = filterCruises({ region: "antarctica" });
   assert.ok(r.length > 0);
   assert.ok(r.every((c) => c.region === "antarctica"));
-  // a non-marquee value is ignored (no spurious empties)
-  assert.equal(filterCruises({ region: "alaska" }).length, cruises.length);
+  const alaska = filterCruises({ region: "alaska" });
+  assert.ok(alaska.length > 0);
+  assert.ok(alaska.length < cruises.length);
 });
 
 test("q drops genre stopwords: 'alaska expedition cruises' matches Alaska", () => {
   const r = filterCruises({ q: "alaska expedition cruises" });
   assert.ok(r.length > 0);
   assert.ok(r.every((c) => ci(c.regionLabel).includes("alaska") || ci(c.name).includes("alaska")));
+});
+
+test("non-marquee region aliases bind instead of broadening", () => {
+  const cases = [
+    ["alaska", "alaska"],
+    ["caribbean", "caribbean"],
+    ["baja", "baja"],
+    ["seychelles", "seychelles"],
+    ["british isles", "british isles"],
+  ];
+  for (const [region, expected] of cases) {
+    const r = filterCruises({ region });
+    assert.ok(r.length > 0, region);
+    assert.ok(r.every((c) => ci(`${c.regionLabel} ${c.name}`).includes(expected)), region);
+  }
+  assert.ok(filterCruises({ region: "seychelles" }).every((c) => c.regionLabel === "Africa & Indian Ocean"));
+  assert.ok(filterCruises({ country: "Seychelles" }).every((c) => c.regionLabel === "Africa & Indian Ocean"));
 });
 
 test("keyword override: Kimberley sailings resolve to the kimberley marquee", () => {

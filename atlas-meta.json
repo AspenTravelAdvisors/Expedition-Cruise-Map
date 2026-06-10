@@ -200,6 +200,14 @@
    ],
    "count": 21
   },
+  "Baja California": {
+   "name": "Baja California",
+   "coord": [
+    24.0,
+    -111.5
+   ],
+   "count": 2
+  },
   "Europe Rivers": {
    "name": "Europe Rivers",
    "coord": [

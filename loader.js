@@ -28,10 +28,23 @@ const DEFAULTS = { sailings: 'sailings.json', meta: 'atlas-meta.json' };
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 function pad(n) { return n < 10 ? '0' + n : '' + n; }
+function norm(s) {
+  return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').replace(/\s+/g, ' ').trim();
+}
+function correctedRegionName(region, name) {
+  const t = norm(name);
+  if (t.includes('alaska')) return 'Alaska & Yukon';
+  if (t.includes('baja') || t.includes('sea of cortez')) return 'Baja California';
+  if (t.includes('seychelles')) return 'Africa & Indian Ocean';
+  if (t.includes('caribbean')) return 'Caribbean & Bermuda';
+  return region;
+}
 
 /** Expand one columnar row into a sailing object: rebuild URLs + derive dates. */
 function rowToSailing(row, urlBase, productBase) {
-  const [id, operator, name, start, nights, region, slug, product] = row;
+  const [id, operator, name, start, nights, rawRegion, slug, product] = row;
+  const region = correctedRegionName(rawRegion, name);
   const s = {
     id, operator, name, region, nights,
     start,                                                  // ISO "2027-04-01" (may be null)
