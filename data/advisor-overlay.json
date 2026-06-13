@@ -1,0 +1,2956 @@
+{
+  "_meta": {
+    "sources": [
+      "Cadence Partner Programs, ver. 2025-09-18 (hotels/DMCs/villas)",
+      "Cadence cruise/yacht supplier commission chart, 2026-06 (CPP + Virtuoso + commission)"
+    ],
+    "lastReviewed": "2026-06",
+    "relationshipRule": "CPP/preferred-partner -> 'preferred' (top tier, boost +12). Commissionable but not top tier -> 'partner' (+6). No commission/flags listed -> 'standard' placeholder (0). 'avoid' = -100.",
+    "tierRule": "commissionTier is assigned on PER-MARKET bands: hotels high=15-16 / mid=12-14 / low=10-11; cruise high=17+ / mid=14-16 / low=11-13. The engine reads the tier LABEL only, so labels stay comparable across atlases even though the % thresholds differ.",
+    "fieldNotes": "commissionPct and appliesTo are ADVISORY: lib/supplier-fit.js ranks on commissionTier (label), not on commissionPct. appliesTo documents which atlas a brand belongs to; entries with appliesTo:[] (DMCs/services) never appear in any atlas's results, so no filtering is required for them.",
+    "excluded": "No GDS/STAR/access codes, passwords, IATA, or rep contacts are stored here. Keep those in a separate access-controlled store, never served by the concierge API.",
+    "reconciled": [
+      "belmond: single entry, appliesTo [hotel,cruise]",
+      "explora (Explora Lodges, hotel) and explora-journeys (Explora Journeys, MSC cruise) are different companies, kept as separate keys"
+    ]
+  },
+  "abercrombie-kent": {
+    "brandId": "abercrombie-kent",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise",
+      "jet"
+    ],
+    "type": "tour-cruise-jet",
+    "alwaysInclude": false,
+    "aliases": [
+      "a&k",
+      "a and k",
+      "abercrombie and kent"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% expedition cruises & tailor-made; 12% private jet & Inspiring Expeditions by Geoffrey Kent; 13% rail/river/barge",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "belmond": {
+    "brandId": "belmond",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 14,
+    "appliesTo": [
+      "hotel",
+      "cruise"
+    ],
+    "type": "hotel-train-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "belmond bellini club",
+      "bellini club",
+      "belmond hotels trains and cruises"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Up to 14%; Virtuoso 'Select'. Covers hotels, trains, cruises",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "accor": {
+    "brandId": "accor",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "accor preferred",
+      "hera",
+      "accor preferred by hera"
+    ],
+    "notes": []
+  },
+  "anantara": {
+    "brandId": "anantara",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "anantara journeys",
+      "minor hotels"
+    ],
+    "notes": []
+  },
+  "auberge": {
+    "brandId": "auberge",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "auberge resorts",
+      "auberge resorts collection"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Enhanced 15% on listed properties (Stanly Ranch, Esperanza, Mauna Lani, etc.)",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "b-signature": {
+    "brandId": "b-signature",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "b signature diamond club",
+      "bsignature"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12% rooms / 16% suites & signature product; seasonal exceptions in Paris & Manapany",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "canaves-oia": {
+    "brandId": "canaves-oia",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "canaves oia luxury resorts"
+    ],
+    "notes": []
+  },
+  "langham": {
+    "brandId": "langham",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 10,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "couture by langham",
+      "couture"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "10% all eligible / 15% suites",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "maisons-pariente": {
+    "brandId": "maisons-pariente",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "dear program",
+      "maison pariente"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12% room/junior suite; 15% one/two-bed suite & chalet; net rates available direct",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "design-hotels": {
+    "brandId": "design-hotels",
+    "relationship": "preferred",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "design hotels collective"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Amenity program; commission rate not stated in partner doc",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "dorchester": {
+    "brandId": "dorchester",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "dorchester diamond club",
+      "dorchester collection"
+    ],
+    "notes": []
+  },
+  "doyle": {
+    "brandId": "doyle",
+    "relationship": "preferred",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "doyle collection",
+      "the circle"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "London only; agent-reward program (Amex gift cards), no flat % stated",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "evok": {
+    "brandId": "evok",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "evok collection",
+      "nolinski",
+      "brach"
+    ],
+    "notes": []
+  },
+  "four-seasons": {
+    "brandId": "four-seasons",
+    "relationship": "preferred",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "four seasons preferred partner",
+      "fs"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Preferred Partner; rate not stated in this doc — confirm standard FSPP commission",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "hartling": {
+    "brandId": "hartling",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-group",
+    "alwaysInclude": false,
+    "aliases": [
+      "hartling group",
+      "the sands",
+      "the shore club",
+      "the palms"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% on direct bookings only (not third-party)",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "hilton-luxury": {
+    "brandId": "hilton-luxury",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 10,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "hilton for luxury",
+      "waldorf astoria",
+      "conrad"
+    ],
+    "notes": []
+  },
+  "hyatt-prive": {
+    "brandId": "hyatt-prive",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "hyatt prive",
+      "world of hyatt",
+      "andaz"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% on suites; room-rate commission not stated. Andaz Maui = 15% on Privé bookings",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "ihg-destined": {
+    "brandId": "ihg-destined",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 10,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "ihg destined",
+      "intercontinental"
+    ],
+    "notes": []
+  },
+  "jumeirah": {
+    "brandId": "jumeirah",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "jumeirah passport to luxury"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Commission honored on no-show/early-departure; blackout dates may apply",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "kempinski": {
+    "brandId": "kempinski",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 10,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "kempinski club 1897",
+      "club 1897"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "10% rooms / 15% suites, residences & villas, on net rates",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "lacure": {
+    "brandId": "lacure",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 11,
+    "appliesTo": [],
+    "type": "villa",
+    "alwaysInclude": false,
+    "aliases": [
+      "lacure villas"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "11% commissionable rates; 10% under $10k. Villa-only — no current atlas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "lhw": {
+    "brandId": "lhw",
+    "relationship": "preferred",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-consortia",
+    "alwaysInclude": false,
+    "aliases": [
+      "leading hotels of the world",
+      "leaders club",
+      "lhw"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Consortia program; rate not stated in this doc",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "lvh": {
+    "brandId": "lvh",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 10,
+    "appliesTo": [],
+    "type": "villa",
+    "alwaysInclude": false,
+    "aliases": [
+      "luxury vacation homes",
+      "lvh global"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "10% rental referral; 5% client-home; 25% of net on home purchase. Villa-only — no current atlas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "mandarin-oriental": {
+    "brandId": "mandarin-oriental",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "mandarin oriental fan club",
+      "mo",
+      "mohg"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% across all room categories incl. villas & Exceptional Homes; 10% spa",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "marriott-luminous": {
+    "brandId": "marriott-luminous",
+    "relationship": "preferred",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "marriott luminous",
+      "w hotels",
+      "jw marriott",
+      "westin",
+      "autograph",
+      "le meridien"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Premium-tier amenity program; rate not stated in this doc",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "marriott-stars": {
+    "brandId": "marriott-stars",
+    "relationship": "preferred",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "marriott stars",
+      "ritz-carlton",
+      "st regis",
+      "luxury collection",
+      "bulgari",
+      "edition"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Top-luxury amenity program; rate not stated in this doc",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "maybourne": {
+    "brandId": "maybourne",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 10,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "maybourne illustrated"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "10% rooms / 15% one-bed suites & above",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "la-reserve": {
+    "brandId": "la-reserve",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "michel reybier",
+      "la reserve",
+      "michele reybier hospitality"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Up to 15% from suite/junior categories; 10% on some standard/high-season rates",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "mr-mrs-smith": {
+    "brandId": "mr-mrs-smith",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-collection",
+    "alwaysInclude": false,
+    "aliases": [
+      "mr and mrs smith",
+      "smith"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12% — must book via Smith Partner Hub",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "noble-house": {
+    "brandId": "noble-house",
+    "relationship": "preferred",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-group",
+    "alwaysInclude": false,
+    "aliases": [
+      "noble house hotels",
+      "vip select"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Amenity/value-add program; rate not stated",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "eden-rock": {
+    "brandId": "eden-rock",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "oetker eden rock",
+      "eden rock st barths"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% hotel / 12% villa rental, on BAR (valid through Aug 2026)",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "oetker": {
+    "brandId": "oetker",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 10,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-collection",
+    "alwaysInclude": false,
+    "aliases": [
+      "oetker collection",
+      "pearl partner",
+      "le bristol",
+      "hotel du cap-eden-roc",
+      "the lanesborough"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "10% all hotels; 15% on suites at named city/resort hotels",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "pan-pacific": {
+    "brandId": "pan-pacific",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "pan pacific reserve"
+    ],
+    "notes": []
+  },
+  "palisociety": {
+    "brandId": "palisociety",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "pali society"
+    ],
+    "notes": []
+  },
+  "preferred-hotels": {
+    "brandId": "preferred-hotels",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 10,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-consortia",
+    "alwaysInclude": false,
+    "aliases": [
+      "preferred hotels & resorts",
+      "platinum partner"
+    ],
+    "notes": []
+  },
+  "relais-chateaux": {
+    "brandId": "relais-chateaux",
+    "relationship": "preferred",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-consortia",
+    "alwaysInclude": false,
+    "aliases": [
+      "relais & chateaux",
+      "relais and chateaux"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Central-res only; not combinable with Virtuoso; rate not stated",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "rocco-forte": {
+    "brandId": "rocco-forte",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "rocco forte knights",
+      "rocco forte hotels"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12% rooms & junior suites / 15% suites, house apartments & private villas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "rosewood": {
+    "brandId": "rosewood",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "rosewood elite"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% all properties; commission protection on deposits/cancellations",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "shangri-la": {
+    "brandId": "shangri-la",
+    "relationship": "preferred",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "shangri-la",
+      "luxury circle"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "The Luxury Circle benefits program; rate not stated",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "slh": {
+    "brandId": "slh",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 10,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-consortia",
+    "alwaysInclude": false,
+    "aliases": [
+      "small luxury hotels",
+      "slh",
+      "within"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "10% standard / 15% suites; 2-night minimum",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "stayone": {
+    "brandId": "stayone",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 10,
+    "appliesTo": [],
+    "type": "villa",
+    "alwaysInclude": false,
+    "aliases": [
+      "stay one homes",
+      "stayone homes"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "10% net of villa rental price. Villa-only — no current atlas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "peninsula": {
+    "brandId": "peninsula",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "the peninsula",
+      "pen club",
+      "peninsula pen club"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% with guaranteed upgrade at time of booking",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "the-set": {
+    "brandId": "the-set",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 10,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-collection",
+    "alwaysInclude": false,
+    "aliases": [
+      "the set collection",
+      "the set by invitation"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Minimum 10% across all Set hotels",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "viceroy": {
+    "brandId": "viceroy",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "viceroy the guild",
+      "the guild"
+    ],
+    "notes": []
+  },
+  "american-excursionist": {
+    "brandId": "american-excursionist",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [],
+    "type": "dmc",
+    "alwaysInclude": false,
+    "aliases": [
+      "excursionist"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12%; US/Canada/Caribbean DMC. No current atlas — itinerary/experience layer",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "andbeyond": {
+    "brandId": "andbeyond",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [],
+    "type": "dmc-safari",
+    "alwaysInclude": false,
+    "aliases": [
+      "and beyond",
+      "&beyond"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% Africa & Asia / 13% South America. Safari-DMC — no current atlas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "andronis": {
+    "brandId": "andronis",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-group",
+    "alwaysInclude": false,
+    "aliases": [
+      "andronis hotels"
+    ],
+    "notes": []
+  },
+  "andy-swann": {
+    "brandId": "andy-swann",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [],
+    "type": "dmc",
+    "alwaysInclude": false,
+    "aliases": [
+      "andy swann voyage"
+    ],
+    "notes": []
+  },
+  "balboa-bay": {
+    "brandId": "balboa-bay",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "balboa bay resort"
+    ],
+    "notes": []
+  },
+  "bardessono": {
+    "brandId": "bardessono",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "bardessono hotel & spa"
+    ],
+    "notes": []
+  },
+  "brush-creek": {
+    "brandId": "brush-creek",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-ranch",
+    "alwaysInclude": false,
+    "aliases": [
+      "brush creek ranch",
+      "magee homestead"
+    ],
+    "notes": []
+  },
+  "butterfly-verona": {
+    "brandId": "butterfly-verona",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "butterfly verona"
+    ],
+    "notes": []
+  },
+  "caesar-augustus": {
+    "brandId": "caesar-augustus",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 13,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "caesar augustus capri"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12% high season / 14% low season (Capri)",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "canyon-ranch": {
+    "brandId": "canyon-ranch",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-wellness",
+    "alwaysInclude": false,
+    "aliases": [
+      "canyon ranch"
+    ],
+    "notes": []
+  },
+  "cavallo-point": {
+    "brandId": "cavallo-point",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "cavallo point"
+    ],
+    "notes": []
+  },
+  "continentale": {
+    "brandId": "continentale",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "continentale florence",
+      "lungarno collection"
+    ],
+    "notes": []
+  },
+  "conrad-punta-mita": {
+    "brandId": "conrad-punta-mita",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "conrad punta de mita"
+    ],
+    "notes": []
+  },
+  "corinthia-london": {
+    "brandId": "corinthia-london",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "corinthia london"
+    ],
+    "notes": []
+  },
+  "costa-rican-trails": {
+    "brandId": "costa-rican-trails",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 13,
+    "appliesTo": [],
+    "type": "dmc",
+    "alwaysInclude": false,
+    "aliases": [
+      "costa rican trails"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "13%; Costa Rica DMC. No current atlas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "de-leurope": {
+    "brandId": "de-leurope",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "de l'europe amsterdam",
+      "de leurope"
+    ],
+    "notes": []
+  },
+  "eclectic-greece": {
+    "brandId": "eclectic-greece",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 14,
+    "appliesTo": [],
+    "type": "dmc",
+    "alwaysInclude": false,
+    "aliases": [
+      "eclectic greece",
+      "kyvernitis"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "14%; Greece DMC. No current atlas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "edgewood-tahoe": {
+    "brandId": "edgewood-tahoe",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "edgewood tahoe"
+    ],
+    "notes": []
+  },
+  "experience-morocco": {
+    "brandId": "experience-morocco",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [],
+    "type": "dmc",
+    "alwaysInclude": false,
+    "aliases": [
+      "experience morocco"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12%; Morocco DMC. No current atlas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "explora": {
+    "brandId": "explora",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [],
+    "type": "lodge-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "explora lodges"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12%; Patagonia/Atacama expedition lodges. Land-expedition — candidate for a future lodges layer",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "fasano": {
+    "brandId": "fasano",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "fasano fifth avenue",
+      "fasano"
+    ],
+    "notes": []
+  },
+  "french-promise": {
+    "brandId": "french-promise",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [],
+    "type": "dmc",
+    "alwaysInclude": false,
+    "aliases": [
+      "french promise"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% services / 10% accommodations & villas. France DMC. No current atlas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "gallery-hotel-art": {
+    "brandId": "gallery-hotel-art",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "gallery hotel art",
+      "lungarno collection"
+    ],
+    "notes": []
+  },
+  "grand-hotel-bristol": {
+    "brandId": "grand-hotel-bristol",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "grand hotel bristol"
+    ],
+    "notes": []
+  },
+  "grand-hotel-victoria": {
+    "brandId": "grand-hotel-victoria",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "grand hotel victoria como"
+    ],
+    "notes": []
+  },
+  "hl-adventure": {
+    "brandId": "hl-adventure",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [],
+    "type": "dmc",
+    "alwaysInclude": false,
+    "aliases": [
+      "hl adventure"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15%; Iceland DMC. No current atlas",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "cafe-royal": {
+    "brandId": "cafe-royal",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "hotel cafe royal",
+      "hotel café royal"
+    ],
+    "notes": []
+  },
+  "hotel-lungarno": {
+    "brandId": "hotel-lungarno",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "hotel lungarno"
+    ],
+    "notes": []
+  },
+  "jk-place-roma": {
+    "brandId": "jk-place-roma",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "j.k. place roma",
+      "jk place"
+    ],
+    "notes": []
+  },
+  "kerzner": {
+    "brandId": "kerzner",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-group",
+    "alwaysInclude": false,
+    "aliases": [
+      "kerzner",
+      "one&only",
+      "atlantis the royal"
+    ],
+    "notes": []
+  },
+  "luggage-free": {
+    "brandId": "luggage-free",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 14.5,
+    "appliesTo": [],
+    "type": "service",
+    "alwaysInclude": false,
+    "aliases": [
+      "luggage free"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "14.5%; luggage-shipping service. No atlas — add-on service",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "outrigger": {
+    "brandId": "outrigger",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 14,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "outrigger resorts"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "14% (excl. Hawaii Vacation Condos)",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "peregrine": {
+    "brandId": "peregrine",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-group",
+    "alwaysInclude": false,
+    "aliases": [
+      "peregrine hospitality",
+      "under canvas",
+      "silverado"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12% on listed properties",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "portrait-firenze": {
+    "brandId": "portrait-firenze",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "portrait firenze",
+      "lungarno collection"
+    ],
+    "notes": []
+  },
+  "portrait-milano": {
+    "brandId": "portrait-milano",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "portrait milano",
+      "lungarno collection"
+    ],
+    "notes": []
+  },
+  "portrait-roma": {
+    "brandId": "portrait-roma",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "portrait roma",
+      "lungarno collection"
+    ],
+    "notes": []
+  },
+  "prince-waikiki": {
+    "brandId": "prince-waikiki",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "prince waikiki"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% on BAR / 10% on discounted rates",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "puente-romano": {
+    "brandId": "puente-romano",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "puente romano marbella"
+    ],
+    "notes": []
+  },
+  "queen-of-clubs": {
+    "brandId": "queen-of-clubs",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 12,
+    "appliesTo": [],
+    "type": "service",
+    "alwaysInclude": false,
+    "aliases": [
+      "queen of clubs",
+      "qofclubs"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12% on services (excl. accommodations & private jets/helicopters)",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "stein-eriksen-lodge": {
+    "brandId": "stein-eriksen-lodge",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "stein eriksen lodge deer valley"
+    ],
+    "notes": []
+  },
+  "stein-eriksen-residences": {
+    "brandId": "stein-eriksen-residences",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "stein eriksen residences deer valley"
+    ],
+    "notes": []
+  },
+  "sun-gardens-dubrovnik": {
+    "brandId": "sun-gardens-dubrovnik",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "sun gardens dubrovnik"
+    ],
+    "notes": []
+  },
+  "the-brando": {
+    "brandId": "the-brando",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "the brando",
+      "tetiaroa"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% all types; private-island resort, French Polynesia",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "the-mercer": {
+    "brandId": "the-mercer",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "the mercer",
+      "mercer hotel"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% on Loft Suites & higher",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "urso": {
+    "brandId": "urso",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 15,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "urso hotel & spa",
+      "urso madrid"
+    ],
+    "notes": []
+  },
+  "waldorf-astoria-los-cabos": {
+    "brandId": "waldorf-astoria-los-cabos",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 16,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel",
+    "alwaysInclude": false,
+    "aliases": [
+      "waldorf astoria los cabos pedregal"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "16% — top commission in this set",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "wilderness-group": {
+    "brandId": "wilderness-group",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 13,
+    "appliesTo": [],
+    "type": "dmc-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "wilderness group"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "13% on small-group travel. Expedition operator — candidate for a future small-group layer",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "amawaterways": {
+    "brandId": "amawaterways",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 18,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "river-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "amawaterways",
+      "ama waterways"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 18% river",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "amadeus-river": {
+    "brandId": "amadeus-river",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "river-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "amadeus river cruises"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15% on cruise fare; not Virtuoso",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "american-cruise-line": {
+    "brandId": "american-cruise-line",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "river-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "american cruise line",
+      "american cruise lines"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; not Virtuoso",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "aqua-expeditions": {
+    "brandId": "aqua-expeditions",
+    "relationship": "partner",
+    "commissionTier": "low",
+    "commissionPct": 12,
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "aqua expeditions"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12%; Amazon/Mekong/Indonesia small-ship",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "atlas-ocean": {
+    "brandId": "atlas-ocean",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 17,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "atlas ocean voyages",
+      "atlas ocean"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 15-20% range (using 17 midpoint)",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "aurora-expeditions": {
+    "brandId": "aurora-expeditions",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "aurora expeditions"
+    ],
+    "notes": []
+  },
+  "avalon-waterways": {
+    "brandId": "avalon-waterways",
+    "relationship": "partner",
+    "commissionTier": "high",
+    "commissionPct": 18,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "river-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "avalon waterways",
+      "globus",
+      "cosmos"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "18% river (Globus/Cosmos family)",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "azamara": {
+    "brandId": "azamara",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "azamara club cruises",
+      "azamara"
+    ],
+    "notes": []
+  },
+  "carnival": {
+    "brandId": "carnival",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 12,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "carnival cruise lines",
+      "carnival"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; not Virtuoso; mass-market (off-brand for luxury concierge)",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "celebrity": {
+    "brandId": "celebrity",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "celebrity cruises",
+      "celebrity"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; not Virtuoso",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "crystal": {
+    "brandId": "crystal",
+    "relationship": "partner",
+    "commissionTier": "high",
+    "commissionPct": 17,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "luxury-ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "crystal cruises",
+      "crystal"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "17%; not Virtuoso",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "cunard": {
+    "brandId": "cunard",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "cunard line limited",
+      "cunard"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "disney-cruise": {
+    "brandId": "disney-cruise",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 12,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "disney cruise vacations",
+      "disney cruise line"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; not Virtuoso; family mass-market",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "emerald": {
+    "brandId": "emerald",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "type": "river-yacht-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "emerald cruises",
+      "emerald waterways"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "No commission/flags listed — resolve",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "explora-journeys": {
+    "brandId": "explora-journeys",
+    "relationship": "partner",
+    "commissionTier": "high",
+    "commissionPct": 18,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "luxury-ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "explora journeys"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "18% (5% on add-ons e.g. air). MSC luxury brand — distinct from Explora Lodges in hotel overlay",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "four-seasons-yacht": {
+    "brandId": "four-seasons-yacht",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "yacht"
+    ],
+    "type": "luxury-yacht",
+    "alwaysInclude": false,
+    "aliases": [
+      "four seasons yacht",
+      "four seasons yachts"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Virtuoso yes; commission not listed — resolve",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "heritage-line": {
+    "brandId": "heritage-line",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "heritage line"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Virtuoso yes; commission not listed — resolve",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "holland-america": {
+    "brandId": "holland-america",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "holland america cruise line",
+      "holland america",
+      "hal"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "hurtigruten": {
+    "brandId": "hurtigruten",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "hurtigruten",
+      "hurtigruten norway"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "16%; Norway coastal",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "hurtigruten-expeditions": {
+    "brandId": "hurtigruten-expeditions",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "hurtigruten expeditions",
+      "hx"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "16%; polar/expedition arm",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "lindblad": {
+    "brandId": "lindblad",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 12,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "lindblad expeditions",
+      "lindblad",
+      "national geographic"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 12%; Nat Geo expedition partner",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "msc": {
+    "brandId": "msc",
+    "relationship": "standard",
+    "commissionTier": "low",
+    "commissionPct": 11,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "msc cruises",
+      "msc"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "11%; mass-market",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "norwegian": {
+    "brandId": "norwegian",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "norwegian cruise lines",
+      "ncl",
+      "norwegian"
+    ],
+    "notes": []
+  },
+  "oceania": {
+    "brandId": "oceania",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 17,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "premium-ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "oceania cruise line",
+      "oceania cruises",
+      "oceania"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 17%",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "official-steamship": {
+    "brandId": "official-steamship",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [],
+    "type": "service",
+    "alwaysInclude": false,
+    "aliases": [
+      "official steamship guide",
+      "offical steamship guide"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Trade resource, not a sellable supplier — exclude from ranking",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "paul-gauguin": {
+    "brandId": "paul-gauguin",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "type": "luxury-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "paul gauguin cruises",
+      "paul gauguin"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15%; South Pacific/Polynesia",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "pearl-seas": {
+    "brandId": "pearl-seas",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "pearl seas",
+      "pearl seas cruises"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "No commission/flags listed — resolve",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "ponant": {
+    "brandId": "ponant",
+    "relationship": "partner",
+    "commissionTier": "high",
+    "commissionPct": 17,
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "type": "luxury-expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "ponant",
+      "compagnie du ponant"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "17%; Virtuoso; French design-led expedition",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "polar-online": {
+    "brandId": "polar-online",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [],
+    "type": "service",
+    "alwaysInclude": false,
+    "aliases": [
+      "polar online"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "No commission/flags listed — likely a booking tool, resolve",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "princess": {
+    "brandId": "princess",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "princess cruises",
+      "princess"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "quark": {
+    "brandId": "quark",
+    "relationship": "partner",
+    "commissionTier": "low",
+    "commissionPct": 14,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "quark",
+      "quark expeditions"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "14%; polar specialist",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "regent": {
+    "brandId": "regent",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 17,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "luxury-ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "regent seven seas cruises",
+      "regent",
+      "rssc"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 17%; all-inclusive luxury",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "ritz-carlton-yacht": {
+    "brandId": "ritz-carlton-yacht",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "yacht"
+    ],
+    "type": "luxury-yacht",
+    "alwaysInclude": false,
+    "aliases": [
+      "ritz-carlton yacht collection",
+      "ritz carlton yacht"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15%; luxury yacht",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "riverside": {
+    "brandId": "riverside",
+    "relationship": "partner",
+    "commissionTier": "high",
+    "commissionPct": 20,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "luxury-river-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "riverside luxury cruises",
+      "riverside"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Was 21% to June 1; flat 20% going forward",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "riviera-river": {
+    "brandId": "riviera-river",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "river-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "riviera river cruises",
+      "riviera travel"
+    ],
+    "notes": []
+  },
+  "royal-caribbean": {
+    "brandId": "royal-caribbean",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "royal caribbean international",
+      "royal caribbean",
+      "rci"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "scenic": {
+    "brandId": "scenic",
+    "relationship": "partner",
+    "commissionTier": "high",
+    "commissionPct": 18,
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "type": "luxury-river-expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "scenic cruises",
+      "scenic",
+      "scenic eclipse"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "18% (River); not Virtuoso. Also operates Eclipse discovery yachts",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "seabourn": {
+    "brandId": "seabourn",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "type": "luxury-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "seabourn cruise line",
+      "seabourn"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 16%; ultra-luxury small-ship",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "sea-cloud": {
+    "brandId": "sea-cloud",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "yacht"
+    ],
+    "type": "sailing-yacht",
+    "alwaysInclude": false,
+    "aliases": [
+      "sea cloud cruises",
+      "sea cloud"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15%; tall-ship sailing yachts",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "seadream": {
+    "brandId": "seadream",
+    "relationship": "partner",
+    "commissionTier": "low",
+    "commissionPct": 14,
+    "appliesTo": [
+      "yacht"
+    ],
+    "type": "luxury-yacht",
+    "alwaysInclude": false,
+    "aliases": [
+      "seadream yacht club",
+      "seadream"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "14%; mega-yacht style",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "shore-excursions-group": {
+    "brandId": "shore-excursions-group",
+    "relationship": "partner",
+    "commissionTier": "low",
+    "commissionPct": 12,
+    "appliesTo": [],
+    "type": "service",
+    "alwaysInclude": false,
+    "aliases": [
+      "shore excursions group"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12%; shore-excursion add-on service, no atlas",
+        "weight": 0,
+        "clientSafe": false
+      }
+    ]
+  },
+  "silversea": {
+    "brandId": "silversea",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 17,
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "type": "luxury-expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "silversea",
+      "silversea cruises"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 17%; ultra-luxury ocean + expedition",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "star-clippers": {
+    "brandId": "star-clippers",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "yacht"
+    ],
+    "type": "sailing-yacht",
+    "alwaysInclude": false,
+    "aliases": [
+      "star clippers",
+      "star clippers gsa"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15%; tall-ship sailing",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "swan-hellenic": {
+    "brandId": "swan-hellenic",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "swan hellenic"
+    ],
+    "notes": []
+  },
+  "tauck": {
+    "brandId": "tauck",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 15,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "river-tour-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "tauck",
+      "tauck river cruising"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "15%; tours + river cruising",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "uncruise": {
+    "brandId": "uncruise",
+    "relationship": "partner",
+    "commissionTier": "low",
+    "commissionPct": 12,
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "type": "small-ship-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "uncruise adventures",
+      "un-cruise"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "12%; small-ship adventure",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "uniworld": {
+    "brandId": "uniworld",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 18,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "luxury-river-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "uniworld boutique river cruise",
+      "uniworld"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 18%; boutique river",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "victory-cruise-lines": {
+    "brandId": "victory-cruise-lines",
+    "relationship": "preferred",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "small-ship-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "victory cruise lines"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "viking": {
+    "brandId": "viking",
+    "relationship": "preferred",
+    "commissionTier": "high",
+    "commissionPct": 17,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "river-ocean-expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "viking river cruises",
+      "viking",
+      "viking ocean",
+      "viking expeditions"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 16-18% range (using 17). River, ocean & expedition",
+        "weight": 2,
+        "clientSafe": false
+      }
+    ]
+  },
+  "virgin-voyages": {
+    "brandId": "virgin-voyages",
+    "relationship": "partner",
+    "commissionTier": "mid",
+    "commissionPct": 16,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "ocean-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "virgin voyages"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "16%; adults-only contemporary",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "windstar": {
+    "brandId": "windstar",
+    "relationship": "preferred",
+    "commissionTier": "low",
+    "commissionPct": 14,
+    "appliesTo": [
+      "yacht",
+      "cruise"
+    ],
+    "type": "small-ship-sailing",
+    "alwaysInclude": false,
+    "aliases": [
+      "windstar cruises",
+      "windstar"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "CPP; 14%; small-ship sail + motor yachts",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  },
+  "zegrahm": {
+    "brandId": "zegrahm",
+    "relationship": "partner",
+    "commissionTier": "low",
+    "commissionPct": 14,
+    "appliesTo": [
+      "cruise"
+    ],
+    "type": "expedition-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "zegrahm expeditions",
+      "zegrahm"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "14%; deep expedition specialist",
+        "weight": 1,
+        "clientSafe": false
+      }
+    ]
+  }
+}

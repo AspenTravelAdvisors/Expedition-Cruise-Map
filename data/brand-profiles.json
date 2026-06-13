@@ -1,0 +1,4147 @@
+{
+  "_meta": {
+    "purpose": "Brand-identity (fit) layer for the Base Camp concierge. Pairs with advisor-overlay.json (commercial layer).",
+    "method": "AI-generated characterizations from general brand knowledge (cutoff Jan 2026). NOT scraped from official sites. officialUrl/sourceSnapshot left null pending the live-fetch + advisor-review step in SUPPLIER-FIT-SPEC.md section 8.",
+    "schema": "positioning {tier, priceIndex 1-5, vibe[], serviceStyle, differentiators[]} for hotels; cruise/yacht add {shipScale, paxBand, expeditionDepth 1-5, cuisine}. idealGuest/notIdealFor use archetype vocabulary.",
+    "independents": "lhw / slh / relais-chateaux / design-hotels / preferred-hotels / independent-virtuoso are UMBRELLA profiles. Hotel-atlas independents have an empty 'brand' field (tagged by 'program'), so to inherit an umbrella the resolver must fall back: brand -> program -> 'independent-virtuoso'. One-line change in resolveBrandId() (see note).",
+    "resolverNote": "function resolveBrandId(item){ return brandIndex[ci(item.brand)] || brandIndex[ci(item.program)] || 'independent-virtuoso' || null; }  // for hotel items only; cruise/yacht resolve on brand as before",
+    "reviewStatus": "DRAFT - advisor to verify tier/ideal-guest calls, especially for the 'unknown'/placeholder lines and any brand whose positioning has shifted."
+  },
+  "four-seasons": {
+    "brandId": "four-seasons",
+    "displayName": "Four Seasons",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "polished",
+        "contemporary-classic",
+        "service-led"
+      ],
+      "serviceStyle": "impeccable, anticipatory",
+      "differentiators": [
+        "fleet-wide consistency",
+        "standout family programs"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "family",
+      "celebration",
+      "business",
+      "first-timer",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "The global gold standard for consistent, anticipatory service.",
+    "aliases": [
+      "four seasons",
+      "fs"
+    ]
+  },
+  "aman": {
+    "brandId": "aman",
+    "displayName": "Aman",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "minimalist",
+        "serene",
+        "design-led",
+        "private"
+      ],
+      "serviceStyle": "discreet, intuitive",
+      "differentiators": [
+        "deep privacy",
+        "architectural restraint",
+        "destination-defining sites"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "uhnw",
+      "wellness",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value",
+      "family"
+    ],
+    "summary": "Minimalist sanctuaries built around privacy and transformative calm.",
+    "aliases": [
+      "aman",
+      "amanresorts"
+    ]
+  },
+  "rosewood": {
+    "brandId": "rosewood",
+    "displayName": "Rosewood",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "residential",
+        "sense-of-place",
+        "refined"
+      ],
+      "serviceStyle": "gracious, local",
+      "differentiators": [
+        "A Sense of Place philosophy",
+        "residential design"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "celebration",
+      "culture",
+      "family",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Residential luxury rooted in local culture and place.",
+    "aliases": [
+      "rosewood",
+      "rosewood elite",
+      "hotel de crillon",
+      "the carlyle",
+      "hotel de crillon a rosewood hotel"
+    ]
+  },
+  "mandarin-oriental": {
+    "brandId": "mandarin-oriental",
+    "displayName": "Mandarin Oriental",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "asian-heritage",
+        "elegant",
+        "spa-led"
+      ],
+      "serviceStyle": "gracious, intuitive",
+      "differentiators": [
+        "legendary spas",
+        "Oriental service heritage"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "business",
+      "celebration",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Asian-rooted elegance with some of the world's best spas.",
+    "aliases": [
+      "mandarin oriental",
+      "mo",
+      "fan club"
+    ]
+  },
+  "ritz-carlton": {
+    "brandId": "ritz-carlton",
+    "displayName": "Ritz-Carlton",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "classic",
+        "formal",
+        "polished"
+      ],
+      "serviceStyle": "formal, reliable",
+      "differentiators": [
+        "Ladies and Gentlemen service ethos",
+        "strong family resorts"
+      ]
+    },
+    "idealGuest": [
+      "family",
+      "celebration",
+      "business",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "boho"
+    ],
+    "summary": "Timeless formal luxury; dependable for families and occasions.",
+    "aliases": [
+      "ritz-carlton",
+      "ritz carlton"
+    ]
+  },
+  "ritz-carlton-reserve": {
+    "brandId": "ritz-carlton-reserve",
+    "displayName": "Ritz-Carlton Reserve",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "secluded",
+        "immersive",
+        "rare"
+      ],
+      "serviceStyle": "intuitive, immersive",
+      "differentiators": [
+        "ultra-rare collection",
+        "destination immersion"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "uhnw",
+      "culture",
+      "celebration"
+    ],
+    "notIdealFor": [
+      "value",
+      "business"
+    ],
+    "summary": "The ultra-rare, deeply immersive tier above Ritz-Carlton.",
+    "aliases": [
+      "ritz-carlton reserve",
+      "reserve"
+    ]
+  },
+  "st-regis": {
+    "brandId": "st-regis",
+    "displayName": "St. Regis",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "glamorous",
+        "heritage",
+        "address"
+      ],
+      "serviceStyle": "butler-led, formal",
+      "differentiators": [
+        "signature butler service",
+        "Astor heritage"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "honeymoon",
+      "business",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Astor-era glamour with signature butler service.",
+    "aliases": [
+      "st. regis",
+      "st regis",
+      "st-regis"
+    ]
+  },
+  "edition": {
+    "brandId": "edition",
+    "displayName": "EDITION",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "design",
+        "nightlife",
+        "lifestyle"
+      ],
+      "serviceStyle": "relaxed-cool, attentive",
+      "differentiators": [
+        "Ian Schrager design",
+        "dining and nightlife scenes"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "culture",
+      "business"
+    ],
+    "notIdealFor": [
+      "family",
+      "multigen"
+    ],
+    "summary": "Schrager-designed lifestyle luxury with a nightlife pulse.",
+    "aliases": [
+      "edition"
+    ]
+  },
+  "bulgari": {
+    "brandId": "bulgari",
+    "displayName": "Bulgari",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "italian",
+        "fashion",
+        "sleek",
+        "urban"
+      ],
+      "serviceStyle": "sleek, discreet",
+      "differentiators": [
+        "jewel-box urban hotels",
+        "Italian fashion-house design"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "honeymoon",
+      "uhnw",
+      "business"
+    ],
+    "notIdealFor": [
+      "family",
+      "value"
+    ],
+    "summary": "Italian fashion-house glamour in sleek urban jewel boxes.",
+    "aliases": [
+      "bulgari"
+    ]
+  },
+  "waldorf-astoria": {
+    "brandId": "waldorf-astoria",
+    "displayName": "Waldorf Astoria",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "grand",
+        "landmark",
+        "classic"
+      ],
+      "serviceStyle": "polished, formal",
+      "differentiators": [
+        "landmark addresses",
+        "grand heritage"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "business",
+      "family",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Grand landmark luxury, Hilton's flagship tier.",
+    "aliases": [
+      "waldorf astoria",
+      "waldorf"
+    ]
+  },
+  "conrad": {
+    "brandId": "conrad",
+    "displayName": "Conrad",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "contemporary",
+        "smart",
+        "design"
+      ],
+      "serviceStyle": "smart, intuitive",
+      "differentiators": [
+        "contemporary design",
+        "tech-smart service"
+      ]
+    },
+    "idealGuest": [
+      "business",
+      "honeymoon",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Contemporary Hilton luxury for the modern traveler.",
+    "aliases": [
+      "conrad"
+    ]
+  },
+  "fairmont": {
+    "brandId": "fairmont",
+    "displayName": "Fairmont",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "grand",
+        "historic",
+        "family"
+      ],
+      "serviceStyle": "warm, classic",
+      "differentiators": [
+        "landmark grand hotels",
+        "strong family heritage"
+      ]
+    },
+    "idealGuest": [
+      "family",
+      "multigen",
+      "first-timer",
+      "culture"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "honeymoon"
+    ],
+    "summary": "Grand historic landmark hotels (Accor).",
+    "aliases": [
+      "fairmont",
+      "the savoy",
+      "savoy"
+    ]
+  },
+  "sofitel": {
+    "brandId": "sofitel",
+    "displayName": "Sofitel",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "french",
+        "art-de-vivre",
+        "stylish"
+      ],
+      "serviceStyle": "warm, French",
+      "differentiators": [
+        "French art de vivre",
+        "local-meets-Parisian style"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "business",
+      "couples"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "French art de vivre with local character.",
+    "aliases": [
+      "sofitel"
+    ]
+  },
+  "raffles": {
+    "brandId": "raffles",
+    "displayName": "Raffles",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "colonial-grand",
+        "storied",
+        "butler"
+      ],
+      "serviceStyle": "butler-led, gracious",
+      "differentiators": [
+        "legendary grand dames",
+        "Raffles butlers"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "celebration",
+      "uhnw",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value",
+      "family"
+    ],
+    "summary": "Storied grande-dame glamour with signature butler service.",
+    "aliases": [
+      "raffles"
+    ]
+  },
+  "park-hyatt": {
+    "brandId": "park-hyatt",
+    "displayName": "Park Hyatt",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "understated",
+        "refined",
+        "art-led"
+      ],
+      "serviceStyle": "quiet, polished",
+      "differentiators": [
+        "art-filled interiors",
+        "understated calm"
+      ]
+    },
+    "idealGuest": [
+      "business",
+      "honeymoon",
+      "culture",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "family",
+      "value"
+    ],
+    "summary": "Quiet, art-filled, understated luxury.",
+    "aliases": [
+      "park hyatt"
+    ]
+  },
+  "grand-hyatt": {
+    "brandId": "grand-hyatt",
+    "displayName": "Grand Hyatt",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "large-scale",
+        "business",
+        "reliable"
+      ],
+      "serviceStyle": "efficient, scaled",
+      "differentiators": [
+        "big-box convention luxury"
+      ]
+    },
+    "idealGuest": [
+      "business",
+      "family",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "honeymoon",
+      "uhnw"
+    ],
+    "summary": "Large-scale premium business hotels.",
+    "aliases": [
+      "grand hyatt"
+    ]
+  },
+  "hyatt-regency": {
+    "brandId": "hyatt-regency",
+    "displayName": "Hyatt Regency",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "reliable",
+        "business",
+        "mainstream-upper"
+      ],
+      "serviceStyle": "efficient",
+      "differentiators": [
+        "dependable upper-upscale"
+      ]
+    },
+    "idealGuest": [
+      "business",
+      "family",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "honeymoon"
+    ],
+    "summary": "Dependable upper-upscale; premium not luxury.",
+    "aliases": [
+      "hyatt regency"
+    ]
+  },
+  "andaz": {
+    "brandId": "andaz",
+    "displayName": "Andaz",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-lifestyle",
+      "priceIndex": 4,
+      "vibe": [
+        "local",
+        "design",
+        "vibrant"
+      ],
+      "serviceStyle": "relaxed, local",
+      "differentiators": [
+        "neighborhood immersion",
+        "lifestyle design"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "celebration",
+      "first-timer",
+      "business"
+    ],
+    "notIdealFor": [
+      "multigen"
+    ],
+    "summary": "Hyatt's local-immersive lifestyle brand.",
+    "aliases": [
+      "andaz"
+    ]
+  },
+  "shangri-la": {
+    "brandId": "shangri-la",
+    "displayName": "Shangri-La",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "asian-hospitality",
+        "warm",
+        "grand"
+      ],
+      "serviceStyle": "warm, attentive",
+      "differentiators": [
+        "Asian hospitality warmth",
+        "grand scale"
+      ]
+    },
+    "idealGuest": [
+      "family",
+      "business",
+      "honeymoon",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Asian warmth at grand scale.",
+    "aliases": [
+      "shangri-la",
+      "shangri la",
+      "luxury circle"
+    ]
+  },
+  "anantara": {
+    "brandId": "anantara",
+    "displayName": "Anantara",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "exotic",
+        "experiential",
+        "indulgent"
+      ],
+      "serviceStyle": "warm, experiential",
+      "differentiators": [
+        "signature local experiences",
+        "exotic locales"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "wellness",
+      "culture",
+      "family"
+    ],
+    "notIdealFor": [
+      "business",
+      "value"
+    ],
+    "summary": "Indulgent experiential resorts in exotic destinations.",
+    "aliases": [
+      "anantara",
+      "anantara journeys"
+    ]
+  },
+  "six-senses": {
+    "brandId": "six-senses",
+    "displayName": "Six Senses",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "wellness",
+        "sustainable",
+        "barefoot",
+        "nature"
+      ],
+      "serviceStyle": "barefoot, intuitive",
+      "differentiators": [
+        "pioneering wellness",
+        "sustainability leadership"
+      ]
+    },
+    "idealGuest": [
+      "wellness",
+      "honeymoon",
+      "active",
+      "uhnw",
+      "family"
+    ],
+    "notIdealFor": [
+      "business"
+    ],
+    "summary": "Pioneering wellness and sustainability in barefoot luxury.",
+    "aliases": [
+      "six senses"
+    ]
+  },
+  "soneva": {
+    "brandId": "soneva",
+    "displayName": "Soneva",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "barefoot",
+        "eco",
+        "castaway",
+        "intelligent-luxury"
+      ],
+      "serviceStyle": "intuitive, playful",
+      "differentiators": [
+        "castaway eco-luxury",
+        "no-news-no-shoes ethos"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "family",
+      "uhnw",
+      "wellness"
+    ],
+    "notIdealFor": [
+      "business",
+      "value"
+    ],
+    "summary": "Intelligent barefoot luxury and castaway escapism.",
+    "aliases": [
+      "soneva"
+    ]
+  },
+  "como": {
+    "brandId": "como",
+    "displayName": "COMO",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "wellness",
+        "design",
+        "holistic"
+      ],
+      "serviceStyle": "holistic, discreet",
+      "differentiators": [
+        "COMO Shambhala wellness",
+        "design-forward calm"
+      ]
+    },
+    "idealGuest": [
+      "wellness",
+      "honeymoon",
+      "active",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "family",
+      "business"
+    ],
+    "summary": "Design-forward holistic wellness luxury.",
+    "aliases": [
+      "como",
+      "como hotels"
+    ]
+  },
+  "banyan-tree": {
+    "brandId": "banyan-tree",
+    "displayName": "Banyan Tree",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "villa",
+        "spa",
+        "romantic"
+      ],
+      "serviceStyle": "warm, private",
+      "differentiators": [
+        "pool-villa romance",
+        "signature spas"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "wellness",
+      "couples"
+    ],
+    "notIdealFor": [
+      "business"
+    ],
+    "summary": "Villa-and-spa romance for couples.",
+    "aliases": [
+      "banyan tree",
+      "angsana"
+    ]
+  },
+  "capella": {
+    "brandId": "capella",
+    "displayName": "Capella",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "residential",
+        "personal-assistant",
+        "refined"
+      ],
+      "serviceStyle": "personalized, discreet",
+      "differentiators": [
+        "personal-assistant service",
+        "residential intimacy"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "uhnw",
+      "celebration",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Highly personalized residential luxury.",
+    "aliases": [
+      "capella"
+    ]
+  },
+  "the-peninsula": {
+    "brandId": "the-peninsula",
+    "displayName": "The Peninsula",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "grande-dame",
+        "tech-forward",
+        "fleet"
+      ],
+      "serviceStyle": "impeccable, classic",
+      "differentiators": [
+        "in-room tech",
+        "legendary car fleets"
+      ]
+    },
+    "idealGuest": [
+      "business",
+      "family",
+      "celebration",
+      "first-timer",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "value",
+      "boho"
+    ],
+    "summary": "Tech-forward grande dame with legendary fleets.",
+    "aliases": [
+      "the peninsula",
+      "peninsula",
+      "pen club"
+    ]
+  },
+  "oetker": {
+    "brandId": "oetker",
+    "displayName": "Oetker Collection",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "european-grand",
+        "discreet",
+        "legendary"
+      ],
+      "serviceStyle": "discreet, gracious",
+      "differentiators": [
+        "European masterpiece hotels",
+        "Cap-Eden-Roc, Le Bristol"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "celebration",
+      "uhnw",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Discreet European grandeur and legendary addresses.",
+    "aliases": [
+      "oetker",
+      "oetker collection",
+      "pearl partner",
+      "le bristol",
+      "eden rock"
+    ]
+  },
+  "dorchester": {
+    "brandId": "dorchester",
+    "displayName": "Dorchester Collection",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "grand",
+        "iconic",
+        "british-european"
+      ],
+      "serviceStyle": "formal, polished",
+      "differentiators": [
+        "iconic grand hotels",
+        "Diamond Club service"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "uhnw",
+      "business",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Iconic grand-dame hotels across Europe and the US.",
+    "aliases": [
+      "dorchester",
+      "dorchester collection",
+      "diamond club"
+    ]
+  },
+  "maybourne": {
+    "brandId": "maybourne",
+    "displayName": "Maybourne",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "london-grand",
+        "classic-british",
+        "storied"
+      ],
+      "serviceStyle": "formal, impeccable",
+      "differentiators": [
+        "Claridge's, Connaught, Berkeley",
+        "London icon status"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "uhnw",
+      "business",
+      "family"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "London's storied grande dames.",
+    "aliases": [
+      "maybourne",
+      "claridge's",
+      "claridges",
+      "the connaught",
+      "the berkeley",
+      "the connaught hotel"
+    ]
+  },
+  "rocco-forte": {
+    "brandId": "rocco-forte",
+    "displayName": "Rocco Forte",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "italian-european",
+        "family-run",
+        "classic"
+      ],
+      "serviceStyle": "warm, personal",
+      "differentiators": [
+        "family-run ethos",
+        "European classics"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "couples",
+      "family",
+      "celebration"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Family-run European classics with personal warmth.",
+    "aliases": [
+      "rocco forte",
+      "rocco forte hotels",
+      "rocco forte knights"
+    ]
+  },
+  "belmond": {
+    "brandId": "belmond",
+    "displayName": "Belmond",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "iconic",
+        "journey-led",
+        "storied"
+      ],
+      "serviceStyle": "theatrical, refined",
+      "differentiators": [
+        "legendary trains and properties",
+        "journey-as-destination"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "honeymoon",
+      "culture",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "value",
+      "business"
+    ],
+    "summary": "Storied properties and journeys; the romance of travel (LVMH).",
+    "aliases": [
+      "belmond",
+      "bellini club",
+      "belmond bellini club"
+    ]
+  },
+  "auberge": {
+    "brandId": "auberge",
+    "displayName": "Auberge Resorts",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "residential",
+        "sense-of-place",
+        "intimate"
+      ],
+      "serviceStyle": "warm, place-led",
+      "differentiators": [
+        "intimate residential resorts",
+        "strong sense of place"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "wellness",
+      "active",
+      "celebration",
+      "culture"
+    ],
+    "notIdealFor": [
+      "business"
+    ],
+    "summary": "Intimate residential resorts with a deep sense of place.",
+    "aliases": [
+      "auberge",
+      "auberge resorts",
+      "auberge resorts collection"
+    ]
+  },
+  "montage": {
+    "brandId": "montage",
+    "displayName": "Montage",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "american-resort",
+        "family-luxe",
+        "spa"
+      ],
+      "serviceStyle": "polished, warm",
+      "differentiators": [
+        "polished US resorts",
+        "strong family programs"
+      ]
+    },
+    "idealGuest": [
+      "family",
+      "multigen",
+      "celebration",
+      "active"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Polished American resort luxury, especially strong for families.",
+    "aliases": [
+      "montage"
+    ]
+  },
+  "pendry": {
+    "brandId": "pendry",
+    "displayName": "Pendry",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-lifestyle",
+      "priceIndex": 4,
+      "vibe": [
+        "modern",
+        "social",
+        "design"
+      ],
+      "serviceStyle": "relaxed, stylish",
+      "differentiators": [
+        "Montage's modern sibling",
+        "social dining scenes"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "culture",
+      "business"
+    ],
+    "notIdealFor": [
+      "multigen",
+      "value"
+    ],
+    "summary": "Montage's modern, design-led lifestyle brand.",
+    "aliases": [
+      "pendry"
+    ]
+  },
+  "one-and-only": {
+    "brandId": "one-and-only",
+    "displayName": "One&Only",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "resort",
+        "glamour",
+        "family-ultra"
+      ],
+      "serviceStyle": "lavish, attentive",
+      "differentiators": [
+        "statement resorts",
+        "ultra family + romance"
+      ]
+    },
+    "idealGuest": [
+      "family",
+      "honeymoon",
+      "celebration",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "business",
+      "value"
+    ],
+    "summary": "Statement resort luxury balancing family and romance.",
+    "aliases": [
+      "one&only",
+      "one and only",
+      "oneandonly"
+    ]
+  },
+  "atlantis": {
+    "brandId": "atlantis",
+    "displayName": "Atlantis",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-resort",
+      "priceIndex": 3,
+      "vibe": [
+        "mega-resort",
+        "family",
+        "entertainment"
+      ],
+      "serviceStyle": "scaled, energetic",
+      "differentiators": [
+        "waterparks and entertainment",
+        "The Royal elevated tier"
+      ]
+    },
+    "idealGuest": [
+      "family",
+      "multigen"
+    ],
+    "notIdealFor": [
+      "honeymoon",
+      "uhnw"
+    ],
+    "summary": "Entertainment mega-resort; The Royal is the elevated tier.",
+    "aliases": [
+      "atlantis",
+      "atlantis the royal"
+    ]
+  },
+  "jumeirah": {
+    "brandId": "jumeirah",
+    "displayName": "Jumeirah",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "arabian",
+        "grand",
+        "landmark"
+      ],
+      "serviceStyle": "lavish, attentive",
+      "differentiators": [
+        "Burj Al Arab icon",
+        "grand Arabian luxury"
+      ]
+    },
+    "idealGuest": [
+      "family",
+      "celebration",
+      "business",
+      "honeymoon"
+    ],
+    "notIdealFor": [
+      "value",
+      "boho"
+    ],
+    "summary": "Grand Arabian-rooted luxury, home of the Burj Al Arab.",
+    "aliases": [
+      "jumeirah",
+      "passport to luxury"
+    ]
+  },
+  "kempinski": {
+    "brandId": "kempinski",
+    "displayName": "Kempinski",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "european-heritage",
+        "grand",
+        "classic"
+      ],
+      "serviceStyle": "formal, classic",
+      "differentiators": [
+        "European grand-hotel heritage"
+      ]
+    },
+    "idealGuest": [
+      "business",
+      "family",
+      "culture",
+      "celebration"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "European grand-hotel heritage, Europe's oldest luxury group.",
+    "aliases": [
+      "kempinski",
+      "club 1897"
+    ]
+  },
+  "langham": {
+    "brandId": "langham",
+    "displayName": "Langham",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "classic",
+        "afternoon-tea",
+        "refined"
+      ],
+      "serviceStyle": "gracious, classic",
+      "differentiators": [
+        "afternoon-tea heritage",
+        "refined classic service"
+      ]
+    },
+    "idealGuest": [
+      "couples",
+      "culture",
+      "business"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Classic refined hospitality with afternoon-tea heritage.",
+    "aliases": [
+      "langham",
+      "couture by langham",
+      "couture"
+    ]
+  },
+  "nobu": {
+    "brandId": "nobu",
+    "displayName": "Nobu",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-lifestyle",
+      "priceIndex": 4,
+      "vibe": [
+        "japanese-cool",
+        "culinary",
+        "celebrity"
+      ],
+      "serviceStyle": "relaxed, cool",
+      "differentiators": [
+        "Nobu dining",
+        "celebrity energy"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "celebration",
+      "couples"
+    ],
+    "notIdealFor": [
+      "family"
+    ],
+    "summary": "Culinary-led lifestyle hotels.",
+    "aliases": [
+      "nobu"
+    ]
+  },
+  "1-hotel": {
+    "brandId": "1-hotel",
+    "displayName": "1 Hotel",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-lifestyle",
+      "priceIndex": 4,
+      "vibe": [
+        "eco",
+        "biophilic",
+        "wellness",
+        "design"
+      ],
+      "serviceStyle": "relaxed, conscious",
+      "differentiators": [
+        "biophilic design",
+        "sustainability-forward"
+      ]
+    },
+    "idealGuest": [
+      "wellness",
+      "couples",
+      "active",
+      "culture"
+    ],
+    "notIdealFor": [
+      "uhnw"
+    ],
+    "summary": "Nature-driven sustainable lifestyle luxury.",
+    "aliases": [
+      "1 hotel",
+      "1 hotels",
+      "1hotel"
+    ]
+  },
+  "thompson": {
+    "brandId": "thompson",
+    "displayName": "Thompson",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-lifestyle",
+      "priceIndex": 4,
+      "vibe": [
+        "design",
+        "urban",
+        "social"
+      ],
+      "serviceStyle": "relaxed, stylish",
+      "differentiators": [
+        "design-led urban hotels",
+        "social scenes"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "celebration",
+      "business"
+    ],
+    "notIdealFor": [
+      "multigen",
+      "value"
+    ],
+    "summary": "Design-led urban lifestyle hotels (Hyatt).",
+    "aliases": [
+      "thompson",
+      "thompson hotels"
+    ]
+  },
+  "cheval-blanc": {
+    "brandId": "cheval-blanc",
+    "displayName": "Cheval Blanc",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "lvmh",
+        "maison",
+        "refined-french"
+      ],
+      "serviceStyle": "discreet, exquisite",
+      "differentiators": [
+        "LVMH maison hotels",
+        "apex French art de vivre"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "uhnw",
+      "celebration",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value",
+      "family"
+    ],
+    "summary": "LVMH's maison hotels at the apex of French luxury.",
+    "aliases": [
+      "cheval blanc",
+      "cheval-blanc"
+    ]
+  },
+  "faena": {
+    "brandId": "faena",
+    "displayName": "Faena",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "theatrical",
+        "art",
+        "glamour",
+        "latin"
+      ],
+      "serviceStyle": "theatrical, lavish",
+      "differentiators": [
+        "art-and-spectacle",
+        "Latin glamour"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "culture",
+      "couples"
+    ],
+    "notIdealFor": [
+      "family",
+      "business"
+    ],
+    "summary": "Theatrical art-and-glamour hotels.",
+    "aliases": [
+      "faena"
+    ]
+  },
+  "armani": {
+    "brandId": "armani",
+    "displayName": "Armani",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "fashion",
+        "minimalist",
+        "sleek"
+      ],
+      "serviceStyle": "discreet, precise",
+      "differentiators": [
+        "Giorgio Armani design ethos",
+        "stay-with-Armani service"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "business",
+      "uhnw",
+      "couples"
+    ],
+    "notIdealFor": [
+      "family",
+      "value"
+    ],
+    "summary": "Giorgio Armani's minimalist fashion-house luxury.",
+    "aliases": [
+      "armani",
+      "armani hotels"
+    ]
+  },
+  "baccarat": {
+    "brandId": "baccarat",
+    "displayName": "Baccarat",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "crystal-glamour",
+        "jewel-box",
+        "french"
+      ],
+      "serviceStyle": "polished, glamorous",
+      "differentiators": [
+        "crystal-house glamour"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "honeymoon",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "family",
+      "value"
+    ],
+    "summary": "Crystal-house glamour, jewel-box urban luxury.",
+    "aliases": [
+      "baccarat",
+      "baccarat hotel"
+    ]
+  },
+  "viceroy": {
+    "brandId": "viceroy",
+    "displayName": "Viceroy",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "design",
+        "resort",
+        "modern"
+      ],
+      "serviceStyle": "relaxed, stylish",
+      "differentiators": [
+        "design-driven resorts"
+      ]
+    },
+    "idealGuest": [
+      "couples",
+      "celebration",
+      "active",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Design-driven modern resort luxury.",
+    "aliases": [
+      "viceroy",
+      "the guild"
+    ]
+  },
+  "sandy-lane": {
+    "brandId": "sandy-lane",
+    "displayName": "Sandy Lane",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "caribbean-icon",
+        "grand",
+        "golf"
+      ],
+      "serviceStyle": "formal, polished",
+      "differentiators": [
+        "Barbados icon",
+        "golf and old-money glamour"
+      ]
+    },
+    "idealGuest": [
+      "family",
+      "celebration",
+      "uhnw",
+      "multigen"
+    ],
+    "notIdealFor": [
+      "boho",
+      "value"
+    ],
+    "summary": "Barbados' old-money grande-dame resort.",
+    "aliases": [
+      "sandy lane"
+    ]
+  },
+  "the-setai": {
+    "brandId": "the-setai",
+    "displayName": "The Setai",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "asian-art-deco",
+        "serene",
+        "miami"
+      ],
+      "serviceStyle": "discreet, serene",
+      "differentiators": [
+        "Art Deco-meets-Asia",
+        "Miami Beach calm"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "celebration",
+      "couples",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "family",
+      "value"
+    ],
+    "summary": "Serene Asian-influenced Art Deco luxury in Miami Beach.",
+    "aliases": [
+      "the setai",
+      "setai"
+    ]
+  },
+  "wynn": {
+    "brandId": "wynn",
+    "displayName": "Wynn",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "vegas-glamour",
+        "resort-casino",
+        "polished"
+      ],
+      "serviceStyle": "polished, scaled",
+      "differentiators": [
+        "Vegas resort-casino luxury"
+      ]
+    },
+    "idealGuest": [
+      "celebration",
+      "couples",
+      "business"
+    ],
+    "notIdealFor": [
+      "wellness",
+      "value"
+    ],
+    "summary": "Polished Las Vegas resort-casino luxury.",
+    "aliases": [
+      "wynn"
+    ]
+  },
+  "lhw": {
+    "brandId": "lhw",
+    "displayName": "Leading Hotels of the World",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "independent",
+        "grand",
+        "iconic",
+        "uncommon"
+      ],
+      "serviceStyle": "varies by property, characterful",
+      "differentiators": [
+        "umbrella for independent grande dames",
+        "uncommon iconic hotels"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "celebration",
+      "honeymoon",
+      "uhnw",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Umbrella for independent, often iconic luxury hotels; character over conformity.",
+    "aliases": [
+      "leading hotels of the world",
+      "lhw",
+      "leaders club"
+    ]
+  },
+  "slh": {
+    "brandId": "slh",
+    "displayName": "Small Luxury Hotels",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "independent",
+        "boutique",
+        "characterful",
+        "owner-run"
+      ],
+      "serviceStyle": "personal, characterful",
+      "differentiators": [
+        "umbrella for independent boutiques",
+        "small and distinctive"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "couples",
+      "honeymoon",
+      "first-timer",
+      "wellness"
+    ],
+    "notIdealFor": [
+      "multigen",
+      "business"
+    ],
+    "summary": "Umbrella for small, independent, characterful luxury hotels.",
+    "aliases": [
+      "small luxury hotels",
+      "slh",
+      "within"
+    ]
+  },
+  "relais-chateaux": {
+    "brandId": "relais-chateaux",
+    "displayName": "Relais & Châteaux",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "gastronomic",
+        "intimate",
+        "characterful",
+        "gourmet"
+      ],
+      "serviceStyle": "personal, gourmet",
+      "differentiators": [
+        "chef-owners and gastronomy",
+        "intimate independents"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "couples",
+      "foodie",
+      "honeymoon"
+    ],
+    "notIdealFor": [
+      "family",
+      "business"
+    ],
+    "summary": "Gastronomy-led intimate independents; charm and the table at the center.",
+    "aliases": [
+      "relais & chateaux",
+      "relais and chateaux",
+      "relais chateaux"
+    ]
+  },
+  "design-hotels": {
+    "brandId": "design-hotels",
+    "displayName": "Design Hotels",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-lifestyle",
+      "priceIndex": 4,
+      "vibe": [
+        "design-led",
+        "architectural",
+        "independent",
+        "lifestyle"
+      ],
+      "serviceStyle": "relaxed, design-forward",
+      "differentiators": [
+        "architecturally distinctive independents"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "couples",
+      "design-conscious",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "multigen",
+      "family"
+    ],
+    "summary": "Architecturally distinctive design-forward independents.",
+    "aliases": [
+      "design hotels",
+      "design hotels collective"
+    ]
+  },
+  "preferred-hotels": {
+    "brandId": "preferred-hotels",
+    "displayName": "Preferred Hotels & Resorts",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "independent",
+        "broad",
+        "varied"
+      ],
+      "serviceStyle": "varies by property",
+      "differentiators": [
+        "large independent program across tiers"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "first-timer",
+      "family",
+      "celebration"
+    ],
+    "notIdealFor": [],
+    "summary": "Large independent-hotel program; character varies by property and tier.",
+    "aliases": [
+      "preferred hotels",
+      "preferred hotels & resorts",
+      "platinum partner"
+    ]
+  },
+  "independent-virtuoso": {
+    "brandId": "independent-virtuoso",
+    "displayName": "Independent Luxury (Virtuoso)",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "independent",
+        "unbranded",
+        "place-led"
+      ],
+      "serviceStyle": "varies by property",
+      "differentiators": [
+        "generic fallback for unbranded Virtuoso hotels"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "couples",
+      "first-timer"
+    ],
+    "notIdealFor": [],
+    "summary": "Fallback identity for unbranded independents tagged to a consortium; refine per property.",
+    "aliases": [
+      "virtuoso",
+      "independent",
+      "cadence individual partner"
+    ]
+  },
+  "silversea": {
+    "brandId": "silversea",
+    "displayName": "Silversea",
+    "type": "luxury-expedition-cruise",
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "all-inclusive",
+        "refined",
+        "expedition-capable"
+      ],
+      "shipScale": "small",
+      "paxBand": ">300-700",
+      "expeditionDepth": 4,
+      "serviceStyle": "refined, all-inclusive",
+      "differentiators": [
+        "butler suites",
+        "serious expedition fleet"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "culture",
+      "expedition",
+      "honeymoon",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "value",
+      "family"
+    ],
+    "summary": "Ultra-luxury all-inclusive ocean cruising with a real expedition arm.",
+    "aliases": [
+      "silversea",
+      "silversea cruises"
+    ]
+  },
+  "regent": {
+    "brandId": "regent",
+    "displayName": "Regent Seven Seas",
+    "type": "luxury-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "most-inclusive",
+        "spacious",
+        "opulent"
+      ],
+      "shipScale": "mid",
+      "paxBand": ">700",
+      "expeditionDepth": 1,
+      "serviceStyle": "opulent, all-inclusive",
+      "differentiators": [
+        "the most inclusive luxury cruise",
+        "all-suite, all-balcony"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "celebration",
+      "first-timer",
+      "multigen"
+    ],
+    "notIdealFor": [
+      "expedition",
+      "active",
+      "value"
+    ],
+    "summary": "The most-inclusive luxury cruise; opulent and spacious.",
+    "aliases": [
+      "regent",
+      "regent seven seas",
+      "rssc"
+    ]
+  },
+  "seabourn": {
+    "brandId": "seabourn",
+    "displayName": "Seabourn",
+    "type": "luxury-cruise",
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "intimate",
+        "refined",
+        "yacht-like"
+      ],
+      "shipScale": "small",
+      "paxBand": "250-600",
+      "expeditionDepth": 3,
+      "serviceStyle": "intuitive, all-inclusive",
+      "differentiators": [
+        "yacht-like intimacy",
+        "Venture expedition ships"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "honeymoon",
+      "culture",
+      "expedition"
+    ],
+    "notIdealFor": [
+      "family",
+      "value"
+    ],
+    "summary": "Intimate ultra-luxury cruising with a growing expedition side.",
+    "aliases": [
+      "seabourn",
+      "seabourn cruise line"
+    ]
+  },
+  "crystal": {
+    "brandId": "crystal",
+    "displayName": "Crystal",
+    "type": "luxury-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "classic-luxury",
+        "spacious",
+        "relaunched"
+      ],
+      "shipScale": "mid",
+      "paxBand": "600-800",
+      "expeditionDepth": 1,
+      "serviceStyle": "refined, attentive",
+      "differentiators": [
+        "relaunched classic luxury",
+        "high space-per-guest"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "celebration",
+      "culture",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "expedition",
+      "value"
+    ],
+    "summary": "Relaunched classic luxury cruising; refined and spacious.",
+    "aliases": [
+      "crystal",
+      "crystal cruises"
+    ]
+  },
+  "explora-journeys": {
+    "brandId": "explora-journeys",
+    "displayName": "Explora Journeys",
+    "type": "luxury-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "contemporary",
+        "european-design",
+        "wellness-forward"
+      ],
+      "shipScale": "mid",
+      "paxBand": "900-ish",
+      "expeditionDepth": 2,
+      "serviceStyle": "relaxed-luxe, attentive",
+      "differentiators": [
+        "ocean state of mind ethos",
+        "MSC's luxury brand"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "honeymoon",
+      "culture",
+      "wellness"
+    ],
+    "notIdealFor": [
+      "value",
+      "family-young-kids"
+    ],
+    "summary": "MSC's contemporary, design-and-wellness ocean luxury.",
+    "aliases": [
+      "explora journeys"
+    ]
+  },
+  "four-seasons-yacht": {
+    "brandId": "four-seasons-yacht",
+    "displayName": "Four Seasons Yachts",
+    "type": "luxury-yacht",
+    "appliesTo": [
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "residential",
+        "yacht",
+        "apex"
+      ],
+      "shipScale": "very-small",
+      "paxBand": "~196",
+      "expeditionDepth": 1,
+      "serviceStyle": "Four Seasons impeccable",
+      "differentiators": [
+        "Four Seasons at sea",
+        "apex residential yachting"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "honeymoon",
+      "celebration",
+      "multigen"
+    ],
+    "notIdealFor": [
+      "value",
+      "expedition"
+    ],
+    "summary": "Four Seasons' superyacht-style debut at the apex of yachting.",
+    "aliases": [
+      "four seasons yacht",
+      "four seasons yachts"
+    ]
+  },
+  "ritz-carlton-yacht": {
+    "brandId": "ritz-carlton-yacht",
+    "displayName": "Ritz-Carlton Yacht Collection",
+    "type": "luxury-yacht",
+    "appliesTo": [
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "yacht",
+        "refined",
+        "casual-luxury"
+      ],
+      "shipScale": "small",
+      "paxBand": "~300",
+      "expeditionDepth": 1,
+      "serviceStyle": "refined, relaxed",
+      "differentiators": [
+        "Ritz-Carlton service afloat",
+        "superyacht style"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "honeymoon",
+      "celebration",
+      "couples"
+    ],
+    "notIdealFor": [
+      "expedition",
+      "value"
+    ],
+    "summary": "Ritz-Carlton's refined superyacht-style sailings.",
+    "aliases": [
+      "ritz-carlton yacht",
+      "ritz-carlton yacht collection",
+      "ritz carlton yacht"
+    ]
+  },
+  "ponant": {
+    "brandId": "ponant",
+    "displayName": "Ponant",
+    "type": "luxury-expedition-cruise",
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "french",
+        "design-led",
+        "comfort-expedition"
+      ],
+      "shipScale": "small",
+      "paxBand": "180-260",
+      "expeditionDepth": 3,
+      "serviceStyle": "refined French",
+      "differentiators": [
+        "Blue Eye underwater lounge",
+        "Le Commandant Charcot polar icebreaker"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "culture",
+      "expedition",
+      "photography",
+      "first-timer",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "value",
+      "big-ship-amenities"
+    ],
+    "summary": "French design-led expedition; comfort-forward polar and remote sailings.",
+    "aliases": [
+      "ponant",
+      "compagnie du ponant"
+    ]
+  },
+  "scenic": {
+    "brandId": "scenic",
+    "displayName": "Scenic",
+    "type": "luxury-expedition-cruise",
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "discovery-yacht",
+        "all-inclusive",
+        "river-too"
+      ],
+      "shipScale": "small",
+      "paxBand": "~200",
+      "expeditionDepth": 3,
+      "serviceStyle": "all-inclusive, attentive",
+      "differentiators": [
+        "Scenic Eclipse discovery yachts",
+        "helicopter and submarine on board"
+      ]
+    },
+    "idealGuest": [
+      "active",
+      "expedition",
+      "uhnw",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Scenic Eclipse discovery yachts plus luxury river cruising.",
+    "aliases": [
+      "scenic",
+      "scenic cruises",
+      "scenic eclipse"
+    ]
+  },
+  "lindblad": {
+    "brandId": "lindblad",
+    "displayName": "Lindblad Expeditions",
+    "type": "expedition-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "nat-geo",
+        "science-led",
+        "deep-expedition"
+      ],
+      "shipScale": "small",
+      "paxBand": "100-150",
+      "expeditionDepth": 5,
+      "serviceStyle": "naturalist-led",
+      "differentiators": [
+        "National Geographic partnership",
+        "onboard scientists and naturalists"
+      ]
+    },
+    "idealGuest": [
+      "expedition",
+      "wildlife",
+      "photography",
+      "active",
+      "culture"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "value",
+      "big-ship-amenities"
+    ],
+    "summary": "National Geographic expedition cruising with science at the core.",
+    "aliases": [
+      "lindblad",
+      "lindblad expeditions",
+      "national geographic"
+    ]
+  },
+  "quark": {
+    "brandId": "quark",
+    "displayName": "Quark Expeditions",
+    "type": "expedition-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-expedition",
+      "priceIndex": 3,
+      "vibe": [
+        "polar-specialist",
+        "adventurous",
+        "substance-over-plush"
+      ],
+      "shipScale": "small",
+      "paxBand": "130-200",
+      "expeditionDepth": 5,
+      "serviceStyle": "expedition-led",
+      "differentiators": [
+        "polar-only focus",
+        "adventure-option heavy"
+      ]
+    },
+    "idealGuest": [
+      "expedition",
+      "active",
+      "wildlife",
+      "photography"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "honeymoon",
+      "value"
+    ],
+    "summary": "Polar-only specialist; deep adventure over plush.",
+    "aliases": [
+      "quark",
+      "quark expeditions"
+    ]
+  },
+  "aurora-expeditions": {
+    "brandId": "aurora-expeditions",
+    "displayName": "Aurora Expeditions",
+    "type": "expedition-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-expedition",
+      "priceIndex": 3,
+      "vibe": [
+        "active",
+        "small-ship",
+        "australian"
+      ],
+      "shipScale": "small",
+      "paxBand": "130-170",
+      "expeditionDepth": 5,
+      "serviceStyle": "active, friendly",
+      "differentiators": [
+        "activity-forward",
+        "sustainability focus"
+      ]
+    },
+    "idealGuest": [
+      "expedition",
+      "active",
+      "wildlife"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "value"
+    ],
+    "summary": "Active, small-ship Australian expedition cruising.",
+    "aliases": [
+      "aurora expeditions"
+    ]
+  },
+  "hurtigruten": {
+    "brandId": "hurtigruten",
+    "displayName": "Hurtigruten",
+    "type": "expedition-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "norway-coastal",
+        "working-ship-heritage",
+        "authentic"
+      ],
+      "shipScale": "mid",
+      "paxBand": "500-1000",
+      "expeditionDepth": 3,
+      "serviceStyle": "casual, authentic",
+      "differentiators": [
+        "Norwegian coastal line",
+        "port-rich working voyages"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "active",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "luxury"
+    ],
+    "summary": "Authentic Norwegian coastal voyages.",
+    "aliases": [
+      "hurtigruten",
+      "hurtigruten norway"
+    ]
+  },
+  "hurtigruten-expeditions": {
+    "brandId": "hurtigruten-expeditions",
+    "displayName": "Hurtigruten Expeditions (HX)",
+    "type": "expedition-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-expedition",
+      "priceIndex": 3,
+      "vibe": [
+        "polar",
+        "accessible",
+        "sustainable"
+      ],
+      "shipScale": "mid",
+      "paxBand": "~500",
+      "expeditionDepth": 5,
+      "serviceStyle": "casual, expedition-led",
+      "differentiators": [
+        "accessible polar expedition",
+        "science programs"
+      ]
+    },
+    "idealGuest": [
+      "expedition",
+      "active",
+      "value"
+    ],
+    "notIdealFor": [
+      "uhnw"
+    ],
+    "summary": "Accessible, sustainability-minded polar and expedition cruising.",
+    "aliases": [
+      "hurtigruten expeditions",
+      "hx"
+    ]
+  },
+  "swan-hellenic": {
+    "brandId": "swan-hellenic",
+    "displayName": "Swan Hellenic",
+    "type": "expedition-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-expedition",
+      "priceIndex": 4,
+      "vibe": [
+        "boutique",
+        "cultural",
+        "value-luxe"
+      ],
+      "shipScale": "small",
+      "paxBand": "~150",
+      "expeditionDepth": 4,
+      "serviceStyle": "cultured, attentive",
+      "differentiators": [
+        "cultural-expedition revival",
+        "expert lecturers"
+      ]
+    },
+    "idealGuest": [
+      "expedition",
+      "culture",
+      "wildlife"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Boutique cultural-expedition cruising revived.",
+    "aliases": [
+      "swan hellenic"
+    ]
+  },
+  "aqua-expeditions": {
+    "brandId": "aqua-expeditions",
+    "displayName": "Aqua Expeditions",
+    "type": "luxury-expedition-cruise",
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "river-yacht",
+        "design",
+        "amazon-mekong"
+      ],
+      "shipScale": "very-small",
+      "paxBand": "16-40 suites",
+      "expeditionDepth": 3,
+      "serviceStyle": "refined, intimate",
+      "differentiators": [
+        "design-led river yachts",
+        "Amazon, Mekong, Indonesia"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "expedition",
+      "culture",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "value",
+      "family"
+    ],
+    "summary": "Design-led luxury river-and-sea expedition yachts.",
+    "aliases": [
+      "aqua expeditions"
+    ]
+  },
+  "zegrahm": {
+    "brandId": "zegrahm",
+    "displayName": "Zegrahm Expeditions",
+    "type": "expedition-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-expedition",
+      "priceIndex": 4,
+      "vibe": [
+        "deep-expedition",
+        "far-flung",
+        "naturalist"
+      ],
+      "shipScale": "small",
+      "paxBand": "~100",
+      "expeditionDepth": 5,
+      "serviceStyle": "expert-led",
+      "differentiators": [
+        "far-flung itineraries",
+        "veteran expedition staff"
+      ]
+    },
+    "idealGuest": [
+      "expedition",
+      "wildlife",
+      "culture"
+    ],
+    "notIdealFor": [
+      "value",
+      "uhnw"
+    ],
+    "summary": "Far-flung deep-expedition specialist.",
+    "aliases": [
+      "zegrahm",
+      "zegrahm expeditions"
+    ]
+  },
+  "uncruise": {
+    "brandId": "uncruise",
+    "displayName": "UnCruise Adventures",
+    "type": "expedition-cruise",
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "active",
+        "casual",
+        "inclusive",
+        "alaska"
+      ],
+      "shipScale": "very-small",
+      "paxBand": "22-86",
+      "expeditionDepth": 4,
+      "serviceStyle": "casual, active",
+      "differentiators": [
+        "all-inclusive small-ship",
+        "Alaska and Baja focus"
+      ]
+    },
+    "idealGuest": [
+      "active",
+      "expedition",
+      "wildlife",
+      "family"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "value"
+    ],
+    "summary": "Small-ship, active, casual adventure cruising.",
+    "aliases": [
+      "uncruise",
+      "uncruise adventures",
+      "un-cruise"
+    ]
+  },
+  "atlas-ocean": {
+    "brandId": "atlas-ocean",
+    "displayName": "Atlas Ocean Voyages",
+    "type": "luxury-expedition-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-expedition",
+      "priceIndex": 4,
+      "vibe": [
+        "yacht-expedition",
+        "all-inclusive",
+        "modern"
+      ],
+      "shipScale": "small",
+      "paxBand": "~200",
+      "expeditionDepth": 4,
+      "serviceStyle": "relaxed-luxe, all-inclusive",
+      "differentiators": [
+        "modern expedition yachts",
+        "accessible luxe-pedition"
+      ]
+    },
+    "idealGuest": [
+      "expedition",
+      "first-timer",
+      "couples",
+      "active"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Modern, all-inclusive luxe-pedition yachts.",
+    "aliases": [
+      "atlas ocean voyages",
+      "atlas ocean"
+    ]
+  },
+  "heritage-line": {
+    "brandId": "heritage-line",
+    "displayName": "Heritage Line",
+    "type": "luxury-river-cruise",
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "asia-river-yacht",
+        "design",
+        "characterful"
+      ],
+      "shipScale": "very-small",
+      "paxBand": "20-30 cabins",
+      "expeditionDepth": 3,
+      "serviceStyle": "intimate, characterful",
+      "differentiators": [
+        "design-led Asian river yachts",
+        "Mekong, Irrawaddy, Halong"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "couples",
+      "honeymoon"
+    ],
+    "notIdealFor": [
+      "value",
+      "family"
+    ],
+    "summary": "Design-led Asian river yachts on the Mekong, Irrawaddy and Halong Bay.",
+    "aliases": [
+      "heritage line"
+    ]
+  },
+  "uniworld": {
+    "brandId": "uniworld",
+    "displayName": "Uniworld",
+    "type": "luxury-river-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "boutique",
+        "opulent-decor",
+        "all-inclusive"
+      ],
+      "shipScale": "small",
+      "paxBand": "~120",
+      "expeditionDepth": 1,
+      "serviceStyle": "lavish, all-inclusive",
+      "differentiators": [
+        "one-of-a-kind opulent decor",
+        "truly all-inclusive river"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "celebration",
+      "couples",
+      "uhnw",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "expedition",
+      "value"
+    ],
+    "summary": "Boutique, opulently decorated, all-inclusive river cruising.",
+    "aliases": [
+      "uniworld",
+      "uniworld boutique river cruise"
+    ]
+  },
+  "amawaterways": {
+    "brandId": "amawaterways",
+    "displayName": "AmaWaterways",
+    "type": "river-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "river",
+        "active-options",
+        "culinary",
+        "family-bridges"
+      ],
+      "shipScale": "mid",
+      "paxBand": "150-160",
+      "expeditionDepth": 2,
+      "serviceStyle": "warm, attentive",
+      "differentiators": [
+        "wellness and biking programs",
+        "family river offerings"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "active",
+      "multigen",
+      "couples",
+      "foodie"
+    ],
+    "notIdealFor": [
+      "uhnw"
+    ],
+    "summary": "Premium-luxury river cruising with wellness, biking and family options.",
+    "aliases": [
+      "amawaterways",
+      "ama waterways"
+    ]
+  },
+  "avalon-waterways": {
+    "brandId": "avalon-waterways",
+    "displayName": "Avalon Waterways",
+    "type": "river-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "river",
+        "panorama-suites",
+        "value-premium"
+      ],
+      "shipScale": "mid",
+      "paxBand": "~160",
+      "expeditionDepth": 1,
+      "serviceStyle": "relaxed, friendly",
+      "differentiators": [
+        "open-air Panorama Suites"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "first-timer",
+      "value",
+      "couples"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "expedition"
+    ],
+    "summary": "Premium river cruising known for open-air suites.",
+    "aliases": [
+      "avalon waterways",
+      "globus",
+      "cosmos"
+    ]
+  },
+  "riverside": {
+    "brandId": "riverside",
+    "displayName": "Riverside Luxury Cruises",
+    "type": "luxury-river-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "luxury-river",
+        "refined",
+        "former-crystal-fleet"
+      ],
+      "shipScale": "small",
+      "paxBand": "~100-150",
+      "expeditionDepth": 1,
+      "serviceStyle": "refined, attentive",
+      "differentiators": [
+        "former Crystal river fleet",
+        "high space-per-guest"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "celebration",
+      "uhnw",
+      "couples"
+    ],
+    "notIdealFor": [
+      "expedition",
+      "value"
+    ],
+    "summary": "Luxury river cruising aboard the former Crystal river fleet.",
+    "aliases": [
+      "riverside",
+      "riverside luxury cruises"
+    ]
+  },
+  "tauck": {
+    "brandId": "tauck",
+    "displayName": "Tauck",
+    "type": "river-tour-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "all-inclusive",
+        "curated",
+        "multigen",
+        "river+land"
+      ],
+      "shipScale": "mid",
+      "paxBand": "~130",
+      "expeditionDepth": 2,
+      "serviceStyle": "curated, hosted",
+      "differentiators": [
+        "truly all-inclusive",
+        "Bridges multigen program"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "multigen",
+      "family",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Curated all-inclusive land-and-river journeys; strong for multigen.",
+    "aliases": [
+      "tauck",
+      "tauck river cruising"
+    ]
+  },
+  "riviera-river": {
+    "brandId": "riviera-river",
+    "displayName": "Riviera River Cruises",
+    "type": "river-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "value-river",
+        "british",
+        "friendly"
+      ],
+      "shipScale": "mid",
+      "paxBand": "~140",
+      "expeditionDepth": 1,
+      "serviceStyle": "friendly, value",
+      "differentiators": [
+        "value-focused river",
+        "British market"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "value",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "uhnw"
+    ],
+    "summary": "Value-focused British river cruising.",
+    "aliases": [
+      "riviera river cruises",
+      "riviera travel"
+    ]
+  },
+  "emerald": {
+    "brandId": "emerald",
+    "displayName": "Emerald Cruises",
+    "type": "river-cruise",
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "contemporary-river",
+        "star-ships",
+        "yacht-too"
+      ],
+      "shipScale": "mid",
+      "paxBand": "~180",
+      "expeditionDepth": 2,
+      "serviceStyle": "contemporary, relaxed",
+      "differentiators": [
+        "pool-equipped Star-Ships",
+        "Emerald yacht cruises"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "active",
+      "value",
+      "couples"
+    ],
+    "notIdealFor": [
+      "uhnw"
+    ],
+    "summary": "Contemporary river cruising plus a small yacht-cruise arm.",
+    "aliases": [
+      "emerald cruises",
+      "emerald waterways"
+    ]
+  },
+  "oceania": {
+    "brandId": "oceania",
+    "displayName": "Oceania",
+    "type": "premium-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-plus",
+      "priceIndex": 4,
+      "vibe": [
+        "foodie",
+        "mid-size",
+        "destination-rich"
+      ],
+      "shipScale": "mid",
+      "paxBand": "700-1200",
+      "expeditionDepth": 2,
+      "serviceStyle": "refined, attentive",
+      "differentiators": [
+        "Finest Cuisine at Sea positioning",
+        "destination-dense itineraries"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "foodie",
+      "first-timer",
+      "multigen",
+      "couples"
+    ],
+    "notIdealFor": [
+      "expedition",
+      "value"
+    ],
+    "summary": "Destination-rich, food-forward premium-plus cruising.",
+    "aliases": [
+      "oceania",
+      "oceania cruise line",
+      "oceania cruises"
+    ]
+  },
+  "viking": {
+    "brandId": "viking",
+    "displayName": "Viking",
+    "type": "premium-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-plus",
+      "priceIndex": 4,
+      "vibe": [
+        "scandi-design",
+        "adults-only",
+        "cultural"
+      ],
+      "shipScale": "mid",
+      "paxBand": "930 (ocean)",
+      "expeditionDepth": 3,
+      "serviceStyle": "understated, cultured",
+      "differentiators": [
+        "no children, no casinos",
+        "Scandinavian design"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "first-timer",
+      "couples"
+    ],
+    "notIdealFor": [
+      "family"
+    ],
+    "summary": "Understated, adults-only, culture-forward (river, ocean and expedition).",
+    "aliases": [
+      "viking",
+      "viking river cruises",
+      "viking ocean",
+      "viking expeditions"
+    ]
+  },
+  "azamara": {
+    "brandId": "azamara",
+    "displayName": "Azamara",
+    "type": "premium-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-plus",
+      "priceIndex": 4,
+      "vibe": [
+        "destination-immersive",
+        "overnights",
+        "mid-size"
+      ],
+      "shipScale": "mid",
+      "paxBand": "~700",
+      "expeditionDepth": 2,
+      "serviceStyle": "relaxed, attentive",
+      "differentiators": [
+        "destination immersion",
+        "late stays and overnights"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "couples",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "family",
+      "value"
+    ],
+    "summary": "Destination-immersive cruising with overnights and late stays.",
+    "aliases": [
+      "azamara",
+      "azamara club cruises"
+    ]
+  },
+  "celebrity": {
+    "brandId": "celebrity",
+    "displayName": "Celebrity Cruises",
+    "type": "premium-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "modern",
+        "polished-mainstream",
+        "edge-series"
+      ],
+      "shipScale": "large",
+      "paxBand": "2900-3200",
+      "expeditionDepth": 1,
+      "serviceStyle": "polished, scaled",
+      "differentiators": [
+        "modern premium ships",
+        "Edge series design"
+      ]
+    },
+    "idealGuest": [
+      "first-timer",
+      "celebration",
+      "family",
+      "couples"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "expedition"
+    ],
+    "summary": "Polished modern premium cruising.",
+    "aliases": [
+      "celebrity",
+      "celebrity cruises"
+    ]
+  },
+  "holland-america": {
+    "brandId": "holland-america",
+    "displayName": "Holland America",
+    "type": "premium-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "classic",
+        "mid-size",
+        "enrichment"
+      ],
+      "shipScale": "mid",
+      "paxBand": "~2000",
+      "expeditionDepth": 2,
+      "serviceStyle": "classic, gracious",
+      "differentiators": [
+        "music and enrichment programs",
+        "classic itineraries"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "first-timer",
+      "mature"
+    ],
+    "notIdealFor": [
+      "uhnw"
+    ],
+    "summary": "Classic premium cruising with music and enrichment.",
+    "aliases": [
+      "holland america",
+      "holland america cruise line",
+      "hal"
+    ]
+  },
+  "princess": {
+    "brandId": "princess",
+    "displayName": "Princess",
+    "type": "premium-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "mainstream-premium",
+        "broad",
+        "balanced"
+      ],
+      "shipScale": "large",
+      "paxBand": "2600-3600",
+      "expeditionDepth": 1,
+      "serviceStyle": "friendly, scaled",
+      "differentiators": [
+        "broad mainstream-premium appeal"
+      ]
+    },
+    "idealGuest": [
+      "first-timer",
+      "family",
+      "multigen",
+      "couples"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "expedition"
+    ],
+    "summary": "Broad, balanced mainstream-premium cruising.",
+    "aliases": [
+      "princess",
+      "princess cruises"
+    ]
+  },
+  "cunard": {
+    "brandId": "cunard",
+    "displayName": "Cunard",
+    "type": "premium-ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-plus",
+      "priceIndex": 4,
+      "vibe": [
+        "ocean-liner",
+        "british-heritage",
+        "formal"
+      ],
+      "shipScale": "large",
+      "paxBand": "2000-3000",
+      "expeditionDepth": 1,
+      "serviceStyle": "formal, heritage",
+      "differentiators": [
+        "transatlantic ocean liner",
+        "white-glove formality"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "celebration",
+      "first-timer",
+      "couples"
+    ],
+    "notIdealFor": [
+      "expedition",
+      "active"
+    ],
+    "summary": "Ocean-liner heritage with transatlantic crossings.",
+    "aliases": [
+      "cunard",
+      "cunard line limited"
+    ]
+  },
+  "paul-gauguin": {
+    "brandId": "paul-gauguin",
+    "displayName": "Paul Gauguin",
+    "type": "luxury-cruise",
+    "appliesTo": [
+      "cruise",
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "south-pacific-specialist",
+        "intimate",
+        "tahiti"
+      ],
+      "shipScale": "small",
+      "paxBand": "~330",
+      "expeditionDepth": 2,
+      "serviceStyle": "relaxed, intimate",
+      "differentiators": [
+        "purpose-built for the South Pacific",
+        "Tahiti and Polynesia focus"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "couples",
+      "culture"
+    ],
+    "notIdealFor": [
+      "expedition",
+      "family"
+    ],
+    "summary": "Intimate Tahiti and South Pacific specialist.",
+    "aliases": [
+      "paul gauguin",
+      "paul gauguin cruises"
+    ]
+  },
+  "victory-cruise-lines": {
+    "brandId": "victory-cruise-lines",
+    "displayName": "Victory Cruise Lines",
+    "type": "small-ship-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "great-lakes",
+        "small-ship-US",
+        "enrichment"
+      ],
+      "shipScale": "very-small",
+      "paxBand": "~200",
+      "expeditionDepth": 2,
+      "serviceStyle": "hosted, casual",
+      "differentiators": [
+        "Great Lakes and US coastal",
+        "small-ship enrichment"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "mature",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "expedition"
+    ],
+    "summary": "Great Lakes and US coastal small-ship cruising.",
+    "aliases": [
+      "victory cruise lines"
+    ]
+  },
+  "american-cruise-line": {
+    "brandId": "american-cruise-line",
+    "displayName": "American Cruise Lines",
+    "type": "river-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "US-rivers-coastal",
+        "small-ship",
+        "domestic"
+      ],
+      "shipScale": "small",
+      "paxBand": "~100-180",
+      "expeditionDepth": 2,
+      "serviceStyle": "hosted, gracious",
+      "differentiators": [
+        "US rivers and coast",
+        "newest domestic riverboats"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "mature",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "expedition"
+    ],
+    "summary": "US river and coastal small-ship cruising.",
+    "aliases": [
+      "american cruise line",
+      "american cruise lines"
+    ]
+  },
+  "pearl-seas": {
+    "brandId": "pearl-seas",
+    "displayName": "Pearl Seas Cruises",
+    "type": "expedition-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "north-america-coastal",
+        "small-ship",
+        "casual-explorer"
+      ],
+      "shipScale": "small",
+      "paxBand": "~200",
+      "expeditionDepth": 2,
+      "serviceStyle": "hosted, casual",
+      "differentiators": [
+        "North America coastal exploration"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "mature",
+      "active"
+    ],
+    "notIdealFor": [
+      "uhnw"
+    ],
+    "summary": "Coastal North America small-ship exploration.",
+    "aliases": [
+      "pearl seas",
+      "pearl seas cruises"
+    ]
+  },
+  "amadeus-river": {
+    "brandId": "amadeus-river",
+    "displayName": "Amadeus River Cruises",
+    "type": "river-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium",
+      "priceIndex": 3,
+      "vibe": [
+        "river",
+        "european",
+        "family-run"
+      ],
+      "shipScale": "mid",
+      "paxBand": "~140",
+      "expeditionDepth": 1,
+      "serviceStyle": "friendly, classic",
+      "differentiators": [
+        "family-run European river line"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "value",
+      "first-timer"
+    ],
+    "notIdealFor": [
+      "uhnw"
+    ],
+    "summary": "Family-run European river cruising.",
+    "aliases": [
+      "amadeus river cruises"
+    ]
+  },
+  "royal-caribbean": {
+    "brandId": "royal-caribbean",
+    "displayName": "Royal Caribbean",
+    "type": "ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "mass-market",
+      "priceIndex": 2,
+      "vibe": [
+        "mega-ship",
+        "family-activity",
+        "entertainment"
+      ],
+      "shipScale": "mega",
+      "paxBand": "4000-7600",
+      "expeditionDepth": 1,
+      "serviceStyle": "scaled, energetic",
+      "differentiators": [
+        "activity mega-ships"
+      ]
+    },
+    "idealGuest": [
+      "family"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "honeymoon",
+      "culture",
+      "expedition",
+      "luxury"
+    ],
+    "summary": "Activity-packed mega-ships; off-brand for a luxury concierge.",
+    "aliases": [
+      "royal caribbean",
+      "royal caribbean international",
+      "rci"
+    ]
+  },
+  "carnival": {
+    "brandId": "carnival",
+    "displayName": "Carnival",
+    "type": "ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "mass-market",
+      "priceIndex": 1,
+      "vibe": [
+        "budget",
+        "party",
+        "family"
+      ],
+      "shipScale": "large",
+      "paxBand": "2000-4000",
+      "expeditionDepth": 1,
+      "serviceStyle": "casual, energetic",
+      "differentiators": [
+        "budget party cruising"
+      ]
+    },
+    "idealGuest": [
+      "value"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "honeymoon",
+      "culture",
+      "luxury"
+    ],
+    "summary": "Budget mass-market cruising; off-brand for luxury.",
+    "aliases": [
+      "carnival",
+      "carnival cruise lines"
+    ]
+  },
+  "msc": {
+    "brandId": "msc",
+    "displayName": "MSC Cruises",
+    "type": "ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "mass-market",
+      "priceIndex": 2,
+      "vibe": [
+        "european-mainstream",
+        "value",
+        "family"
+      ],
+      "shipScale": "mega",
+      "paxBand": "3000-6300",
+      "expeditionDepth": 1,
+      "serviceStyle": "scaled, value",
+      "differentiators": [
+        "European value mass-market"
+      ]
+    },
+    "idealGuest": [
+      "value",
+      "family"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "luxury",
+      "expedition"
+    ],
+    "summary": "European value mass-market; off-brand for luxury (note: owns Explora Journeys).",
+    "aliases": [
+      "msc",
+      "msc cruises"
+    ]
+  },
+  "norwegian": {
+    "brandId": "norwegian",
+    "displayName": "Norwegian",
+    "type": "ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "mass-market",
+      "priceIndex": 2,
+      "vibe": [
+        "freestyle",
+        "family",
+        "mainstream"
+      ],
+      "shipScale": "mega",
+      "paxBand": "3000-4000",
+      "expeditionDepth": 1,
+      "serviceStyle": "casual, flexible",
+      "differentiators": [
+        "Freestyle dining and flexibility"
+      ]
+    },
+    "idealGuest": [
+      "family"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "luxury",
+      "expedition"
+    ],
+    "summary": "Freestyle mainstream cruising; off-brand for luxury.",
+    "aliases": [
+      "norwegian",
+      "norwegian cruise lines",
+      "ncl"
+    ]
+  },
+  "disney-cruise": {
+    "brandId": "disney-cruise",
+    "displayName": "Disney Cruise Line",
+    "type": "ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-family",
+      "priceIndex": 3,
+      "vibe": [
+        "family",
+        "character",
+        "immersive"
+      ],
+      "shipScale": "large",
+      "paxBand": "2500-4000",
+      "expeditionDepth": 1,
+      "serviceStyle": "family-led, polished",
+      "differentiators": [
+        "character and storytelling",
+        "best-in-class kids programs"
+      ]
+    },
+    "idealGuest": [
+      "family",
+      "multigen"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "honeymoon",
+      "culture",
+      "expedition"
+    ],
+    "summary": "Family/character cruising; relevant only for dedicated family asks.",
+    "aliases": [
+      "disney cruise",
+      "disney cruise line",
+      "disney cruise vacations"
+    ]
+  },
+  "virgin-voyages": {
+    "brandId": "virgin-voyages",
+    "displayName": "Virgin Voyages",
+    "type": "ocean-cruise",
+    "appliesTo": [
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "premium-lifestyle",
+      "priceIndex": 3,
+      "vibe": [
+        "adults-only",
+        "hip",
+        "design"
+      ],
+      "shipScale": "large",
+      "paxBand": "~2700",
+      "expeditionDepth": 1,
+      "serviceStyle": "relaxed, hip",
+      "differentiators": [
+        "adults-only",
+        "design-and-wellness lifestyle"
+      ]
+    },
+    "idealGuest": [
+      "couples",
+      "celebration",
+      "culture"
+    ],
+    "notIdealFor": [
+      "family",
+      "uhnw"
+    ],
+    "summary": "Adults-only, design-led lifestyle cruising.",
+    "aliases": [
+      "virgin voyages"
+    ]
+  },
+  "seadream": {
+    "brandId": "seadream",
+    "displayName": "SeaDream Yacht Club",
+    "type": "luxury-yacht",
+    "appliesTo": [
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "yacht",
+        "casual-luxury",
+        "mega-yacht-style"
+      ],
+      "shipScale": "very-small",
+      "paxBand": "~112",
+      "expeditionDepth": 1,
+      "serviceStyle": "relaxed, intuitive",
+      "differentiators": [
+        "It's Yachting, Not Cruising ethos",
+        "open-seating, no schedule"
+      ]
+    },
+    "idealGuest": [
+      "honeymoon",
+      "couples",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "family",
+      "expedition"
+    ],
+    "summary": "Casual mega-yacht-style yachting for couples.",
+    "aliases": [
+      "seadream",
+      "seadream yacht club"
+    ]
+  },
+  "sea-cloud": {
+    "brandId": "sea-cloud",
+    "displayName": "Sea Cloud Cruises",
+    "type": "sailing-yacht",
+    "appliesTo": [
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "tall-ship",
+        "authentic-sailing",
+        "romantic"
+      ],
+      "shipScale": "very-small",
+      "paxBand": "~60-130",
+      "expeditionDepth": 1,
+      "serviceStyle": "refined, nautical",
+      "differentiators": [
+        "authentic tall-ship sailing",
+        "historic windjammers"
+      ]
+    },
+    "idealGuest": [
+      "couples",
+      "culture",
+      "honeymoon"
+    ],
+    "notIdealFor": [
+      "family",
+      "value"
+    ],
+    "summary": "Authentic tall-ship sailing under real canvas.",
+    "aliases": [
+      "sea cloud",
+      "sea cloud cruises"
+    ]
+  },
+  "star-clippers": {
+    "brandId": "star-clippers",
+    "displayName": "Star Clippers",
+    "type": "sailing-yacht",
+    "appliesTo": [
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "tall-ship",
+        "sailing",
+        "adventurous-romantic"
+      ],
+      "shipScale": "small",
+      "paxBand": "~170-300",
+      "expeditionDepth": 1,
+      "serviceStyle": "relaxed, nautical",
+      "differentiators": [
+        "genuine sail power",
+        "clipper-ship romance"
+      ]
+    },
+    "idealGuest": [
+      "couples",
+      "active",
+      "culture"
+    ],
+    "notIdealFor": [
+      "uhnw",
+      "value"
+    ],
+    "summary": "Tall-ship sailing under genuine canvas.",
+    "aliases": [
+      "star clippers",
+      "star clippers gsa"
+    ]
+  },
+  "windstar": {
+    "brandId": "windstar",
+    "displayName": "Windstar",
+    "type": "small-ship-yacht",
+    "appliesTo": [
+      "yacht",
+      "cruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "sail+motor-yachts",
+        "casual",
+        "foodie"
+      ],
+      "shipScale": "small",
+      "paxBand": "148-342",
+      "expeditionDepth": 1,
+      "serviceStyle": "relaxed, intimate",
+      "differentiators": [
+        "180 Degrees from Ordinary",
+        "sail and motor yachts, foodie focus"
+      ]
+    },
+    "idealGuest": [
+      "couples",
+      "culture",
+      "foodie",
+      "active"
+    ],
+    "notIdealFor": [
+      "family",
+      "value"
+    ],
+    "summary": "Intimate small-ship sail and motor yachts; foodie-forward.",
+    "aliases": [
+      "windstar",
+      "windstar cruises"
+    ]
+  },
+  "abercrombie-kent": {
+    "brandId": "abercrombie-kent",
+    "displayName": "Abercrombie & Kent",
+    "type": "tour-cruise-jet",
+    "appliesTo": [
+      "cruise",
+      "jet"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "bespoke",
+        "guided",
+        "private-jet-expedition"
+      ],
+      "shipScale": "varies",
+      "paxBand": "varies",
+      "expeditionDepth": 4,
+      "serviceStyle": "expert-guided, bespoke",
+      "differentiators": [
+        "Geoffrey Kent legacy",
+        "private-jet expeditions and tailor-made"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "expedition",
+      "culture",
+      "celebration",
+      "multigen"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Bespoke private-jet expeditions and luxury tailor-made journeys.",
+    "aliases": [
+      "abercrombie & kent",
+      "abercrombie and kent",
+      "a&k"
+    ]
+  }
+}
