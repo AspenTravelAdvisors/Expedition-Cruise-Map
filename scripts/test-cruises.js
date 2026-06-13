@@ -74,6 +74,16 @@ test("query paginates with honest total and default limit 6", () => {
   assert.equal(r.count, r.results.length);
   assert.ok(r.deepLink.includes("region=antarctica"));
 });
+
+test("intent ranks with itinerary-fit rows and returns fit metadata", () => {
+  const r = query({ region: "antarctica", intent: "wildlife", limit: 5 });
+  assert.equal(r.count, Math.min(5, r.total));
+  assert.ok(r.deepLink.includes("intent=wildlife"));
+  assert.ok(r.results.every((c) => c.fit && c.fit.intent === "wildlife"));
+  for (let i = 1; i < r.results.length; i++) {
+    assert.ok(r.results[i - 1].fit.score >= r.results[i].fit.score);
+  }
+});
 test("clampLimit default 6, capped at 24", () => {
   assert.equal(clampLimit(undefined), 6);
   assert.equal(clampLimit(100), 24);
