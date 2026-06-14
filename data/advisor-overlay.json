@@ -1947,7 +1947,8 @@
     "commissionTier": "mid",
     "commissionPct": 16,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "ocean-cruise",
     "alwaysInclude": false,
@@ -2009,7 +2010,8 @@
     "commissionTier": "high",
     "commissionPct": 17,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "luxury-ocean-cruise",
     "alwaysInclude": false,
@@ -2032,7 +2034,8 @@
     "commissionTier": "mid",
     "commissionPct": 15,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "ocean-cruise",
     "alwaysInclude": false,
@@ -2102,7 +2105,8 @@
     "commissionTier": "high",
     "commissionPct": 18,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "luxury-ocean-cruise",
     "alwaysInclude": false,
@@ -2170,7 +2174,8 @@
     "commissionTier": "mid",
     "commissionPct": 16,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "ocean-cruise",
     "alwaysInclude": false,
@@ -2223,7 +2228,8 @@
     "alwaysInclude": false,
     "aliases": [
       "hurtigruten expeditions",
-      "hx"
+      "hx",
+      "hx expeditions"
     ],
     "notes": [
       {
@@ -2240,14 +2246,16 @@
     "commissionTier": "low",
     "commissionPct": 12,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "expedition-cruise",
     "alwaysInclude": false,
     "aliases": [
       "lindblad expeditions",
       "lindblad",
-      "national geographic"
+      "national geographic-lindblad expeditions",
+      "nat geo-lindblad"
     ],
     "notes": [
       {
@@ -2304,7 +2312,8 @@
     "commissionTier": "high",
     "commissionPct": 17,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "premium-ocean-cruise",
     "alwaysInclude": false,
@@ -2440,7 +2449,8 @@
     "commissionTier": "mid",
     "commissionPct": 15,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "ocean-cruise",
     "alwaysInclude": false,
@@ -2486,7 +2496,8 @@
     "commissionTier": "high",
     "commissionPct": 17,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "luxury-ocean-cruise",
     "alwaysInclude": false,
@@ -2622,7 +2633,8 @@
     "commissionPct": 16,
     "appliesTo": [
       "cruise",
-      "yacht"
+      "yacht",
+      "worldcruise"
     ],
     "type": "luxury-cruise",
     "alwaysInclude": false,
@@ -2712,7 +2724,8 @@
     "commissionPct": 17,
     "appliesTo": [
       "cruise",
-      "yacht"
+      "yacht",
+      "worldcruise"
     ],
     "type": "luxury-expedition-cruise",
     "alwaysInclude": false,
@@ -2865,7 +2878,8 @@
     "commissionTier": "high",
     "commissionPct": 17,
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "river-ocean-expedition-cruise",
     "alwaysInclude": false,
@@ -2913,7 +2927,8 @@
     "commissionPct": 14,
     "appliesTo": [
       "yacht",
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "type": "small-ship-sailing",
     "alwaysInclude": false,
@@ -2950,6 +2965,287 @@
         "note": "14%; deep expedition specialist",
         "weight": 1,
         "clientSafe": false
+      }
+    ]
+  },
+  "four-seasons-private-jet": {
+    "brandId": "four-seasons-private-jet",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "jet"
+    ],
+    "type": "private-jet-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "four seasons private jet",
+      "four seasons jet",
+      "fs private jet"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Branded private jet hospitality with Four Seasons ground experience and highly consistent service.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "aman-jet": {
+    "brandId": "aman-jet",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "jet"
+    ],
+    "type": "private-jet-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "aman jet expeditions",
+      "aman jet"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Aman-aligned private jet experience for privacy, design, and quiet luxury.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "remote-lands": {
+    "brandId": "remote-lands",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "jet"
+    ],
+    "type": "private-jet-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "remote lands",
+      "remotelands"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Boutique Asia and private jet specialist with strong design, privacy, and cultural access.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "tcs-world-travel": {
+    "brandId": "tcs-world-travel",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "jet"
+    ],
+    "type": "private-jet-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "tcs world travel",
+      "tcs"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Logistics powerhouse for ambitious around-the-world and multi-country private jet expeditions.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "national-geographic": {
+    "brandId": "national-geographic",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "jet"
+    ],
+    "type": "private-jet-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "national geographic expeditions",
+      "national geographic",
+      "nat geo"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Expert-led private jet expeditions for science, photography, culture, and natural history depth.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "lakani": {
+    "brandId": "lakani",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "jet"
+    ],
+    "type": "private-jet-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "lakani",
+      "lakani world tours"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Small-group private jet touring for veteran luxury travelers seeking less obvious routes.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "signature-jet-journeys": {
+    "brandId": "signature-jet-journeys",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "jet"
+    ],
+    "type": "private-jet-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "signature jet journeys",
+      "signature jet"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Regional private jet journeys with curated small-group access.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "seasonz": {
+    "brandId": "seasonz",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "jet"
+    ],
+    "type": "private-jet-expedition",
+    "alwaysInclude": false,
+    "aliases": [
+      "seasonz",
+      "seasonz new zealand"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "New Zealand specialist for active luxury, golf, and bespoke regional planning.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "aman-at-sea": {
+    "brandId": "aman-at-sea",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "yacht"
+    ],
+    "type": "luxury-yacht",
+    "alwaysInclude": false,
+    "aliases": [
+      "aman at sea",
+      "amangati",
+      "aman yacht"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Aman privacy and wellness translated to a low-density yacht experience.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "orient-express-yachts": {
+    "brandId": "orient-express-yachts",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "yacht"
+    ],
+    "type": "luxury-yacht",
+    "alwaysInclude": false,
+    "aliases": [
+      "orient express sailing yachts",
+      "orient express yachts"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Romantic French sailing-yacht concept with Orient Express design heritage.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "the-world": {
+    "brandId": "the-world",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "worldcruise"
+    ],
+    "type": "residential-world-cruise",
+    "alwaysInclude": false,
+    "aliases": [
+      "the world residences at sea",
+      "the world",
+      "residences at sea"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Private residential ship; ownership and net-worth qualification should be advisor-led.",
+        "weight": 0,
+        "clientSafe": true
+      }
+    ]
+  },
+  "airelles": {
+    "brandId": "airelles",
+    "relationship": "standard",
+    "commissionTier": "unknown",
+    "commissionPct": null,
+    "appliesTo": [
+      "hotel"
+    ],
+    "type": "hotel-brand",
+    "alwaysInclude": false,
+    "aliases": [
+      "airelles",
+      "airelles collection",
+      "le grand controle"
+    ],
+    "notes": [
+      {
+        "audience": "all",
+        "note": "Palace-level French hospitality for regal, history-minded ultra-luxury stays.",
+        "weight": 0,
+        "clientSafe": true
       }
     ]
   }

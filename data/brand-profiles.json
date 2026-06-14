@@ -44,7 +44,21 @@
     "aliases": [
       "four seasons",
       "fs"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 90,
+      "couples": 88,
+      "family": 94,
+      "multigen": 92,
+      "celebration": 90,
+      "business": 94,
+      "first-timer": 94,
+      "culture": 72,
+      "uhnw": 92,
+      "wellness": 84,
+      "foodie": 82,
+      "value": 24
+    }
   },
   "aman": {
     "brandId": "aman",
@@ -84,7 +98,20 @@
     "aliases": [
       "aman",
       "amanresorts"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 96,
+      "couples": 96,
+      "family": 45,
+      "multigen": 45,
+      "celebration": 88,
+      "business": 70,
+      "culture": 84,
+      "photography": 88,
+      "uhnw": 100,
+      "wellness": 96,
+      "value": 20
+    }
   },
   "rosewood": {
     "brandId": "rosewood",
@@ -125,7 +152,20 @@
       "hotel de crillon",
       "the carlyle",
       "hotel de crillon a rosewood hotel"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 90,
+      "couples": 90,
+      "family": 86,
+      "multigen": 86,
+      "celebration": 92,
+      "business": 93,
+      "culture": 90,
+      "photography": 86,
+      "uhnw": 95,
+      "wellness": 82,
+      "value": 25
+    }
   },
   "mandarin-oriental": {
     "brandId": "mandarin-oriental",
@@ -163,7 +203,20 @@
       "mandarin oriental",
       "mo",
       "fan club"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 88,
+      "couples": 88,
+      "family": 78,
+      "multigen": 76,
+      "celebration": 86,
+      "business": 90,
+      "culture": 82,
+      "uhnw": 90,
+      "wellness": 94,
+      "foodie": 94,
+      "value": 25
+    }
   },
   "ritz-carlton": {
     "brandId": "ritz-carlton",
@@ -276,7 +329,20 @@
       "st. regis",
       "st regis",
       "st-regis"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 88,
+      "couples": 90,
+      "family": 78,
+      "multigen": 78,
+      "celebration": 92,
+      "business": 92,
+      "culture": 78,
+      "uhnw": 90,
+      "wellness": 74,
+      "foodie": 82,
+      "value": 24
+    }
   },
   "edition": {
     "brandId": "edition",
@@ -790,7 +856,20 @@
     "summary": "Pioneering wellness and sustainability in barefoot luxury.",
     "aliases": [
       "six senses"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 88,
+      "couples": 88,
+      "family": 72,
+      "multigen": 70,
+      "celebration": 80,
+      "active": 84,
+      "culture": 76,
+      "uhnw": 85,
+      "wellness": 98,
+      "foodie": 82,
+      "value": 24
+    }
   },
   "soneva": {
     "brandId": "soneva",
@@ -938,7 +1017,20 @@
     "summary": "Highly personalized residential luxury.",
     "aliases": [
       "capella"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 92,
+      "couples": 92,
+      "family": 78,
+      "multigen": 76,
+      "celebration": 90,
+      "business": 82,
+      "culture": 96,
+      "photography": 88,
+      "uhnw": 98,
+      "wellness": 86,
+      "value": 25
+    }
   },
   "the-peninsula": {
     "brandId": "the-peninsula",
@@ -1174,7 +1266,20 @@
       "belmond",
       "bellini club",
       "belmond bellini club"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 96,
+      "couples": 96,
+      "family": 76,
+      "multigen": 80,
+      "celebration": 94,
+      "business": 65,
+      "culture": 95,
+      "photography": 92,
+      "uhnw": 95,
+      "foodie": 86,
+      "value": 24
+    }
   },
   "auberge": {
     "brandId": "auberge",
@@ -1213,7 +1318,22 @@
       "auberge",
       "auberge resorts",
       "auberge resorts collection"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 88,
+      "couples": 88,
+      "family": 88,
+      "multigen": 86,
+      "celebration": 90,
+      "active": 92,
+      "culture": 78,
+      "wildlife": 70,
+      "photography": 84,
+      "uhnw": 90,
+      "wellness": 88,
+      "foodie": 90,
+      "value": 28
+    }
   },
   "montage": {
     "brandId": "montage",
@@ -1545,7 +1665,20 @@
       "1 hotel",
       "1 hotels",
       "1hotel"
-    ]
+    ],
+    "fitScores": {
+      "honeymoon": 80,
+      "couples": 82,
+      "family": 74,
+      "multigen": 70,
+      "celebration": 78,
+      "business": 88,
+      "culture": 78,
+      "uhnw": 82,
+      "wellness": 88,
+      "foodie": 82,
+      "value": 32
+    }
   },
   "thompson": {
     "brandId": "thompson",
@@ -2113,7 +2246,8 @@
     "type": "luxury-expedition-cruise",
     "appliesTo": [
       "cruise",
-      "yacht"
+      "yacht",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -2148,14 +2282,39 @@
     "aliases": [
       "silversea",
       "silversea cruises"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "cruise": {
+        "business": 60,
+        "first-timer": 60,
+        "family": 60,
+        "multigen": 60,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 100,
+        "active": 70
+      },
+      "world-cruise": {
+        "business": 50,
+        "first-timer": 50,
+        "family": 40,
+        "multigen": 40,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 100,
+        "active": 60
+      }
+    }
   },
   "regent": {
     "brandId": "regent",
     "displayName": "Regent Seven Seas",
     "type": "luxury-ocean-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -2191,7 +2350,20 @@
       "regent",
       "regent seven seas",
       "rssc"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 50,
+        "first-timer": 50,
+        "family": 70,
+        "multigen": 70,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 100,
+        "active": 60
+      }
+    }
   },
   "seabourn": {
     "brandId": "seabourn",
@@ -2199,7 +2371,8 @@
     "type": "luxury-cruise",
     "appliesTo": [
       "cruise",
-      "yacht"
+      "yacht",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -2233,14 +2406,39 @@
     "aliases": [
       "seabourn",
       "seabourn cruise line"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "cruise": {
+        "business": 60,
+        "first-timer": 60,
+        "family": 90,
+        "multigen": 90,
+        "culture": 70,
+        "photography": 90,
+        "expedition": 90,
+        "uhnw": 90,
+        "active": 90
+      },
+      "world-cruise": {
+        "business": 60,
+        "first-timer": 60,
+        "family": 80,
+        "multigen": 80,
+        "culture": 70,
+        "photography": 100,
+        "expedition": 100,
+        "uhnw": 90,
+        "active": 100
+      }
+    }
   },
   "crystal": {
     "brandId": "crystal",
     "displayName": "Crystal",
     "type": "luxury-ocean-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -2274,14 +2472,28 @@
     "aliases": [
       "crystal",
       "crystal cruises"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 50,
+        "first-timer": 50,
+        "family": 50,
+        "multigen": 50,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 100,
+        "active": 50
+      }
+    }
   },
   "explora-journeys": {
     "brandId": "explora-journeys",
     "displayName": "Explora Journeys",
     "type": "luxury-ocean-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -2314,7 +2526,20 @@
     "summary": "MSC's contemporary, design-and-wellness ocean luxury.",
     "aliases": [
       "explora journeys"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 70,
+        "first-timer": 70,
+        "family": 60,
+        "multigen": 60,
+        "culture": 70,
+        "photography": 70,
+        "expedition": 70,
+        "uhnw": 100,
+        "active": 60
+      }
+    }
   },
   "four-seasons-yacht": {
     "brandId": "four-seasons-yacht",
@@ -2355,7 +2580,20 @@
     "aliases": [
       "four seasons yacht",
       "four seasons yachts"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "yacht": {
+        "business": 80,
+        "first-timer": 80,
+        "family": 80,
+        "multigen": 80,
+        "culture": 60,
+        "photography": 60,
+        "expedition": 60,
+        "uhnw": 100,
+        "active": 50
+      }
+    }
   },
   "ritz-carlton-yacht": {
     "brandId": "ritz-carlton-yacht",
@@ -2397,7 +2635,20 @@
       "ritz-carlton yacht",
       "ritz-carlton yacht collection",
       "ritz carlton yacht"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "yacht": {
+        "business": 100,
+        "first-timer": 100,
+        "family": 80,
+        "multigen": 80,
+        "culture": 60,
+        "photography": 70,
+        "expedition": 70,
+        "uhnw": 90,
+        "active": 70
+      }
+    }
   },
   "ponant": {
     "brandId": "ponant",
@@ -2441,7 +2692,20 @@
     "aliases": [
       "ponant",
       "compagnie du ponant"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "cruise": {
+        "business": 70,
+        "first-timer": 70,
+        "family": 70,
+        "multigen": 70,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 90,
+        "active": 70
+      }
+    }
   },
   "scenic": {
     "brandId": "scenic",
@@ -2490,7 +2754,8 @@
     "displayName": "Lindblad Expeditions",
     "type": "expedition-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -2526,8 +2791,33 @@
     "aliases": [
       "lindblad",
       "lindblad expeditions",
-      "national geographic"
-    ]
+      "national geographic-lindblad expeditions",
+      "nat geo-lindblad"
+    ],
+    "fitScoresByAtlas": {
+      "cruise": {
+        "business": 50,
+        "first-timer": 50,
+        "family": 80,
+        "multigen": 80,
+        "culture": 100,
+        "photography": 100,
+        "expedition": 100,
+        "uhnw": 50,
+        "active": 80
+      },
+      "world-cruise": {
+        "business": 40,
+        "first-timer": 40,
+        "family": 60,
+        "multigen": 60,
+        "culture": 100,
+        "photography": 100,
+        "expedition": 100,
+        "uhnw": 40,
+        "active": 100
+      }
+    }
   },
   "quark": {
     "brandId": "quark",
@@ -2569,7 +2859,20 @@
     "aliases": [
       "quark",
       "quark expeditions"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "cruise": {
+        "business": 40,
+        "first-timer": 40,
+        "family": 50,
+        "multigen": 50,
+        "culture": 70,
+        "photography": 100,
+        "expedition": 100,
+        "uhnw": 50,
+        "active": 100
+      }
+    }
   },
   "aurora-expeditions": {
     "brandId": "aurora-expeditions",
@@ -2687,7 +2990,20 @@
     "aliases": [
       "hurtigruten expeditions",
       "hx"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "cruise": {
+        "business": 50,
+        "first-timer": 50,
+        "family": 70,
+        "multigen": 70,
+        "culture": 90,
+        "photography": 90,
+        "expedition": 90,
+        "uhnw": 60,
+        "active": 80
+      }
+    }
   },
   "swan-hellenic": {
     "brandId": "swan-hellenic",
@@ -3224,7 +3540,8 @@
     "displayName": "Oceania",
     "type": "premium-ocean-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -3260,14 +3577,28 @@
       "oceania",
       "oceania cruise line",
       "oceania cruises"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 60,
+        "first-timer": 60,
+        "family": 50,
+        "multigen": 50,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 80,
+        "active": 70
+      }
+    }
   },
   "viking": {
     "brandId": "viking",
     "displayName": "Viking",
     "type": "premium-ocean-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -3301,14 +3632,28 @@
       "viking river cruises",
       "viking ocean",
       "viking expeditions"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 60,
+        "first-timer": 60,
+        "family": 10,
+        "multigen": 10,
+        "culture": 100,
+        "photography": 100,
+        "expedition": 100,
+        "uhnw": 70,
+        "active": 60
+      }
+    }
   },
   "azamara": {
     "brandId": "azamara",
     "displayName": "Azamara",
     "type": "premium-ocean-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -3341,7 +3686,20 @@
     "aliases": [
       "azamara",
       "azamara club cruises"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 60,
+        "first-timer": 60,
+        "family": 40,
+        "multigen": 40,
+        "culture": 90,
+        "photography": 90,
+        "expedition": 90,
+        "uhnw": 60,
+        "active": 70
+      }
+    }
   },
   "celebrity": {
     "brandId": "celebrity",
@@ -3389,7 +3747,8 @@
     "displayName": "Holland America",
     "type": "premium-ocean-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -3422,14 +3781,28 @@
       "holland america",
       "holland america cruise line",
       "hal"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 50,
+        "first-timer": 50,
+        "family": 60,
+        "multigen": 60,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 60,
+        "active": 50
+      }
+    }
   },
   "princess": {
     "brandId": "princess",
     "displayName": "Princess",
     "type": "premium-ocean-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -3462,14 +3835,28 @@
     "aliases": [
       "princess",
       "princess cruises"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 50,
+        "first-timer": 50,
+        "family": 90,
+        "multigen": 90,
+        "culture": 60,
+        "photography": 60,
+        "expedition": 60,
+        "uhnw": 50,
+        "active": 60
+      }
+    }
   },
   "cunard": {
     "brandId": "cunard",
     "displayName": "Cunard",
     "type": "premium-ocean-cruise",
     "appliesTo": [
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -3503,7 +3890,20 @@
     "aliases": [
       "cunard",
       "cunard line limited"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 40,
+        "first-timer": 40,
+        "family": 50,
+        "multigen": 50,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 80,
+        "active": 40
+      }
+    }
   },
   "paul-gauguin": {
     "brandId": "paul-gauguin",
@@ -4065,7 +4465,8 @@
     "type": "small-ship-yacht",
     "appliesTo": [
       "yacht",
-      "cruise"
+      "cruise",
+      "worldcruise"
     ],
     "officialUrl": null,
     "positioning": {
@@ -4099,7 +4500,20 @@
     "aliases": [
       "windstar",
       "windstar cruises"
-    ]
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 70,
+        "first-timer": 70,
+        "family": 40,
+        "multigen": 40,
+        "culture": 70,
+        "photography": 90,
+        "expedition": 90,
+        "uhnw": 70,
+        "active": 90
+      }
+    }
   },
   "abercrombie-kent": {
     "brandId": "abercrombie-kent",
@@ -4143,5 +4557,676 @@
       "abercrombie and kent",
       "a&k"
     ]
+  },
+  "airelles": {
+    "brandId": "airelles",
+    "displayName": "Airelles",
+    "type": "hotel-brand",
+    "appliesTo": [
+      "hotel"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "palace-hotel",
+        "historic",
+        "regal"
+      ],
+      "serviceStyle": "formal, highly personalized",
+      "differentiators": [
+        "French palace-style estates",
+        "living-history settings",
+        "deep privacy"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "culture",
+      "celebration",
+      "honeymoon"
+    ],
+    "notIdealFor": [
+      "value",
+      "casual-lifestyle"
+    ],
+    "summary": "Palace-level French hospitality for history-minded ultra-luxury travelers.",
+    "aliases": [
+      "airelles",
+      "airelles collection",
+      "le grand controle"
+    ],
+    "fitScores": {
+      "honeymoon": 92,
+      "couples": 90,
+      "family": 72,
+      "multigen": 78,
+      "celebration": 98,
+      "business": 58,
+      "culture": 97,
+      "photography": 92,
+      "uhnw": 98,
+      "wellness": 72,
+      "value": 18
+    }
+  },
+  "four-seasons-private-jet": {
+    "brandId": "four-seasons-private-jet",
+    "displayName": "Four Seasons Private Jet",
+    "type": "private-jet-expedition",
+    "appliesTo": [
+      "jet"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "branded-hospitality",
+        "seamless",
+        "polished"
+      ],
+      "shipScale": "private jet",
+      "paxBand": "approx. 48-52",
+      "expeditionDepth": 2,
+      "serviceStyle": "highly consistent Four Seasons service on air and ground",
+      "differentiators": [
+        "Four Seasons ground hotels",
+        "chef-driven onboard model",
+        "predictable ultra-luxury logistics"
+      ]
+    },
+    "idealGuest": [
+      "business",
+      "first-timer",
+      "uhnw",
+      "family",
+      "multigen",
+      "celebration"
+    ],
+    "notIdealFor": [
+      "value",
+      "hardcore-expedition"
+    ],
+    "summary": "The most seamless branded-hospitality private jet product for clients who want comfort and predictability everywhere.",
+    "aliases": [
+      "four seasons private jet",
+      "four seasons jet",
+      "fs private jet"
+    ],
+    "fitScoresByAtlas": {
+      "jet": {
+        "business": 100,
+        "first-timer": 100,
+        "family": 80,
+        "multigen": 80,
+        "culture": 60,
+        "photography": 60,
+        "expedition": 60,
+        "uhnw": 100,
+        "active": 50
+      }
+    }
+  },
+  "aman-jet": {
+    "brandId": "aman-jet",
+    "displayName": "Aman Jet Expeditions",
+    "type": "private-jet-expedition",
+    "appliesTo": [
+      "jet"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "aman-minimalism",
+        "private",
+        "design-led"
+      ],
+      "shipScale": "private jet",
+      "paxBand": "boutique",
+      "expeditionDepth": 3,
+      "serviceStyle": "quiet, curated, high-touch",
+      "differentiators": [
+        "Aman resort alignment",
+        "lower-density group feel",
+        "design-forward regional itineraries"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "honeymoon",
+      "couples",
+      "culture",
+      "wellness"
+    ],
+    "notIdealFor": [
+      "value",
+      "family-young-kids"
+    ],
+    "summary": "Aman-style private jet travel for privacy, quiet design, and deeply curated regional access.",
+    "aliases": [
+      "aman jet expeditions",
+      "aman jet",
+      "aman private jet"
+    ],
+    "fitScoresByAtlas": {
+      "jet": {
+        "business": 70,
+        "first-timer": 70,
+        "family": 50,
+        "multigen": 50,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 100,
+        "active": 60
+      }
+    }
+  },
+  "remote-lands": {
+    "brandId": "remote-lands",
+    "displayName": "Remote Lands",
+    "type": "private-jet-expedition",
+    "appliesTo": [
+      "jet"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "boutique",
+        "private",
+        "culturally-immersive"
+      ],
+      "shipScale": "private jet",
+      "paxBand": "boutique",
+      "expeditionDepth": 4,
+      "serviceStyle": "hyper-custom, discreet, destination-specialist",
+      "differentiators": [
+        "deep Asia expertise",
+        "Aman partnership tracks",
+        "exclusive temple and cultural access"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "culture",
+      "honeymoon",
+      "couples",
+      "wellness"
+    ],
+    "notIdealFor": [
+      "value",
+      "large-group-energy"
+    ],
+    "summary": "Boutique private jet expeditions with Aman-level design, privacy, and deep cultural access.",
+    "aliases": [
+      "remote lands",
+      "remotelands"
+    ],
+    "fitScoresByAtlas": {
+      "jet": {
+        "business": 70,
+        "first-timer": 70,
+        "family": 50,
+        "multigen": 50,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 100,
+        "active": 60
+      }
+    }
+  },
+  "tcs-world-travel": {
+    "brandId": "tcs-world-travel",
+    "displayName": "TCS World Travel",
+    "type": "private-jet-expedition",
+    "appliesTo": [
+      "jet"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "global",
+        "logistics-led",
+        "grand-expedition"
+      ],
+      "shipScale": "private jet",
+      "paxBand": "approx. 50",
+      "expeditionDepth": 4,
+      "serviceStyle": "highly organized, polished, operations-forward",
+      "differentiators": [
+        "around-the-world execution",
+        "traveling physician",
+        "complex multi-country logistics"
+      ]
+    },
+    "idealGuest": [
+      "business",
+      "first-timer",
+      "culture",
+      "uhnw",
+      "expedition"
+    ],
+    "notIdealFor": [
+      "value",
+      "slow-travel-purist"
+    ],
+    "summary": "The private-jet logistics powerhouse for ambitious around-the-world and multi-country itineraries.",
+    "aliases": [
+      "tcs world travel",
+      "tcs"
+    ],
+    "fitScoresByAtlas": {
+      "jet": {
+        "business": 100,
+        "first-timer": 100,
+        "family": 70,
+        "multigen": 70,
+        "culture": 80,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 80,
+        "active": 60
+      }
+    }
+  },
+  "national-geographic": {
+    "brandId": "national-geographic",
+    "displayName": "National Geographic Expeditions",
+    "type": "private-jet-expedition",
+    "appliesTo": [
+      "jet"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury-expedition",
+      "priceIndex": 4,
+      "vibe": [
+        "scholar-led",
+        "purpose-driven",
+        "field-focused"
+      ],
+      "shipScale": "private jet",
+      "paxBand": "small group",
+      "expeditionDepth": 5,
+      "serviceStyle": "expert-led, educational, practical luxury",
+      "differentiators": [
+        "scientists and historians",
+        "photographer-led learning",
+        "culture and natural-history depth"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "expedition",
+      "photography",
+      "wildlife"
+    ],
+    "notIdealFor": [
+      "white-glove-only",
+      "value"
+    ],
+    "summary": "Private jet expeditions where the intellectual and photographic lens matters more than maximal pampering.",
+    "aliases": [
+      "national geographic expeditions",
+      "national geographic",
+      "nat geo expeditions",
+      "nat geo"
+    ],
+    "fitScoresByAtlas": {
+      "jet": {
+        "business": 70,
+        "first-timer": 70,
+        "family": 60,
+        "multigen": 60,
+        "culture": 100,
+        "photography": 100,
+        "expedition": 100,
+        "uhnw": 60,
+        "active": 70
+      }
+    }
+  },
+  "lakani": {
+    "brandId": "lakani",
+    "displayName": "Lakani World Tours",
+    "type": "private-jet-expedition",
+    "appliesTo": [
+      "jet"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "intimate",
+        "off-path",
+        "specialist"
+      ],
+      "shipScale": "private business jet",
+      "paxBand": "small group",
+      "expeditionDepth": 3,
+      "serviceStyle": "curated, nimble, route-specialist",
+      "differentiators": [
+        "smaller long-range jets",
+        "less-standard routes",
+        "veteran traveler appeal"
+      ]
+    },
+    "idealGuest": [
+      "business",
+      "first-timer",
+      "culture",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "family",
+      "large-group-energy"
+    ],
+    "summary": "Intimate private-jet touring for well-traveled clients seeking less obvious routes.",
+    "aliases": [
+      "lakani",
+      "lakani world tours"
+    ],
+    "fitScoresByAtlas": {
+      "jet": {
+        "business": 90,
+        "first-timer": 90,
+        "family": 50,
+        "multigen": 50,
+        "culture": 70,
+        "photography": 70,
+        "expedition": 70,
+        "uhnw": 80,
+        "active": 50
+      }
+    }
+  },
+  "signature-jet-journeys": {
+    "brandId": "signature-jet-journeys",
+    "displayName": "Signature Jet Journeys",
+    "type": "private-jet-expedition",
+    "appliesTo": [
+      "jet"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "curated",
+        "regional",
+        "private-jet"
+      ],
+      "shipScale": "private jet",
+      "paxBand": "small group",
+      "expeditionDepth": 3,
+      "serviceStyle": "specialist-led and structured",
+      "differentiators": [
+        "regional private-jet routing",
+        "small-group access"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "business",
+      "first-timer",
+      "uhnw"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "Regional private-jet journeys for clients who want curated access without a full around-the-world program.",
+    "aliases": [
+      "signature jet journeys",
+      "signature jet"
+    ],
+    "fitScoresByAtlas": {
+      "jet": {
+        "business": 80,
+        "first-timer": 80,
+        "family": 50,
+        "multigen": 50,
+        "culture": 70,
+        "photography": 70,
+        "expedition": 70,
+        "uhnw": 80,
+        "active": 60
+      }
+    }
+  },
+  "seasonz": {
+    "brandId": "seasonz",
+    "displayName": "Seasonz New Zealand",
+    "type": "private-jet-expedition",
+    "appliesTo": [
+      "jet"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "luxury",
+      "priceIndex": 4,
+      "vibe": [
+        "new-zealand-specialist",
+        "active",
+        "bespoke"
+      ],
+      "shipScale": "private air and land",
+      "paxBand": "private or small group",
+      "expeditionDepth": 3,
+      "serviceStyle": "local-specialist, outdoors-forward",
+      "differentiators": [
+        "New Zealand depth",
+        "golf and outdoor access",
+        "bespoke regional planning"
+      ]
+    },
+    "idealGuest": [
+      "active",
+      "uhnw",
+      "culture",
+      "couples"
+    ],
+    "notIdealFor": [
+      "value"
+    ],
+    "summary": "New Zealand specialist for active luxury, golf, and high-touch regional planning.",
+    "aliases": [
+      "seasonz",
+      "seasonz new zealand"
+    ],
+    "fitScoresByAtlas": {
+      "jet": {
+        "business": 60,
+        "first-timer": 60,
+        "family": 70,
+        "multigen": 70,
+        "culture": 70,
+        "photography": 80,
+        "expedition": 80,
+        "uhnw": 80,
+        "active": 80
+      }
+    }
+  },
+  "aman-at-sea": {
+    "brandId": "aman-at-sea",
+    "displayName": "Aman at Sea",
+    "type": "luxury-yacht",
+    "appliesTo": [
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "aman-minimalism",
+        "private",
+        "quiet-luxury"
+      ],
+      "shipScale": "superyacht",
+      "paxBand": "approx. 100 guests",
+      "expeditionDepth": 1,
+      "serviceStyle": "discreet, spacious, wellness-led",
+      "differentiators": [
+        "about 50 large suites",
+        "Aman spa ethos",
+        "beach-club lifestyle"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "honeymoon",
+      "couples",
+      "wellness"
+    ],
+    "notIdealFor": [
+      "family",
+      "value",
+      "big-ship-amenities"
+    ],
+    "summary": "Aman privacy and wellness translated into a low-density luxury yacht experience.",
+    "aliases": [
+      "aman at sea",
+      "amangati",
+      "aman yacht"
+    ],
+    "fitScoresByAtlas": {
+      "yacht": {
+        "business": 60,
+        "first-timer": 60,
+        "family": 40,
+        "multigen": 40,
+        "culture": 70,
+        "photography": 70,
+        "expedition": 70,
+        "uhnw": 100,
+        "active": 60
+      }
+    }
+  },
+  "orient-express-yachts": {
+    "brandId": "orient-express-yachts",
+    "displayName": "Orient Express Sailing Yachts",
+    "type": "luxury-yacht",
+    "appliesTo": [
+      "yacht"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "gilded-age",
+        "romantic",
+        "french-design"
+      ],
+      "shipScale": "large sailing yacht",
+      "paxBand": "boutique",
+      "expeditionDepth": 1,
+      "serviceStyle": "formal, theatrical, design-led",
+      "differentiators": [
+        "largest sailing superyacht concept",
+        "Orient Express heritage",
+        "clean-energy sailing technology"
+      ]
+    },
+    "idealGuest": [
+      "culture",
+      "honeymoon",
+      "couples",
+      "uhnw",
+      "celebration"
+    ],
+    "notIdealFor": [
+      "active",
+      "family-young-kids",
+      "value"
+    ],
+    "summary": "Romantic French sailing-yacht luxury for design purists and old-world maritime theater.",
+    "aliases": [
+      "orient express sailing yachts",
+      "orient express yachts",
+      "orient express yacht"
+    ],
+    "fitScoresByAtlas": {
+      "yacht": {
+        "business": 70,
+        "first-timer": 70,
+        "family": 50,
+        "multigen": 50,
+        "culture": 90,
+        "photography": 90,
+        "expedition": 90,
+        "uhnw": 90,
+        "active": 50
+      }
+    }
+  },
+  "the-world": {
+    "brandId": "the-world",
+    "displayName": "The World (Residences at Sea)",
+    "type": "residential-world-cruise",
+    "appliesTo": [
+      "worldcruise"
+    ],
+    "officialUrl": null,
+    "positioning": {
+      "tier": "ultra-luxury",
+      "priceIndex": 5,
+      "vibe": [
+        "residential",
+        "exclusive-community",
+        "global"
+      ],
+      "shipScale": "private residential ship",
+      "paxBand": "165 residences",
+      "expeditionDepth": 4,
+      "serviceStyle": "private-residence, owner-community",
+      "differentiators": [
+        "residences owned by guests",
+        "resident-voted itineraries",
+        "net-worth gatekeeping"
+      ]
+    },
+    "idealGuest": [
+      "uhnw",
+      "culture",
+      "expedition",
+      "active"
+    ],
+    "notIdealFor": [
+      "value",
+      "short-trip",
+      "first-timer"
+    ],
+    "summary": "A private residential ship for ultra-high-net-worth travelers who want a permanent global community at sea.",
+    "aliases": [
+      "the world residences at sea",
+      "the world",
+      "residences at sea"
+    ],
+    "fitScoresByAtlas": {
+      "world-cruise": {
+        "business": 40,
+        "first-timer": 40,
+        "family": 60,
+        "multigen": 60,
+        "culture": 90,
+        "photography": 90,
+        "expedition": 90,
+        "uhnw": 100,
+        "active": 80
+      }
+    }
   }
 }
