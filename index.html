@@ -328,6 +328,15 @@ function boot(a){
     return a0;
   }
   const panel=document.getElementById('panel');
+  function revealPanel(){
+    document.body.classList.remove('panel-collapsed');
+    document.dispatchEvent(new Event('atlas:panel-sync'));
+  }
+  function hidePanel(){
+    datePop.classList.remove('open');
+    document.body.classList.add('panel-collapsed');
+    document.dispatchEvent(new Event('atlas:panel-sync'));
+  }
   function openSearchResults(title){
     activeView='__search__';
     const list=allMatchingSailings();
@@ -335,6 +344,7 @@ function boot(a){
     document.getElementById('pSub').innerHTML=list.length+' expedition sailing'+(list.length!==1?'s':'')+' matched this Guide shortlist';
     const L0=document.getElementById('pList');L0.innerHTML='';list.forEach(s=>L0.appendChild(makeCard(s)));
     panel.classList.add('open');
+    revealPanel();
     fitSailings(list);
   }
   function openRegion(key){
@@ -348,6 +358,7 @@ function boot(a){
     document.getElementById('pSub').innerHTML=sub;
     const L0=document.getElementById('pList');L0.innerHTML='';list.forEach(s=>L0.appendChild(makeCard(s)));
     panel.classList.add('open');
+    revealPanel();
     const c=reg.coord;map.flyTo([c[0],c[1]],Math.max(map.getZoom(),3.2),{duration:.8});
   }
   function closePanel(){panel.classList.remove('open');activeView=null;datePop.classList.remove('open');}
@@ -361,7 +372,7 @@ function boot(a){
     updateMarkers();closePanel();
   }
   window.__atlasShowAll=showAll;
-  document.getElementById('close').addEventListener('click',closePanel);
+  document.getElementById('close').addEventListener('click',hidePanel);
   map.on('click',()=>{datePop.classList.remove('open');closePanel();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel();});
   updateMarkers();
@@ -438,6 +449,7 @@ function boot(a){
   function syncPanel(){ setIcon(panelPill, body.classList.contains('panel-collapsed')?'&#8249;':'&#10005;'); }
   railPill.addEventListener('click',function(){ railCollapsed=!railCollapsed; syncRail(); });
   panelPill.addEventListener('click',function(){ body.classList.toggle('panel-collapsed'); syncPanel(); });
+  document.addEventListener('atlas:panel-sync',syncPanel);
   var resetAll=document.getElementById('resetAll');
   if(resetAll){ resetAll.addEventListener('click',function(){ if(window.__atlasShowAll) window.__atlasShowAll(); }); }
   if(panel){
