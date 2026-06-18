@@ -74,6 +74,21 @@
   .op.active .desc{display:block}
   .rail .reset{margin:6px 10px 12px;text-align:center;font-size:11.5px;color:var(--accent);cursor:pointer;padding:7px;border:1px dashed var(--line);border-radius:9px;display:none}
   .rail .reset.show{display:block}
+  /* ---------- Collapsible filter sections (ported from Private Jet Atlas) ---------- */
+  .railscroll{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column}
+  .secthead{display:flex;align-items:center;gap:8px;margin:11px 10px 2px;padding:9px 11px;border-radius:11px;
+    background:var(--panel2);border:1px solid var(--line);color:var(--muted);cursor:pointer;
+    font:700 11px var(--sans);text-transform:uppercase;letter-spacing:1.1px;-webkit-tap-highlight-color:transparent}
+  .secthead:hover{border-color:rgba(var(--accent-rgb),.5);color:var(--ink)}
+  .secthead .chev{margin-left:auto;font-size:10px;color:var(--accent);transition:transform .22s}
+  .secthead.collapsed .chev{transform:rotate(-90deg)}
+  .sectbody{overflow:hidden;max-height:800px;transition:max-height .26s ease,opacity .2s ease}
+  .sectbody.collapsed{max-height:0;opacity:0;pointer-events:none}
+  /* Region filter rows reuse .op; pin chip instead of a logo */
+  .op.reg .reginner{flex:1 1 0;min-width:0}
+  .op .regab{background:radial-gradient(circle at 35% 30%,var(--accent-hi),var(--accent) 60%,var(--accent-deep));color:var(--accent-text);font-size:14px}
+  .op .dot.regtick{background:transparent;border:1.5px solid var(--line);width:14px;height:14px;border-radius:5px;opacity:.7}
+  .op.reg.active .dot.regtick{background:var(--accent);border-color:var(--accent);opacity:1}
   .panel{position:absolute;z-index:1001;top:0;right:0;height:100%;width:392px;max-width:92vw;background:linear-gradient(180deg,var(--panel),#080b10);border-left:1px solid var(--line);box-shadow:-12px 0 40px rgba(0,0,0,.55);transform:translateX(105%);transition:transform .32s cubic-bezier(.22,.61,.36,1);display:flex;flex-direction:column}
   .panel.open{transform:none}
   .panel .hero{position:relative;padding:24px 22px 18px;border-bottom:1px solid var(--line);background:radial-gradient(120% 120% at 80% 0%,rgba(var(--accent-rgb),.20),transparent 60%)}
@@ -105,7 +120,7 @@
   .leaflet-bar{border:1px solid var(--line);box-shadow:var(--shadow)}
   .leaflet-bar a{background:var(--panel2);color:var(--ink);border-bottom-color:var(--line)}
   .leaflet-bar a:hover{background:#1d232f}
-  @media (max-width:640px){.rail{display:block;top:70px;left:12px;right:12px;width:auto;max-height:none;background:transparent;border:0;box-shadow:none;backdrop-filter:none}.rail h2,.rail .ops,.rail .reset{display:none}.filterbtn{margin:0;background:rgba(17,21,29,.94);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.datepop{left:12px;right:12px;top:132px;width:auto;max-width:none}.panel{width:100%}.topbar p{display:none}.partner span{display:none}.logochip.mark{height:42px}.logochip.mark img{height:30px;max-width:120px}.hint{display:none}.leaflet-bottom.leaflet-left{bottom:18px}}
+  @media (max-width:640px){.rail{display:block;top:70px;left:12px;right:12px;width:auto;max-height:none;background:transparent;border:0;box-shadow:none;backdrop-filter:none}.rail h2,.rail .railscroll,.rail .reset{display:none}.filterbtn{margin:0;background:rgba(17,21,29,.94);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.datepop{left:12px;right:12px;top:132px;width:auto;max-width:none}.panel{width:100%}.topbar p{display:none}.partner span{display:none}.logochip.mark{height:42px}.logochip.mark img{height:30px;max-width:120px}.hint{display:none}.leaflet-bottom.leaflet-left{bottom:18px}}
 </style>
 </head>
 <body>
@@ -131,8 +146,12 @@
       <div class="fs" id="dateSummary">All sailings</div>
     </div>
   </div>
-  <h2>Filter by expedition line</h2>
-  <div class="ops" id="opList"></div>
+  <div class="railscroll">
+    <button type="button" class="secthead" id="lineHead">Expedition line<span class="chev">&#9662;</span></button>
+    <div class="sectbody ops" id="opList"></div>
+    <button type="button" class="secthead collapsed" id="regionHead">Region<span class="chev">&#9662;</span></button>
+    <div class="sectbody ops reglist collapsed" id="regionList"></div>
+  </div>
   <div class="reset" id="reset">&#10005; Clear filter</div>
 </aside>
 <div class="datepop" id="datePop">
@@ -191,14 +210,18 @@ function logoEl(opName){
 function boot(a){
   const {OPERATORS,REGIONS,byRegion}=a;
   const markers={}; let activeOp=null, activeView=null; const activeMonths=new Set();
+  const activeRegions=new Set();
   const activeIds=new Set(); let activeSearchTerms=[];
   const today=new Date().toISOString().slice(0,10);
 
+  /* matches = every filter except the region filter (used for pin counts,
+     so each region pin reflects how many qualifying sailings reach it) */
   function matches(s){ return s.start>=today
     && (!activeOp||s.operator===activeOp)
     && (!activeMonths.size||activeMonths.has(s.monthKey))
     && (!activeIds.size||activeIds.has(String(s.id))||activeIds.has("cr_"+s.id))
     && textMatches(s); }
+  function regionPass(s){ return !activeRegions.size||activeRegions.has(s.region); }
   function regionSailings(key){ return (byRegion.get(key)||[]).filter(matches)
     .sort((x,y)=>{ if(activeOp){const a1=x.operator===activeOp,b1=y.operator===activeOp;if(a1!==b1)return a1?-1:1;}
       return (x.start||'').localeCompare(y.start||'')||x.name.localeCompare(y.name); }); }
@@ -215,12 +238,18 @@ function boot(a){
   });
 
   function updateMarkers(){
+    const anyFilter=!!activeOp||activeMonths.size||activeIds.size||activeSearchTerms.length||activeRegions.size;
     a.mappableRegions.forEach(key=>{
-      const n=regionSailings(key).length; const o=markers[key];
+      const n=regionSailings(key).length; const o=markers[key];   // count ignores the region toggle itself
       o.el.querySelector('.ring').textContent=n;
       o.el.querySelector('.tag').textContent=REGIONS[key].name+' · '+n+' sailing'+(n!==1?'s':'');
-      o.el.classList.toggle('dim',n===0);
-      o.el.classList.toggle('hit',(activeOp||activeMonths.size||activeIds.size||activeSearchTerms.length)&&n>0);
+      o.el.style.setProperty('--sz',Math.max(32,Math.min(60,28+n*0.32))+'px');
+      const row=document.querySelector('.reg[data-region="'+cssEsc(key)+'"]');
+      if(row){const sub=row.querySelector('.ct');if(sub)sub.textContent=n+' departure'+(n!==1?'s':'');}
+      const regionSel=!activeRegions.size||activeRegions.has(key);
+      const hit=n>0&&regionSel;
+      o.el.classList.toggle('dim',(anyFilter&&!hit)||n===0);
+      o.el.classList.toggle('hit',anyFilter&&hit);
     });
   }
   function norm(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();}
@@ -242,7 +271,8 @@ function boot(a){
   }
   function allMatchingSailings(){
     const seen=new Set(), out=[];
-    a.mappableRegions.forEach(key=>regionSailings(key).forEach(s=>{ if(!seen.has(s.id)){seen.add(s.id);out.push(s);} }));
+    a.mappableRegions.forEach(key=>{ if(activeRegions.size&&!activeRegions.has(key))return;
+      regionSailings(key).forEach(s=>{ if(!seen.has(s.id)){seen.add(s.id);out.push(s);} }); });
     return out.sort((x,y)=>(x.start||'').localeCompare(y.start||'')||x.name.localeCompare(y.name));
   }
   function fitSailings(list){
@@ -265,16 +295,40 @@ function boot(a){
     if(m.blurb){const ds=document.createElement('div');ds.className='desc';ds.textContent=m.blurb;row.title=m.blurb;row.appendChild(ds);}
     row.addEventListener('click',()=>toggleOp(name,row));opList.appendChild(row);
   });
+  function syncReset(){ document.getElementById('reset').classList.toggle('show',!!activeOp||activeRegions.size||activeIds.size||activeSearchTerms.length); }
   function toggleOp(name,row){
-    const was=activeOp===name;document.querySelectorAll('.op').forEach(r=>r.classList.remove('active'));
+    const was=activeOp===name;document.querySelectorAll('.op:not(.reg)').forEach(r=>r.classList.remove('active'));
     activeOp=was?null:name; if(!was)row.classList.add('active');
-    document.getElementById('reset').classList.toggle('show',!!activeOp);
+    syncReset();
     updateMarkers(); if(activeView){ activeView==='__search__'?openSearchResults():openRegion(activeView); }
   }
   document.getElementById('reset').addEventListener('click',()=>{
     activeOp=null;document.querySelectorAll('.op').forEach(r=>r.classList.remove('active'));
-    activeIds.clear();activeSearchTerms=[];
+    activeIds.clear();activeSearchTerms=[];activeRegions.clear();
     document.getElementById('reset').classList.remove('show');updateMarkers();if(activeView){ activeView==='__search__'?openSearchResults():openRegion(activeView); }
+  });
+  /* ── region filter rows + collapsible section accordion ──────────────── */
+  const regionListEl=document.getElementById('regionList');
+  a.mappableRegions.forEach(key=>{
+    const reg=REGIONS[key];
+    const n=(byRegion.get(key)||[]).length;
+    const row=document.createElement('div');
+    row.className='op reg';row.dataset.region=key;
+    row.innerHTML='<div class="lg regab">&#128205;</div>'+
+      '<div class="reginner"><div class="nm">'+esc(reg.name)+'</div><div class="ct">'+n+' departure'+(n!==1?'s':'')+'</div></div>'+
+      '<div class="dot regtick"></div>';
+    row.addEventListener('click',()=>toggleRegionFilter(key,row));
+    regionListEl.appendChild(row);
+  });
+  function toggleRegionFilter(key,row){
+    if(activeRegions.has(key))activeRegions.delete(key);else activeRegions.add(key);
+    row.classList.toggle('active',activeRegions.has(key));
+    syncReset();
+    updateMarkers(); if(activeView){ activeView==='__search__'?openSearchResults():openRegion(activeView); }
+  }
+  [['lineHead','opList'],['regionHead','regionList']].forEach(pair=>{
+    const head=document.getElementById(pair[0]),body=document.getElementById(pair[1]);
+    head.addEventListener('click',()=>{ const c=head.classList.toggle('collapsed'); body.classList.toggle('collapsed',c); });
   });
 
   /* ── date-range (month) filter ───────────────────────────────────────── */
@@ -328,6 +382,30 @@ function boot(a){
     return a0;
   }
   const panel=document.getElementById('panel');
+  /* Short J. Peterman–style evocations, one per region (shown under the title) */
+  const REGION_BLURB={
+    'Antarctica':"Ice the size of nations, a stillness older than history, penguins that have never once feared a soul. Antarctica is the last place on earth that owes you nothing.",
+    'Arctic':"Pack ice to the horizon, a polar bear moving like weather across the floe, light that never quite goes out. The Arctic is the planet with its mask off.",
+    'Galápagos':"Tortoises older than your grandparents, birds with no instinct to flee, a chain of islands where evolution wrote its first draft. The Galápagos let you walk straight into the wild.",
+    'Amazon & South America':"A river so wide it makes its own weather, a canopy loud with life, pink dolphins surfacing at dusk. The Amazon doesn't receive visitors so much as absorb them.",
+    'Alaska & Yukon':"Forests that climb straight from the sea, the crack of a calving glacier, a bear at the very edge of the tide. Alaska is the wilderness in its first language.",
+    'Norway, Fjords & Coast':"Sheer black walls plunging to mirrored water, fishing villages clinging to the rock, a sun that forgets to set. The Norwegian coast humbles the camera.",
+    'Northern Europe & British Isles':"Sea cliffs and standing stones, a harbor pub at the end of the world, rain that clears to impossible green. Northern Europe rewards the patient traveler.",
+    'Mediterranean':"Lemon groves above a cobalt sea, ruins warm underfoot, espresso in a square older than memory. The Mediterranean was never meant to be discovered — only revisited.",
+    'Atlantic Islands':"Volcanic peaks rising straight from the swell, terraced vineyards, trade winds that built whole cultures. The Atlantic islands are green secrets in a wide blue ocean.",
+    'Africa & Indian Ocean':"Spice on the harbor air, dhows under lateen sail, an ocean that has carried traders for a thousand years. This is where Africa meets Arabia and the East.",
+    'Asia & Mekong':"Temple bells over a slow brown river, floating markets at first light, jungle pressing close to the bank. The Mekong carries you through a thousand years of unhurried life.",
+    'Australia, NZ & South Pacific':"Coral reefs and rainforest running to the tide, islands strung like beads across an endless blue. The South Pacific is the wild edge of the map, and the water is warm.",
+    'Hawaii & Tahiti':"Volcanic spires wrapped in cloud, water the temperature of memory, a lei still warm from the maker's hands. These are the islands the world pictures with its eyes closed.",
+    'Caribbean & Bermuda':"Turquoise shallows over white sand, a reef just below the surface, rum the color of late sun. The Caribbean asks nothing of you but that you slow down.",
+    'Central America & Panama':"Cloud forest meeting two oceans, a sloth in no hurry whatsoever, the locks lifting you sea to sea. Central America is green abundance, pressed edge to edge.",
+    'Baja California':"Desert running straight into a sapphire sea, gray whales rising beside the boat, islands sharp against the heat. Baja is where two deserts — sand and sea — meet.",
+    'Canada & New England':"Lighthouses on granite headlands, lobster hauled at dawn, maples turning the shore to fire. The northeast coast keeps its welcome plain and its beauty honest.",
+    'US Rivers & Coast':"Paddlewheels and live oaks, a brass band drifting from the levee, small towns that still keep river time. America's waterways run slow and full of story.",
+    'Europe Rivers':"Castles on the bluff, vineyards in neat rows, a different old town every morning before coffee. Europe's rivers thread its history together at the pace of the current.",
+    'Great Lakes':"Inland seas with no far shore, lighthouses and lake freighters, water you'd swear was an ocean until the air turns sweet. The Great Lakes are vaster than anyone expects.",
+    'Other':"Open ocean and the long way round, a ship between seasons, days when the only landmark is the wake behind you. Repositioning voyages are travel for its own quiet sake."
+  };
   function revealPanel(){
     document.body.classList.remove('panel-collapsed');
     document.dispatchEvent(new Event('atlas:panel-sync'));
@@ -351,11 +429,9 @@ function boot(a){
     activeView=key;
     const reg=REGIONS[key];const list=regionSailings(key);
     document.getElementById('pTitle').textContent=reg.name;
-    let sub=list.length+' expedition sailing'+(list.length!==1?'s':'')+' here';
-    if(activeOp)sub+=' · '+(OPERATORS[activeOp].short);
-    sub+=' · tap a card for full details &amp; pricing';
+    let sub=REGION_BLURB[key]||(list.length+' expedition sailing'+(list.length!==1?'s':'')+' here.');
     if(activeOp&&!list.length)sub=(OPERATORS[activeOp].short)+' has no sailings here with the current filters · tap “Show all” to reset';
-    document.getElementById('pSub').innerHTML=sub;
+    document.getElementById('pSub').textContent=sub;
     const L0=document.getElementById('pList');L0.innerHTML='';list.forEach(s=>L0.appendChild(makeCard(s)));
     panel.classList.add('open');
     revealPanel();
@@ -364,7 +440,7 @@ function boot(a){
   function closePanel(){panel.classList.remove('open');activeView=null;datePop.classList.remove('open');}
   function showAll(){
     activeOp=null;activeMonths.clear();
-    activeIds.clear();activeSearchTerms=[];
+    activeIds.clear();activeSearchTerms=[];activeRegions.clear();
     document.querySelectorAll('.op').forEach(r=>r.classList.remove('active'));
     document.querySelectorAll('.month').forEach(m=>m.classList.remove('active'));
     document.getElementById('reset').classList.remove('show');
@@ -378,6 +454,7 @@ function boot(a){
     if(activeView&&activeView!=='__search__')p.set('region',activeView);
     if(activeOp)p.set('operator',activeOp);
     if(activeMonths.size)p.set('month',[...activeMonths].join(','));
+    if(activeRegions.size)p.set('regions',[...activeRegions].join(','));
     if(activeSearchTerms.length)p.set('q',activeSearchTerms.join(' '));
     if(activeIds.size)p.set('ids',[...activeIds].join(','));
     var qs=p.toString();
@@ -396,11 +473,13 @@ function boot(a){
     if(month){ month.split(',').map(s=>s.trim()).filter(Boolean).forEach(m=>{ activeMonths.add(m); const b=document.querySelector('.month[data-month="'+cssEsc(m)+'"]'); if(b)b.classList.add('active'); }); if(activeMonths.size){ document.getElementById('dateBtn').classList.add('active'); updateDateSummary(); } }
     const op=findOperator(sp.get('operator')||sp.get('brand'));
     if(op){ activeOp=op; const row=document.querySelector('.op[data-operator="'+cssEsc(op)+'"]'); if(row)row.classList.add('active'); document.getElementById('reset').classList.add('show'); }
+    const regions=sp.get('regions');
+    if(regions){ regions.split(',').map(s=>s.trim()).filter(Boolean).forEach(k=>{ if(REGIONS[k]&&markers[k]){ activeRegions.add(k); const r=document.querySelector('.reg[data-region="'+cssEsc(k)+'"]'); if(r)r.classList.add('active'); } }); if(activeRegions.size){ const rh=document.getElementById('regionHead'),rl=document.getElementById('regionList'); if(rh)rh.classList.remove('collapsed'); if(rl)rl.classList.remove('collapsed'); document.getElementById('reset').classList.add('show'); } }
     activeSearchTerms=[...words(sp.get('q')), ...words(sp.get('country'))];
     updateMarkers();
     const region=findRegionKey(sp.get('region'));
     if(region) openRegion(region);
-    else if(activeIds.size||activeOp||activeMonths.size||activeSearchTerms.length) openSearchResults(activeIds.size?'Guide shortlist':'Filtered sailings');
+    else if(activeIds.size||activeOp||activeMonths.size||activeRegions.size||activeSearchTerms.length) openSearchResults(activeIds.size?'Guide shortlist':'Filtered sailings');
   }
   applyDeepLink();
 }
@@ -434,7 +513,7 @@ function boot(a){
     .dockbtn{padding:0 13px}
     body.rail-shown .rail{display:flex !important;opacity:1;visibility:visible;transform:none;background:rgba(17,21,29,.96) !important;border:1px solid var(--line) !important;border-radius:14px !important;box-shadow:var(--shadow) !important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px) !important;max-height:calc(100% - 150px) !important}
     body.rail-shown .rail h2{display:block !important}
-    body.rail-shown .rail .ops{display:block !important}
+    body.rail-shown .rail .railscroll{display:flex !important}
     body.rail-shown .rail .reset.show{display:block !important}
   }
 </style>
