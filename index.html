@@ -120,11 +120,67 @@
   .leaflet-bar{border:1px solid var(--line);box-shadow:var(--shadow)}
   .leaflet-bar a{background:var(--panel2);color:var(--ink);border-bottom-color:var(--line)}
   .leaflet-bar a:hover{background:#1d232f}
+
+  .sheetHandle,.sheetFooter,.sheetScrim{display:none}
+  .atlasVeil{position:absolute;inset:0;z-index:2500;display:flex;align-items:center;justify-content:center;background:rgba(5,7,11,.84);overflow:hidden;transition:opacity .32s ease,visibility .32s ease}
+  .atlasVeil.hidden{opacity:0;visibility:hidden;pointer-events:none}
+  .veilSkeleton{position:absolute;inset:0;z-index:0;overflow:hidden;background:radial-gradient(46% 46% at 50% 42%,rgba(var(--accent-rgb),.12),transparent 70%),radial-gradient(80% 80% at 50% 120%,rgba(91,141,214,.12),transparent 70%)}
+  .veilSkeleton:before{content:"";position:absolute;inset:-40% -10%;background:linear-gradient(115deg,transparent 38%,rgba(207,238,255,.08) 50%,transparent 62%);animation:shimmer 2.4s ease-in-out infinite}
+  @keyframes shimmer{0%{transform:translateX(-30%)}100%{transform:translateX(30%)}}
+  .atlasVeil .box{position:relative;z-index:1;width:420px;max-width:calc(100vw - 36px);text-align:center;background:rgba(17,21,29,.88);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:28px 26px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+  .atlasVeil .box.hidden{display:none}
+  .spinner{width:42px;height:42px;border-radius:50%;border:3px solid rgba(var(--accent-rgb),.18);border-top-color:var(--accent);margin:0 auto 18px;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .atlasVeil h2{font-family:var(--serif);font-size:28px;line-height:1.1;font-weight:600;margin:0 0 8px}
+  .atlasVeil p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
+  .loadbar{width:230px;max-width:70vw;height:4px;margin:20px auto 0;border-radius:4px;background:rgba(var(--accent-rgb),.18);overflow:hidden}
+  .loadbar-fill{height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s cubic-bezier(.22,.61,.36,1)}
+  .errmark{font-size:38px;color:var(--accent);margin-bottom:8px;opacity:.9}
+  .errbtn{display:inline-block;margin:4px 5px;padding:10px 20px;border-radius:30px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent-text);font-weight:800;font-size:13.5px;text-decoration:none}
+  .errbtn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .errbtn:hover{filter:brightness(1.05)}
+  .setupNote{margin-top:20px;text-align:left;max-width:440px;margin-left:auto;margin-right:auto;border-top:1px solid var(--line);padding-top:12px}
+  .setupNote summary{cursor:pointer;font-size:11.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);list-style:none}
+  .setupNote summary::-webkit-details-marker{display:none}
+  .setupNote summary:before{content:"\25B8 ";color:var(--accent)}
+  .setupNote[open] summary:before{content:"\25BE "}
+  .setupNote p{font-size:12.5px;margin:8px 0}
   @media (max-width:640px){.rail{display:block;top:70px;left:12px;right:12px;width:auto;max-height:none;background:transparent;border:0;box-shadow:none;backdrop-filter:none}.rail h2,.rail .railscroll,.rail .reset{display:none}.filterbtn{margin:0;background:rgba(17,21,29,.94);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.datepop{left:12px;right:12px;top:132px;width:auto;max-width:none}.panel{width:100%}.topbar p{display:none}.partner span{display:none}.logochip.mark{height:42px}.logochip.mark img{height:30px;max-width:120px}.hint{display:none}.leaflet-bottom.leaflet-left{bottom:18px}}
 </style>
 </head>
 <body>
 <div id="map"></div>
+<div class="atlasVeil" id="atlasVeil">
+  <div class="veilSkeleton" aria-hidden="true"></div>
+  <div class="box" id="atlasLoad">
+    <div class="spinner"></div>
+    <h2>Loading the Atlas&hellip;</h2>
+    <p id="loadMsg">Preparing expedition sailings and region filters.</p>
+    <div class="loadbar" role="progressbar" aria-label="Loading the atlas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="loadBar">
+      <div class="loadbar-fill" id="loadFill"></div>
+    </div>
+  </div>
+  <div class="box hidden" id="atlasErr">
+    <div class="errmark" aria-hidden="true">&#9888;</div>
+    <h2>The Atlas is taking a moment</h2>
+    <p>Expedition cruise sailings are not available right now. Please refresh, or reach our concierge and we&rsquo;ll send curated recommendations straight to you.</p>
+    <p style="margin-top:14px">
+      <a class="errbtn" href="#" onclick="location.reload();return false;">Refresh</a>
+      <a class="errbtn ghost" href="mailto:Book@BeVvip.com?subject=Expedition%20Cruise%20Atlas%20help" data-help-open>Contact concierge</a>
+    </p>
+    <details class="setupNote"><summary>What happened</summary><p>This atlas loads map tiles and itinerary data in the browser. A refresh usually clears temporary network or data-loading issues.</p></details>
+  </div>
+</div>
+<script>
+(function(){
+  function setProgress(pct,msg){var fill=document.getElementById('loadFill'),bar=document.getElementById('loadBar'),lbl=document.getElementById('loadMsg');pct=Math.max(0,Math.min(100,pct||0));if(fill)fill.style.width=pct+'%';if(bar)bar.setAttribute('aria-valuenow',String(Math.round(pct)));if(msg&&lbl)lbl.textContent=msg;}
+  window.setAtlasProgress=setProgress;
+  window.__atlasSetApplyCount=function(n){window.__atlasLastApplyCount=n;var el=document.getElementById('applyCount');if(el)el.textContent=Number(n||0).toLocaleString();};
+  window.hideAtlasVeil=function(){var v=document.getElementById('atlasVeil');if(v)v.classList.add('hidden');};
+  window.showAtlasError=function(msg){var load=document.getElementById('atlasLoad'),err=document.getElementById('atlasErr'),lbl=document.getElementById('loadMsg');if(msg&&lbl)lbl.textContent=msg;if(load)load.classList.add('hidden');if(err)err.classList.remove('hidden');};
+  setProgress(6);
+})();
+</script>
 <div class="topbar">
   <div class="brand">
     <a class="logochip mark" href="https://www.expeditionbucketlist.com" target="_blank" rel="noopener"><img src="https://images.squarespace-cdn.com/content/57d86bcd46c3c49c625850a1/54c90494-d588-412d-9643-5d5650d856fd/ebl+2026+Gemini.png?content-type=image%2Fpng" alt="Expedition Bucket List"></a>
@@ -138,7 +194,10 @@
     <div class="logochip ata"><img src="https://images.squarespace-cdn.com/content/v1/57d86bcd46c3c49c625850a1/8c7b524b-9951-4a51-aaf2-44982357ccfe/ATA+logo+clear+2025+black.png?format=750w" alt="Aspen Travel Advisors"></div>
   </a>
 </div>
-<aside class="rail">
+<div class="sheetScrim" id="sheetScrim" hidden></div>
+
+<aside class="rail" id="rail">
+  <div class="sheetHandle" id="railHandle" aria-hidden="true"><span></span></div>
   <div class="filterbtn" id="dateBtn">
     <div class="ico">&#128197;</div>
     <div>
@@ -153,6 +212,9 @@
     <div class="sectbody ops reglist collapsed" id="regionList"></div>
   </div>
   <div class="reset" id="reset">&#10005; Clear filter</div>
+  <div class="sheetFooter" id="railFooter">
+    <button type="button" class="sheetApply" id="railApply">Show <span id="applyCount">0</span> sailings</button>
+  </div>
 </aside>
 <div class="datepop" id="datePop">
   <div class="dh">
@@ -165,6 +227,7 @@
   <div id="dateGrid"></div>
 </div>
 <section class="panel" id="panel">
+  <div class="sheetHandle drawerHandle" id="panelHandle" aria-hidden="true"><span></span></div>
   <div class="hero">
     <button class="close" id="close">&#10005;</button>
     <div class="klabel">Expedition region</div>
@@ -180,6 +243,7 @@ import { loadAtlas, logoSources } from './loader.js';
 
 const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+if(window.setAtlasProgress) window.setAtlasProgress(12,'Loading expedition sailings...');
 
 /* ── base map, painted immediately ─────────────────────────────────────── */
 const map=L.map('map',{worldCopyJump:true,minZoom:2,maxZoom:8,zoomControl:false}).setView([20,-30],2.3);
@@ -191,9 +255,19 @@ window.__atlasMap=map;
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
   attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics &middot; Expedition data: Brian Harris / Virtuoso',maxZoom:8
 }).addTo(map);
+if(window.setAtlasProgress) window.setAtlasProgress(34,'Rendering the expedition map...');
 
 let atlas=null;
-loadAtlas().then(a=>{ atlas=a; boot(a); }).catch(err=>console.error('Expedition Atlas: data failed to load —',err));
+loadAtlas().then(a=>{
+  atlas=a;
+  if(window.setAtlasProgress) window.setAtlasProgress(56,'Preparing expedition regions and operators...');
+  boot(a);
+  if(window.setAtlasProgress) window.setAtlasProgress(100,'Welcome to the Expedition Cruise Atlas');
+  setTimeout(function(){ if(window.hideAtlasVeil) window.hideAtlasVeil(); },180);
+}).catch(err=>{
+  console.error('Expedition Atlas: data failed to load —',err);
+  if(window.showAtlasError) window.showAtlasError('Expedition cruise sailings could not be loaded.');
+});
 
 function logoEl(opName){
   const wrap=document.createElement('div');wrap.className='lg';
@@ -251,6 +325,7 @@ function boot(a){
       o.el.classList.toggle('dim',(anyFilter&&!hit)||n===0);
       o.el.classList.toggle('hit',anyFilter&&hit);
     });
+    if(window.__atlasSetApplyCount) window.__atlasSetApplyCount(allMatchingSailings().length);
   }
   function norm(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();}
   function words(s){return norm(s).split(/\s+/).filter(w=>w&&!['the','and','or','of','in','to','for','cruise','cruises','expedition','expeditions','sailing','sailings','voyage','voyages','ship','trip','trips'].includes(w));}
@@ -560,7 +635,7 @@ function boot(a){
       var open=panel.classList.contains('open');
       body.classList.toggle('panel-active',open);
       if(!open){ body.classList.remove('panel-collapsed'); }
-      if(mq.matches){ railCollapsed=open; syncRail(); }
+      if(mq.matches && open && !railCollapsed){ railCollapsed=true; syncRail(); }
       syncPanel();
     }).observe(panel,{attributes:true,attributeFilter:['class']});
   }
@@ -673,6 +748,64 @@ function boot(a){
     .dockbtn{padding:0 10px}
   }
 </style>
+<style>
+  @media (max-width:680px){
+    .sheetScrim{display:block;position:fixed;inset:0;z-index:1250;background:rgba(3,6,11,.5);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .26s ease}
+    .sheetScrim.show{opacity:1;pointer-events:auto}
+    .sheetHandle{display:flex;justify-content:center;align-items:center;padding:9px 0 4px;touch-action:none;cursor:grab}
+    .sheetHandle span{width:38px;height:5px;border-radius:5px;background:var(--line);display:block}
+    body.rail-shown .rail,.rail{position:fixed !important;left:0 !important;right:0 !important;top:auto !important;bottom:0 !important;z-index:1300 !important;width:100% !important;max-width:100% !important;max-height:86vh !important;border:1px solid var(--line) !important;border-bottom:0 !important;border-radius:18px 18px 0 0 !important;background:rgba(17,21,29,.98) !important;box-shadow:0 -12px 40px rgba(0,0,0,.55) !important;transform:translateY(100%) !important;transition:transform .3s cubic-bezier(.22,.61,.36,1) !important;opacity:1 !important;visibility:visible !important;display:flex !important;pointer-events:auto !important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px) !important}
+    body.rail-shown .rail{transform:translateY(0) !important}
+    .rail .railscroll{display:flex !important}
+    .rail .reset.show{display:block !important}
+    .sheetFooter{display:block;border-top:1px solid var(--line);background:rgba(17,21,29,.98);padding:10px 14px calc(12px + env(safe-area-inset-bottom,0))}
+    .sheetApply{width:100%;padding:14px;border:none;border-radius:12px;cursor:pointer;font:inherit;font-weight:800;font-size:15px;letter-spacing:.3px;color:var(--accent-text);background:linear-gradient(135deg,var(--accent),var(--accent2))}
+    .sheetApply:active{transform:scale(.99)}
+    .datepop{position:fixed !important;z-index:1350 !important;left:14px !important;right:14px !important;top:auto !important;bottom:calc(92px + env(safe-area-inset-bottom,0)) !important;width:auto !important;max-width:none !important;max-height:58vh !important;overflow-y:auto}
+    .panel{top:auto !important;bottom:0 !important;left:0 !important;right:0 !important;z-index:1300 !important;width:100% !important;max-width:100% !important;height:52vh !important;border-left:0 !important;border-top:1px solid var(--line) !important;border-radius:18px 18px 0 0 !important;box-shadow:0 -14px 44px rgba(0,0,0,.6) !important;transform:translateY(100%) !important;transition:transform .32s cubic-bezier(.22,.61,.36,1),height .3s cubic-bezier(.22,.61,.36,1) !important}
+    .panel.open{transform:translateY(0) !important}
+    .panel.drawer-expanded{height:92vh !important}
+    body.panel-collapsed .panel.open{transform:translateY(100%) !important}
+    .panel .hero{padding:4px 48px 14px 16px !important}
+    .panel .close{top:8px}
+  }
+</style>
+<script>
+(function(){
+  var mq=window.matchMedia('(max-width:680px)');
+  var body=document.body;
+  var rail=document.getElementById('rail');
+  var railPill=document.getElementById('railPill');
+  var panel=document.getElementById('panel');
+  var scrim=document.getElementById('sheetScrim');
+  var railHandle=document.getElementById('railHandle');
+  var panelHandle=document.getElementById('panelHandle');
+  var applyBtn=document.getElementById('railApply');
+  if(!rail||!railPill||!panel||!scrim) return;
+  function closePopovers(){ document.querySelectorAll('.datepop.open').forEach(function(el){ el.classList.remove('open'); }); }
+  function railOpen(){ return body.classList.contains('rail-shown')&&!body.classList.contains('rail-hidden'); }
+  function closeRail(){ closePopovers(); if(railOpen()) railPill.click(); }
+  function panelOpen(){ return panel.classList.contains('open')&&!body.classList.contains('panel-collapsed'); }
+  function closePanel(){ var closeBtn=document.getElementById('close'); if(closeBtn) closeBtn.click(); else { body.classList.add('panel-collapsed'); panel.classList.remove('open'); document.dispatchEvent(new Event('atlas:panel-sync')); } }
+  function expanded(){ return panel.classList.contains('drawer-expanded'); }
+  if(typeof window.__atlasLastApplyCount!=='undefined'&&window.__atlasSetApplyCount) window.__atlasSetApplyCount(window.__atlasLastApplyCount);
+  if(applyBtn) applyBtn.addEventListener('click',closeRail);
+  function syncScrim(){ var show=mq.matches&&(railOpen()||panelOpen()); if(show){ scrim.hidden=false; requestAnimationFrame(function(){ scrim.classList.add('show'); }); } else { scrim.classList.remove('show'); setTimeout(function(){ if(!scrim.classList.contains('show')) scrim.hidden=true; },260); } }
+  scrim.addEventListener('click',function(){ if(railOpen()) closeRail(); else if(panelOpen()) closePanel(); });
+  var wasPanelOpen=panelOpen();
+  function syncPanelState(){ var open=panelOpen(); if(open&&!wasPanelOpen&&mq.matches){ panel.classList.remove('drawer-expanded'); panel.style.removeProperty('transform'); } wasPanelOpen=open; syncScrim(); }
+  new MutationObserver(syncPanelState).observe(body,{attributes:true,attributeFilter:['class']});
+  new MutationObserver(syncPanelState).observe(panel,{attributes:true,attributeFilter:['class']});
+  document.addEventListener('atlas:panel-sync',syncPanelState);
+  if(mq.addEventListener) mq.addEventListener('change',syncPanelState); else if(mq.addListener) mq.addListener(syncPanelState);
+  function dragify(grip,target,handlers){ if(!grip) return; var startY=0,dy=0,active=false; grip.addEventListener('touchstart',function(e){ if(!mq.matches) return; active=true; startY=e.touches[0].clientY; dy=0; target.style.transition='none'; },{passive:true}); grip.addEventListener('touchmove',function(e){ if(!active) return; dy=e.touches[0].clientY-startY; handlers.move(dy,e); },{passive:false}); function end(){ if(!active) return; active=false; target.style.transition=''; handlers.end(dy); dy=0; } grip.addEventListener('touchend',end); grip.addEventListener('touchcancel',end); }
+  function setT(el,y){ el.style.setProperty('transform','translateY('+y+'px)','important'); }
+  function clearT(el){ el.style.removeProperty('transform'); }
+  dragify(railHandle,rail,{move:function(dy,e){ if(dy>0){ e.preventDefault(); setT(rail,dy); } },end:function(dy){ clearT(rail); if(dy>90) closeRail(); }});
+  dragify(panelHandle,panel,{move:function(dy,e){ e.preventDefault(); if(dy>0) setT(panel,dy); },end:function(dy){ clearT(panel); if(dy<-50&&!expanded()) panel.classList.add('drawer-expanded'); else if(dy>110){ if(expanded()) panel.classList.remove('drawer-expanded'); else closePanel(); } }});
+  syncPanelState();
+})();
+</script>
 <script>
 (function(){try{
   var coach=document.getElementById('dockCoach'); if(!coach) return;
