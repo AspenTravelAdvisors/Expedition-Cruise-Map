@@ -40,6 +40,8 @@
   .partner span{font-size:11px;letter-spacing:.6px;text-transform:uppercase;font-weight:600;white-space:nowrap}
   .rail{position:absolute;z-index:1000;top:78px;left:14px;width:236px;background:rgba(17,21,29,.93);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);backdrop-filter:blur(8px);overflow:hidden;display:flex;flex-direction:column;max-height:calc(100% - 100px)}
   .rail h2{font-size:11px;text-transform:uppercase;letter-spacing:1.3px;color:var(--muted);margin:0;padding:13px 14px 9px}
+  .rail .railx{position:absolute;top:10px;right:10px;z-index:5;width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer;font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;-webkit-tap-highlight-color:transparent}
+  .rail .railx:hover{border-color:var(--accent);color:var(--accent)}
   .rail .ops{overflow-y:auto;padding:0 8px 8px}
   .filterbtn{margin:11px 10px 4px;padding:11px 12px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:11px;background:linear-gradient(135deg,rgba(var(--accent-rgb),.16),rgba(var(--accent-rgb),.05));border:1px solid rgba(var(--accent-rgb),.5);transition:.16s;color:var(--ink)}
   .filterbtn:hover{background:linear-gradient(135deg,rgba(var(--accent-rgb),.26),rgba(var(--accent-rgb),.08))}
@@ -202,6 +204,7 @@
 
 <aside class="rail" id="rail">
   <div class="sheetHandle" id="railHandle" aria-hidden="true"><span></span></div>
+  <button type="button" class="railx" id="railClose" aria-label="Close filters">&#10005;</button>
   <div class="filterbtn" id="dateBtn">
     <div class="ico">&#128197;</div>
     <div>
@@ -288,7 +291,7 @@ function logoEl(opName){
 
 function boot(a){
   const {OPERATORS,REGIONS,byRegion}=a;
-  const markers={}; let activeOp=null, activeView=null; const activeMonths=new Set();
+  const markers={}; let activeOps=new Set(), activeView=null; const activeMonths=new Set();
   const activeRegions=new Set();
   const activeIds=new Set(); let activeSearchTerms=[];
   const today=new Date().toISOString().slice(0,10);
@@ -296,13 +299,13 @@ function boot(a){
   /* matches = every filter except the region filter (used for pin counts,
      so each region pin reflects how many qualifying sailings reach it) */
   function matches(s){ return s.start>=today
-    && (!activeOp||s.operator===activeOp)
+    && (!activeOps.size||activeOps.has(s.operator))
     && (!activeMonths.size||activeMonths.has(s.monthKey))
     && (!activeIds.size||activeIds.has(String(s.id))||activeIds.has("cr_"+s.id))
     && textMatches(s); }
   function regionPass(s){ return !activeRegions.size||activeRegions.has(s.region); }
   function regionSailings(key){ return (byRegion.get(key)||[]).filter(matches)
-    .sort((x,y)=>{ if(activeOp){const a1=x.operator===activeOp,b1=y.operator===activeOp;if(a1!==b1)return a1?-1:1;}
+    .sort((x,y)=>{ if(activeOps.size){const a1=activeOps.has(x.operator),b1=activeOps.has(y.operator);if(a1!==b1)return a1?-1:1;}
       return (x.start||'').localeCompare(y.start||'')||x.name.localeCompare(y.name); }); }
 
   /* ── region pins ─────────────────────────────────────────────────────── */
@@ -317,7 +320,7 @@ function boot(a){
   });
 
   function updateMarkers(){
-    const anyFilter=!!activeOp||activeMonths.size||activeIds.size||activeSearchTerms.length||activeRegions.size;
+    const anyFilter=!!activeOps.size||activeMonths.size||activeIds.size||activeSearchTerms.length||activeRegions.size;
     a.mappableRegions.forEach(key=>{
       const n=regionSailings(key).length; const o=markers[key];   // count ignores the region toggle itself
       o.el.querySelector('.ring').textContent=n;
@@ -375,15 +378,15 @@ function boot(a){
     if(m.blurb){const ds=document.createElement('div');ds.className='desc';ds.textContent=m.blurb;row.title=m.blurb;row.appendChild(ds);}
     row.addEventListener('click',()=>toggleOp(name,row));opList.appendChild(row);
   });
-  function syncReset(){ document.getElementById('reset').classList.toggle('show',!!activeOp||activeRegions.size||activeIds.size||activeSearchTerms.length); }
+  function syncReset(){ document.getElementById('reset').classList.toggle('show',!!activeOps.size||activeRegions.size||activeIds.size||activeSearchTerms.length); }
   function toggleOp(name,row){
-    const was=activeOp===name;document.querySelectorAll('.op:not(.reg)').forEach(r=>r.classList.remove('active'));
-    activeOp=was?null:name; if(!was)row.classList.add('active');
+    if(activeOps.has(name)){activeOps.delete(name);row.classList.remove('active');}
+    else{activeOps.add(name);row.classList.add('active');}
     syncReset();
     updateMarkers(); if(activeView){ activeView==='__search__'?openSearchResults():openRegion(activeView); }
   }
   document.getElementById('reset').addEventListener('click',()=>{
-    activeOp=null;document.querySelectorAll('.op').forEach(r=>r.classList.remove('active'));
+    activeOps.clear();document.querySelectorAll('.op').forEach(r=>r.classList.remove('active'));
     activeIds.clear();activeSearchTerms=[];activeRegions.clear();
     document.getElementById('reset').classList.remove('show');updateMarkers();if(activeView){ activeView==='__search__'?openSearchResults():openRegion(activeView); }
   });
@@ -472,7 +475,7 @@ function boot(a){
       +'<div class="go">'+esc(op)+nights+' &#8599;</div>';
     const ar=document.createElement('div');ar.className='arrow';ar.textContent='›';
     a0.appendChild(logoEl(s.operator));a0.appendChild(meta);a0.appendChild(ar);
-    if(activeOp&&s.operator===activeOp)a0.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    if(activeOps.size&&activeOps.has(s.operator))a0.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
     meta.appendChild(askGuideBtn(
       'I\'m looking at the "'+s.name+'" expedition cruise on the BeVvip Expedition Atlas — '
       +op+(typeof s.nights==='number'?', '+s.nights+' night'+(s.nights!==1?'s':''):'')
@@ -529,7 +532,7 @@ function boot(a){
     const reg=REGIONS[key];const list=regionSailings(key);
     document.getElementById('pTitle').textContent=reg.name;
     let sub=REGION_BLURB[key]||(list.length+' expedition sailing'+(list.length!==1?'s':'')+' here.');
-    if(activeOp&&!list.length)sub=(OPERATORS[activeOp].short)+' has no sailings here with the current filters · tap “Show all” to reset';
+    if(activeOps.size&&!list.length)sub='No sailings here with the current filters · tap “Show all” to reset';
     document.getElementById('pSub').textContent=sub;
     const L0=document.getElementById('pList');L0.innerHTML='';list.forEach(s=>L0.appendChild(makeCard(s)));
     panel.classList.add('open');
@@ -538,7 +541,7 @@ function boot(a){
   }
   function closePanel(){panel.classList.remove('open');activeView=null;datePop.classList.remove('open');}
   function showAll(){
-    activeOp=null;activeMonths.clear();
+    activeOps.clear();activeMonths.clear();
     activeIds.clear();activeSearchTerms=[];activeRegions.clear();
     document.querySelectorAll('.op').forEach(r=>r.classList.remove('active'));
     document.querySelectorAll('.month').forEach(m=>m.classList.remove('active'));
@@ -551,7 +554,7 @@ function boot(a){
   window.__atlasShareUrl=function(){
     var p=new URLSearchParams();
     if(activeView&&activeView!=='__search__')p.set('region',activeView);
-    if(activeOp)p.set('operator',activeOp);
+    if(activeOps.size)p.set('operator',[...activeOps].join(','));
     if(activeMonths.size)p.set('month',[...activeMonths].join(','));
     if(activeRegions.size)p.set('regions',[...activeRegions].join(','));
     if(activeSearchTerms.length)p.set('q',activeSearchTerms.join(' '));
@@ -570,15 +573,15 @@ function boot(a){
     if(ids) ids.split(',').map(s=>s.trim()).filter(Boolean).forEach(id=>activeIds.add(id));
     const month=sp.get('month');
     if(month){ month.split(',').map(s=>s.trim()).filter(Boolean).forEach(m=>{ activeMonths.add(m); const b=document.querySelector('.month[data-month="'+cssEsc(m)+'"]'); if(b)b.classList.add('active'); }); if(activeMonths.size){ document.getElementById('dateBtn').classList.add('active'); updateDateSummary(); } }
-    const op=findOperator(sp.get('operator')||sp.get('brand'));
-    if(op){ activeOp=op; const row=document.querySelector('.op[data-operator="'+cssEsc(op)+'"]'); if(row)row.classList.add('active'); document.getElementById('reset').classList.add('show'); }
+    const opParam=sp.get('operator')||sp.get('brand');
+    if(opParam){ opParam.split(',').map(s=>s.trim()).filter(Boolean).forEach(o=>{ const op=findOperator(o); if(op){ activeOps.add(op); const row=document.querySelector('.op[data-operator="'+cssEsc(op)+'"]'); if(row)row.classList.add('active'); } }); if(activeOps.size) document.getElementById('reset').classList.add('show'); }
     const regions=sp.get('regions');
     if(regions){ regions.split(',').map(s=>s.trim()).filter(Boolean).forEach(k=>{ if(REGIONS[k]&&markers[k]){ activeRegions.add(k); const r=document.querySelector('.reg[data-region="'+cssEsc(k)+'"]'); if(r)r.classList.add('active'); } }); if(activeRegions.size){ const rh=document.getElementById('regionHead'),rl=document.getElementById('regionList'); if(rh)rh.classList.remove('collapsed'); if(rl)rl.classList.remove('collapsed'); document.getElementById('reset').classList.add('show'); } }
     activeSearchTerms=[...words(sp.get('q')), ...words(sp.get('country'))];
     updateMarkers();
     const region=findRegionKey(sp.get('region'));
     if(region) openRegion(region);
-    else if(activeIds.size||activeOp||activeMonths.size||activeRegions.size||activeSearchTerms.length) openSearchResults(activeIds.size?'Guide shortlist':'Filtered sailings');
+    else if(activeIds.size||activeOps.size||activeMonths.size||activeRegions.size||activeSearchTerms.length) openSearchResults(activeIds.size?'Guide shortlist':'Filtered sailings');
   }
   applyDeepLink();
 }
@@ -641,6 +644,8 @@ function boot(a){
   }
   function syncPanel(){ setIcon(panelPill, body.classList.contains('panel-collapsed')?'&#8249;':'&#10005;'); }
   railPill.addEventListener('click',function(){ railCollapsed=!railCollapsed; syncRail(); });
+  var railClose=document.getElementById('railClose');
+  if(railClose) railClose.addEventListener('click',function(){ railCollapsed=true; syncRail(); });
   panelPill.addEventListener('click',function(){ body.classList.toggle('panel-collapsed'); syncPanel(); });
   document.addEventListener('atlas:panel-sync',syncPanel);
   var resetAll=document.getElementById('resetAll');
