@@ -106,6 +106,10 @@
   .card .meta .dt{font-size:12px;color:var(--accent2);margin-top:3px;font-variant-numeric:tabular-nums}
   .card .meta .go{font-size:11.5px;color:var(--accent);margin-top:4px;display:flex;align-items:center;gap:5px}
   .card .arrow{margin-left:auto;color:var(--muted);font-size:18px;flex:0 0 auto}
+  .card .askguide{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:6px 11px;border-radius:9px;font-size:11.5px;font-weight:700;cursor:pointer;color:var(--accent);background:transparent;border:1px solid var(--accent);-webkit-tap-highlight-color:transparent;transition:.15s}
+  .card .askguide:hover{background:var(--accent);color:var(--accent-text);border-color:var(--accent)}
+  .card .askguide:active{transform:scale(.97)}
+  .panel .cardteaser{display:flex;align-items:center;justify-content:center;gap:7px;margin:12px 16px 0;padding:8px 12px;border:1px dashed var(--accent);border-radius:10px;color:var(--accent);font-size:11.5px;font-weight:600;letter-spacing:.2px;text-align:center;line-height:1.3;opacity:.92}
   .rmarker{position:relative;transform:translate(-50%,-50%);cursor:pointer}
   .rmarker .ring{width:var(--sz,34px);height:var(--sz,34px);border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(232,247,255,.96),rgba(var(--accent-rgb),.92) 58%,rgba(36,104,143,.92));border:2px solid rgba(255,255,255,.85);box-shadow:0 0 0 4px rgba(var(--accent-rgb),.22),0 5px 16px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(--accent-text);transition:.18s}
   .rmarker:hover .ring{transform:scale(1.12);box-shadow:0 0 0 6px rgba(var(--accent-rgb),.3),0 6px 18px rgba(0,0,0,.6)}
@@ -234,6 +238,7 @@
     <h3 id="pTitle">Region</h3>
     <div class="sub" id="pSub"></div>
   </div>
+  <div class="cardteaser">&#128071; Click any result for ship photos, day-to-day details &amp; more</div>
   <div class="list" id="pList"></div>
 </section>
 <div class="hint" id="hint">Tap a <b>region pin</b> to see every expedition sailing &middot; filter by line or month on the left</div>
@@ -443,6 +448,20 @@ function boot(a){
   });
 
   /* ── sailing card + region panel ─────────────────────────────────────── */
+  /* ===== Ask The Guide — opens BeVvip Base Camp pre-filled with this product ===== */
+  const GUIDE_URL='https://bevvip-concierge.vercel.app/';
+  function askGuideBtn(ctx,link){
+    const b=document.createElement('span');
+    b.className='askguide';b.setAttribute('role','button');b.tabIndex=0;
+    b.title='Ask The Guide about this';
+    b.innerHTML='&#10022; Ask The Guide';
+    const full=ctx+(link?(' (Listing: '+link+')'):'');
+    function go(e){ e.preventDefault();e.stopPropagation();
+      window.open(GUIDE_URL+'?ask='+encodeURIComponent(full)+'&src=expedition','_blank','noopener'); }
+    b.addEventListener('click',go);
+    b.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ')go(e); });
+    return b;
+  }
   function makeCard(s){
     const a0=document.createElement('a');a0.className='card';a0.href=s.url||'#';a0.target='_blank';a0.rel='noopener';
     const meta=document.createElement('div');meta.className='meta';
@@ -454,6 +473,11 @@ function boot(a){
     const ar=document.createElement('div');ar.className='arrow';ar.textContent='›';
     a0.appendChild(logoEl(s.operator));a0.appendChild(meta);a0.appendChild(ar);
     if(activeOp&&s.operator===activeOp)a0.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    meta.appendChild(askGuideBtn(
+      'I\'m looking at the "'+s.name+'" expedition cruise on the BeVvip Expedition Atlas — '
+      +op+(typeof s.nights==='number'?', '+s.nights+' night'+(s.nights!==1?'s':''):'')
+      +(s.dates?', '+s.dates:'')+'. Can you tell me more about it and help me plan it through BeVvip?',
+      (s.url&&s.url!=='#')?s.url:''));
     return a0;
   }
   const panel=document.getElementById('panel');
