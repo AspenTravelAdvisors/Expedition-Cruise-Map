@@ -191,6 +191,24 @@
   .setupNote p{font-size:12.5px;margin:8px 0}
   @media (max-width:640px){.rail{display:block;top:70px;left:12px;right:12px;width:auto;max-height:none;background:transparent;border:0;box-shadow:none;backdrop-filter:none}.rail h2,.rail .railscroll,.rail .reset{display:none}.filterbtn{margin:0;background:rgba(17,21,29,.94);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.datepop{left:12px;right:12px;top:132px;width:auto;max-width:none}.panel{width:100%}.topbar p{display:none}.partner span{display:none}.logochip.mark{height:42px}.logochip.mark img{height:30px;max-width:120px}.hint{display:none}.leaflet-bottom.leaflet-left{bottom:18px}}
 </style>
+<style id="bvnav-css">
+/* Cross-atlas top nav — copied from Base Camp (The Guide). Self-contained; sits inside the existing .topbar so no map/rail/search offsets change. */
+.bvnav{order:3;display:flex;align-items:center;gap:5px;font-size:12px;min-width:0;max-width:100%;overflow-x:auto;scrollbar-width:none;font-family:var(--sans,inherit)}
+.bvnav::-webkit-scrollbar{display:none}
+.bvnav a{flex:0 0 auto;color:#9c9070;letter-spacing:.6px;text-transform:uppercase;white-space:nowrap;font-weight:600;padding:7px 10px 6px;border:1px solid transparent;border-bottom:2px solid transparent;border-radius:9px 9px 0 0;text-decoration:none;transition:.15s}
+.bvnav a:hover{color:#e2c87a;background:rgba(255,255,255,.06);text-decoration:none}
+.bvnav a.bvnav-guide{color:#d8c79c}
+.bvnav a.bvnav-tab{color:var(--tab);border-bottom-color:var(--tab)}
+.bvnav a.bvnav-tab:hover{color:#e2c87a}
+.bvnav a.is-here{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#fff;cursor:default}
+@media(max-width:680px){
+  .topbar .partner{display:none!important}
+  .topbar .brand{min-width:0!important;overflow:hidden!important}
+  .topbar h1{max-width:44vw!important}
+  .bvnav{flex:1 1 0;min-width:0;margin-left:8px;gap:2px;font-size:10px}
+  .bvnav a{padding:6px 7px 5px;letter-spacing:.2px}
+}
+</style>
 </head>
 <body>
 <div id="map"></div>
@@ -226,10 +244,18 @@
 })();
 </script>
 <div class="topbar">
+  <nav class="bvnav" aria-label="BeVvip Atlas family">
+    <a class="bvnav-guide" href="https://bevvip-concierge.vercel.app/" target="_blank" rel="noopener">The Guide</a>
+    <a class="bvnav-tab" style="--tab:#e6d488" href="https://luxury-hotel-atlas-two.vercel.app" target="_blank" rel="noopener">Hotels</a>
+    <a class="bvnav-tab is-here" aria-current="page" style="--tab:#5aa9e6" href="https://expedition-cruise-map.vercel.app">Expeditions</a>
+    <a class="bvnav-tab" style="--tab:#dfe5f2" href="https://private-jet-expeditions.vercel.app" target="_blank" rel="noopener">Jets</a>
+    <a class="bvnav-tab" style="--tab:#e0b84a" href="https://luxury-hotel-brand-yacht-atlas.vercel.app" target="_blank" rel="noopener">Yachts</a>
+    <a class="bvnav-tab" style="--tab:#45d6c2" href="https://world-cruise-atlas.vercel.app" target="_blank" rel="noopener">World</a>
+  </nav>
   <div class="brand">
     <a class="logochip mark" href="https://www.expeditionbucketlist.com" target="_blank" rel="noopener"><img src="https://images.squarespace-cdn.com/content/57d86bcd46c3c49c625850a1/54c90494-d588-412d-9643-5d5650d856fd/ebl+2026+Gemini.png?content-type=image%2Fpng" alt="Expedition Bucket List"></a>
     <div>
-      <h1>Expedition Cruise <span>Atlas</span><a class="bev" href="https://bevvip.com" target="_blank" rel="noopener"> - BeVvip.com</a></h1>
+      <h1>Expedition Cruise <span>Atlas</span></h1>
       <p>Explore the world's true expedition ships by region &middot; tap a pin to see every sailing</p>
     </div>
   </div>
