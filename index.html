@@ -1461,8 +1461,9 @@ function boot(a){
   scrim.addEventListener('click',function(e){if(e.target===scrim)done();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&scrim.classList.contains('bvi-open'))done();});
   var force=/(?:[?#&])(?:tour|intro)\b/i.test(location.search+location.hash);
+  var embedded=false;try{embedded=window.self!==window.top;}catch(e){embedded=true;}
   var seen=false;try{seen=localStorage.getItem(INTRO.key)==='1';}catch(e){}
-  if(force||!seen){
+  if(force||(!seen&&!embedded)){
     if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches){
       scrim.classList.add('bvi-open');scrim.setAttribute('aria-hidden','false');
     }else{requestAnimationFrame(function(){requestAnimationFrame(open);});}
