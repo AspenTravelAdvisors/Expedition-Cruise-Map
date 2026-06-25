@@ -1325,44 +1325,38 @@ function boot(a){
   coach.addEventListener('click',dismiss);
   var dock=document.querySelector('.dock'); if(dock) dock.addEventListener('click',dismiss,{once:true});
 }catch(e){}})();
-</script>
-<!-- ===== BeVvip intro tour (Base Camp wayfinding layer) ===== -->
+</script><!-- ===== BeVvip intro tour (Base Camp wayfinding layer) ===== -->
 <style id="bvi-style">
   .bvi-scrim{position:fixed;inset:0;z-index:9000;background:rgba(6,9,13,.9);
     -webkit-backdrop-filter:blur(15px) saturate(.92);backdrop-filter:blur(15px) saturate(.92);
     clip-path:inset(0 0 100% 0);transition:clip-path .6s cubic-bezier(.16,.84,.34,1);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:74px 22px 38px;pointer-events:none;overflow-y:auto;font-family:var(--sans)}
+    padding:64px 22px 30px;pointer-events:none;font-family:var(--sans)}
   .bvi-scrim.bvi-open{clip-path:inset(0 0 0 0);pointer-events:auto}
-  .bvi-close{position:absolute;top:15px;right:clamp(14px,4vw,30px);background:none;border:0;cursor:pointer;
+  .bvi-skip{position:absolute;top:15px;right:clamp(14px,4vw,30px);background:none;border:0;cursor:pointer;
     color:var(--muted);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-    display:flex;align-items:center;gap:7px;transition:color .25s}
-  .bvi-close:hover{color:var(--ink)}
-  .bvi-close svg{width:12px;height:12px}
-  .bvi-card{max-width:660px;width:100%;text-align:center;opacity:0;transform:translateY(10px);
+    display:flex;align-items:center;gap:7px;transition:color .25s;z-index:2}
+  .bvi-skip:hover{color:var(--ink)}
+  .bvi-skip svg{width:12px;height:12px}
+  .bvi-stage{width:min(660px,100%);overflow:hidden;opacity:0;transform:translateY(10px);
     transition:opacity .5s .16s,transform .5s .16s}
-  .bvi-open .bvi-card{opacity:1;transform:none}
+  .bvi-open .bvi-stage{opacity:1;transform:none}
+  .bvi-track{display:flex;transition:transform .46s cubic-bezier(.22,.61,.36,1)}
+  .bvi-slide{flex:0 0 100%;width:100%;min-height:clamp(286px,44vh,372px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px 8px}
   .bvi-eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin:0 0 15px}
-  .bvi-title{font-family:var(--serif);font-size:clamp(27px,4.6vw,42px);line-height:1.18;font-weight:600;
+  .bvi-title{font-family:var(--serif);font-size:clamp(28px,4.8vw,44px);line-height:1.16;font-weight:600;
     margin:0 auto;max-width:16ch;color:var(--ink)}
-  .bvi-sub{font-size:13px;line-height:1.7;color:var(--muted);max-width:50ch;margin:18px auto 0}
-  .bvi-steps{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:30px auto 0;max-width:640px}
-  .bvi-step{flex:1 1 170px;max-width:200px;border:1px solid var(--line);border-radius:14px;
-    padding:16px 15px;background:rgba(255,255,255,.02);text-align:left}
-  .bvi-step .bvi-g{width:22px;height:22px;color:var(--accent);margin-bottom:9px;display:block}
-  .bvi-step b{display:block;font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);
-    margin-bottom:4px;letter-spacing:.2px}
-  .bvi-step span{font-size:12px;line-height:1.55;color:var(--muted)}
-  .bvi-begin{display:inline-flex;align-items:center;gap:10px;margin-top:30px;background:none;
-    border:1px solid var(--accent);color:var(--ink);cursor:pointer;font-size:12px;letter-spacing:.18em;
-    text-transform:uppercase;padding:13px 28px;border-radius:2px;transition:background .3s,color .3s}
-  .bvi-begin:hover{background:var(--accent);color:var(--bg,#0a0d13)}
-  .bvi-begin svg{width:15px;height:11px}
-  .bvi-fam{margin-top:clamp(28px,5vh,52px);width:100%;max-width:740px;opacity:0;transition:opacity .55s .32s}
-  .bvi-open .bvi-fam{opacity:1}
+  .bvi-sub{font-size:13.5px;line-height:1.7;color:var(--muted);max-width:46ch;margin:18px auto 0}
+  .bvi-ic{width:62px;height:62px;border:1px solid var(--line);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--accent);margin:0 auto 22px;
+    background:rgba(255,255,255,.02)}
+  .bvi-ic svg{width:26px;height:26px}
+  .bvi-h{font-family:var(--serif);font-size:clamp(24px,3.6vw,32px);line-height:1.18;font-weight:600;margin:0;color:var(--ink)}
+  .bvi-d{font-size:13.5px;line-height:1.7;color:var(--muted);max-width:40ch;margin:14px auto 0}
   .bvi-famlbl{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
-    text-align:center;margin-bottom:16px;position:relative}
-  .bvi-famlbl::before,.bvi-famlbl::after{content:"";position:absolute;top:50%;width:clamp(18px,12%,80px);height:1px;background:var(--line)}
+    text-align:center;margin:0 0 18px;position:relative;width:100%}
+  .bvi-famlbl::before,.bvi-famlbl::after{content:"";position:absolute;top:50%;width:clamp(18px,16%,90px);height:1px;background:var(--line)}
   .bvi-famlbl::before{left:0}.bvi-famlbl::after{right:0}
   .bvi-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 12px}
   .bvi-link{display:flex;flex-direction:column;align-items:center;gap:5px;text-decoration:none;color:var(--ink);
@@ -1374,6 +1368,20 @@ function boot(a){
   .bvi-link .bvi-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-height:10px}
   .bvi-link.bvi-here{cursor:default}
   .bvi-link.bvi-here .bvi-g,.bvi-link.bvi-here .bvi-tag{color:var(--accent)}
+  .bvi-nav{width:min(660px,100%);display:flex;align-items:center;justify-content:space-between;gap:14px;
+    margin-top:24px;opacity:0;transition:opacity .55s .3s}
+  .bvi-open .bvi-nav{opacity:1}
+  .bvi-arrow{display:inline-flex;align-items:center;gap:9px;background:none;border:1px solid var(--line);
+    color:var(--ink);cursor:pointer;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    padding:11px 18px;border-radius:2px;transition:background .3s,color .3s,border-color .3s,opacity .25s;white-space:nowrap}
+  .bvi-arrow svg{width:15px;height:11px}
+  .bvi-prev{padding:11px 16px}
+  .bvi-prev[disabled]{opacity:.28;pointer-events:none}
+  .bvi-next{border-color:var(--accent)}
+  .bvi-next:hover{background:var(--accent);color:var(--bg,#0a0d13)}
+  .bvi-dots{display:flex;gap:8px;align-items:center}
+  .bvi-dot{width:7px;height:7px;border-radius:50%;background:var(--line);border:0;padding:0;cursor:pointer;transition:.25s}
+  .bvi-dot.on{background:var(--accent);width:20px;border-radius:4px}
   .bvi-reopen{position:fixed;left:14px;bottom:calc(16px + var(--vvb,0px));z-index:1500;display:flex;align-items:center;gap:7px;
     background:rgba(10,13,19,.82);border:1px solid var(--line);color:var(--muted);cursor:pointer;border-radius:30px;
     padding:7px 13px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
@@ -1381,89 +1389,127 @@ function boot(a){
   .bvi-reopen:hover{color:var(--ink);border-color:var(--accent)}
   .bvi-reopen svg{width:14px;height:14px;color:var(--accent)}
   @media (max-width:640px){
-    .bvi-scrim{padding:62px 16px 28px;justify-content:flex-start}
-    .bvi-step{flex:1 1 100%;max-width:none}
+    .bvi-scrim{padding:56px 14px 22px}
+    .bvi-arrow span{display:none}.bvi-arrow{padding:11px 14px}
     .bvi-reopen span{display:none}.bvi-reopen{padding:9px}
+    .bvi-link{min-width:44%}
   }
-  @media (prefers-reduced-motion:reduce){.bvi-scrim,.bvi-card,.bvi-fam{transition:none}}
+  @media (prefers-reduced-motion:reduce){.bvi-scrim,.bvi-stage,.bvi-nav,.bvi-track{transition:none}}
 </style>
 <button class="bvi-reopen" id="bviReopen" type="button" aria-label="Replay the intro tour">
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M15.5 8.5 L10.5 10.5 L8.5 15.5 L13.5 13.5 Z" fill="currentColor"/></svg>
   <span>Tour</span>
 </button>
 <div class="bvi-scrim" id="bviScrim" role="dialog" aria-modal="true" aria-label="Welcome to the Atlas" aria-hidden="true">
-  <button class="bvi-close" id="bviClose" type="button" aria-label="Skip the intro">Skip
+  <button class="bvi-skip" id="bviSkip" type="button" aria-label="Skip the intro">Skip
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5 L19 19 M19 5 L5 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
   </button>
-  <div class="bvi-card">
-    <p class="bvi-eyebrow" id="bviEyebrow"></p>
-    <h2 class="bvi-title" id="bviTitle"></h2>
-    <p class="bvi-sub" id="bviSub"></p>
-    <div class="bvi-steps" id="bviSteps"></div>
-    <button class="bvi-begin" id="bviBegin" type="button">Begin exploring
+  <div class="bvi-stage"><div class="bvi-track" id="bviTrack"></div></div>
+  <div class="bvi-nav">
+    <button class="bvi-arrow bvi-prev" id="bviPrev" type="button" aria-label="Back">
+      <svg viewBox="0 0 24 12" fill="none" aria-hidden="true"><path d="M23 6 H3 M8 1 L2 6 L8 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Back</span>
+    </button>
+    <div class="bvi-dots" id="bviDots"></div>
+    <button class="bvi-arrow bvi-next" id="bviNext" type="button">
+      <span>Next</span>
       <svg viewBox="0 0 24 12" fill="none" aria-hidden="true"><path d="M1 6 H21 M16 1 L22 6 L16 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
   </div>
-  <nav class="bvi-fam" aria-label="Atlas family">
-    <div class="bvi-famlbl">The Atlas family</div>
-    <div class="bvi-links" id="bviLinks"></div>
-  </nav>
 </div>
 <script>
 (function(){
   "use strict";
-  var INTRO = {"key": "bvi_intro_expedition_v1", "here": "expedition", "eyebrow": "Welcome aboard", "title": "Where the world's expedition ships actually sail.", "sub": "Map the small-ship expedition fleet by region and season — from the poles to the remotest tropics, every voyage plotted where it really goes.", "steps": [{"t": "Filter by region", "d": "Open the rail to narrow the map by region, season or ship."}, {"t": "Tap any pin", "d": "Each pin opens the expeditions sailing there — with dates, ships and itineraries."}, {"t": "Ask The Guide", "d": "Send any voyage to The Guide for a tailored shortlist. A human advisor closes and books."}]};
+  var INTRO = {"key": "bvi_intro_expedition_v1", "here": "expedition", "welcome": {"eyebrow": "Welcome aboard", "title": "Where the world's expedition ships actually sail.", "sub": "Map the small-ship expedition fleet by region and season — from the poles to the remotest tropics, every voyage plotted where it really goes."}, "features": [{"icon": "filter", "t": "Filter by region", "d": "Open the rail to narrow the map by region, season or ship."}, {"icon": "pin", "t": "Tap a pin", "d": "Each pin marks where ships sail. Tap to see the expeditions there."}, {"icon": "card", "t": "See photos & day-by-day", "d": "Open any card to follow a deep link with photos, the day-by-day itinerary and full voyage details."}, {"icon": "compass", "t": "Ask The Guide", "d": "Send any voyage to The Guide for a tailored shortlist. A human advisor closes and books."}]};
   var FAM=[
-    {nm:"VIP Hotels",        slug:"hotel",     url:"https://luxury-hotel-atlas-two.vercel.app",          glyph:"hotel"},
-    {nm:"Expedition Cruises",slug:"expedition",url:"https://expedition-cruise-map.vercel.app",            glyph:"cruise"},
-    {nm:"Private Jet",       slug:"jet",       url:"https://private-jet-expeditions.vercel.app",          glyph:"jet"},
-    {nm:"Hotel Yachts",      slug:"yacht",     url:"https://luxury-hotel-brand-yacht-atlas.vercel.app",   glyph:"yacht"},
-    {nm:"World Cruises",     slug:"world",     url:"https://world-cruise-atlas.vercel.app",               glyph:"world"}
+    {nm:"VIP Hotels",         slug:"hotel",     url:"https://luxury-hotel-atlas-two.vercel.app",          glyph:"hotel"},
+    {nm:"Expedition Cruises", slug:"expedition",url:"https://expedition-cruise-map.vercel.app",            glyph:"cruise"},
+    {nm:"Private Jet",        slug:"jet",       url:"https://private-jet-expeditions.vercel.app",          glyph:"jet"},
+    {nm:"Luxury Hotel Yachts",slug:"yacht",     url:"https://luxury-hotel-brand-yacht-atlas.vercel.app",   glyph:"yacht"},
+    {nm:"World Cruises",      slug:"world",     url:"https://world-cruise-atlas.vercel.app",               glyph:"world"}
   ];
   var GLYPHS={
     hotel:'<path d="M3 21h18M5 21V8l7-4 7 4v13M9 12h2M13 12h2M9 16h2M13 16h2" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
     cruise:'<path d="M4 17l1.5-5h13L20 17M3 17h18l-1.5 3H4.5L3 17M12 12V5M9 7h6" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
     jet:'<path d="M21 12l-9 2-3 5-2-1 1-4-4-1-2 2-1.5-.7L3 12 1.5 9.7 3 9l2 2 4-1-1-4 2-1 3 5 9 2z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round"/>',
     yacht:'<path d="M5 19h14M6 19l-1-7 8-6 6 6-2 7M12 6V3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
-    world:'<circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M3.5 12h17M12 3.5v17M5.5 7c2 1.6 11 1.6 13 0M5.5 17c2-1.6 11-1.6 13 0" stroke="currentColor" stroke-width="1.1" fill="none"/>'
+    world:'<circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M3.5 12h17M12 3.5v17M5.5 7c2 1.6 11 1.6 13 0M5.5 17c2-1.6 11-1.6 13 0" stroke="currentColor" stroke-width="1.1" fill="none"/>',
+    filter:'<path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/>',
+    pin:'<path d="M12 22s7-7.6 7-13a7 7 0 1 0-14 0c0 5.4 7 13 7 13z" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6" fill="none"/>',
+    card:'<rect x="3" y="5" width="18" height="14" rx="2.4" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M3 16l4.5-4 3 2.6 4-4.6L21 15" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="9.5" r="1.3" fill="currentColor"/>',
+    compass:'<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M15.5 8.5 L10.5 10.5 L8.5 15.5 L13.5 13.5 Z" fill="currentColor"/>'
   };
-  var STEPG=[
-    '<path d="M4 7h16M7 12h10M10 17h4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
-    '<path d="M12 22s7-7.6 7-13a7 7 0 1 0-14 0c0 5.4 7 13 7 13z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.5" fill="none"/>',
-    '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M15.5 8.5 L10.5 10.5 L8.5 15.5 L13.5 13.5 Z" fill="currentColor"/>'
-  ];
-  var $=function(id){return document.getElementById(id);};
-  $('bviEyebrow').textContent=INTRO.eyebrow;
-  $('bviTitle').textContent=INTRO.title;
-  $('bviSub').textContent=INTRO.sub;
-  var sw=$('bviSteps');
-  INTRO.steps.forEach(function(s,i){
-    var d=document.createElement('div');d.className='bvi-step';
-    d.innerHTML='<svg class="bvi-g" viewBox="0 0 24 24" aria-hidden="true">'+STEPG[i%STEPG.length]+'</svg>'+
-      '<b>'+s.t+'</b><span>'+s.d+'</span>';
-    sw.appendChild(d);
+  var track=document.getElementById('bviTrack');
+  function svg(g,cls){return '<svg class="'+(cls||'')+'" viewBox="0 0 24 24" aria-hidden="true">'+g+'</svg>';}
+
+  // ---- build slides ----
+  var slides=[];
+  // 0: welcome
+  var w=document.createElement('div');w.className='bvi-slide';
+  w.innerHTML='<p class="bvi-eyebrow">'+INTRO.welcome.eyebrow+'</p>'+
+    '<h2 class="bvi-title">'+INTRO.welcome.title+'</h2>'+
+    '<p class="bvi-sub">'+INTRO.welcome.sub+'</p>';
+  slides.push(w);
+  // feature slides
+  INTRO.features.forEach(function(f){
+    var s=document.createElement('div');s.className='bvi-slide';
+    s.innerHTML='<div class="bvi-ic">'+svg(GLYPHS[f.icon]||'')+'</div>'+
+      '<h2 class="bvi-h">'+f.t+'</h2><p class="bvi-d">'+f.d+'</p>';
+    slides.push(s);
   });
-  var lw=$('bviLinks');
+  // final: atlas family
+  var fam=document.createElement('div');fam.className='bvi-slide';
+  var links='';
   FAM.forEach(function(a){
-    var here=a.slug===INTRO.here,el;
-    if(here){el=document.createElement('div');el.className='bvi-link bvi-here';}
-    else{el=document.createElement('a');el.className='bvi-link';el.href=a.url;el.target='_blank';el.rel='noopener';}
-    el.innerHTML='<svg class="bvi-g" viewBox="0 0 24 24" aria-hidden="true">'+GLYPHS[a.glyph]+'</svg>'+
-      '<span class="bvi-nm">'+a.nm+'</span><span class="bvi-tag">'+(here?'You are here':'')+'</span>';
-    lw.appendChild(el);
+    var here=a.slug===INTRO.here;
+    var inner=svg(GLYPHS[a.glyph],'bvi-g')+'<span class="bvi-nm">'+a.nm+'</span>'+
+      '<span class="bvi-tag">'+(here?'You are here':'')+'</span>';
+    links+= here ? '<div class="bvi-link bvi-here">'+inner+'</div>'
+                 : '<a class="bvi-link" href="'+a.url+'" target="_blank" rel="noopener">'+inner+'</a>';
   });
-  var scrim=$('bviScrim'),beginB=$('bviBegin'),closeB=$('bviClose'),reopen=$('bviReopen');
-  function open(){scrim.classList.add('bvi-open');scrim.setAttribute('aria-hidden','false');setTimeout(function(){try{beginB.focus();}catch(e){}},140);}
+  fam.innerHTML='<div class="bvi-famlbl">The Atlas family</div><div class="bvi-links">'+links+'</div>';
+  slides.push(fam);
+  slides.forEach(function(s){track.appendChild(s);});
+
+  // ---- dots ----
+  var dotsWrap=document.getElementById('bviDots');
+  slides.forEach(function(_,i){
+    var b=document.createElement('button');b.type='button';b.className='bvi-dot';
+    b.setAttribute('aria-label','Go to slide '+(i+1));
+    b.addEventListener('click',function(){go(i);});
+    dotsWrap.appendChild(b);
+  });
+
+  var scrim=document.getElementById('bviScrim'),skip=document.getElementById('bviSkip'),
+      prev=document.getElementById('bviPrev'),next=document.getElementById('bviNext'),
+      nextLbl=next.querySelector('span'),reopen=document.getElementById('bviReopen');
+  var idx=0,last=slides.length-1;
+  function render(){
+    track.style.transform='translateX(-'+(idx*100)+'%)';
+    prev.disabled=idx===0;
+    nextLbl.textContent=idx===last?'Begin exploring':'Next';
+    [].forEach.call(dotsWrap.children,function(d,i){d.classList.toggle('on',i===idx);});
+  }
+  function go(i){idx=Math.max(0,Math.min(last,i));render();}
   function done(){scrim.classList.remove('bvi-open');scrim.setAttribute('aria-hidden','true');try{localStorage.setItem(INTRO.key,'1');}catch(e){}}
-  beginB.addEventListener('click',done);
-  closeB.addEventListener('click',done);
+  function open(){idx=0;render();scrim.classList.add('bvi-open');scrim.setAttribute('aria-hidden','false');setTimeout(function(){try{next.focus();}catch(e){}},150);}
+
+  next.addEventListener('click',function(){ if(idx===last) done(); else go(idx+1); });
+  prev.addEventListener('click',function(){ go(idx-1); });
+  skip.addEventListener('click',done);
   reopen.addEventListener('click',open);
   scrim.addEventListener('click',function(e){if(e.target===scrim)done();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&scrim.classList.contains('bvi-open'))done();});
+  document.addEventListener('keydown',function(e){
+    if(!scrim.classList.contains('bvi-open'))return;
+    if(e.key==='Escape')done();
+    else if(e.key==='ArrowRight'){ if(idx<last) go(idx+1); }
+    else if(e.key==='ArrowLeft'){ go(idx-1); }
+  });
+
+  render();
   var force=/(?:[?#&])(?:tour|intro)\b/i.test(location.search+location.hash);
-  var embedded=false;try{embedded=window.self!==window.top;}catch(e){embedded=true;}
   var seen=false;try{seen=localStorage.getItem(INTRO.key)==='1';}catch(e){}
-  if(force||(!seen&&!embedded)){
+  if(force||!seen){
     if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches){
       scrim.classList.add('bvi-open');scrim.setAttribute('aria-hidden','false');
     }else{requestAnimationFrame(function(){requestAnimationFrame(open);});}
