@@ -111,6 +111,24 @@
   .card .askguide{display:inline-flex;align-items:center;gap:6px;margin-top:9px;padding:6px 11px;border-radius:9px;font-size:11.5px;font-weight:700;cursor:pointer;color:var(--accent);background:transparent;border:1px solid var(--accent);-webkit-tap-highlight-color:transparent;transition:.15s}
   .card .askguide:hover{background:var(--accent);color:var(--accent-text);border-color:var(--accent)}
   .card .askguide:active{transform:scale(.97)}
+  /* ---------- Day-by-day route tracing (mirrors the Luxury Yacht Atlas) ---------- */
+  .card.routed{border-color:var(--accent);background:#1d232f;box-shadow:0 0 0 1px var(--accent),0 0 20px rgba(var(--accent-rgb),.30)}
+  .card.routed::before{content:"\25C9 On map";position:absolute;top:-9px;right:11px;font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--accent-text);background:linear-gradient(135deg,var(--accent),var(--accent-mid));padding:2px 8px;border-radius:20px;box-shadow:0 2px 6px rgba(0,0,0,.45)}
+  .card .meta .rt{font-size:10.5px;color:var(--muted);margin-top:5px;line-height:1.45}
+  .card .tracebtn{display:inline-flex;align-items:center;gap:6px;margin-top:9px;margin-right:8px;padding:6px 11px;border-radius:9px;font-size:11.5px;font-weight:700;cursor:pointer;color:var(--accent);background:rgba(var(--accent-rgb),.10);border:1px solid rgba(var(--accent-rgb),.45);-webkit-tap-highlight-color:transparent;transition:.15s}
+  .card .tracebtn:hover{background:rgba(var(--accent-rgb),.20);border-color:var(--accent)}
+  .card .tracebtn:active{transform:scale(.97)}
+  .card .tracebtn.on{background:linear-gradient(135deg,var(--accent),var(--accent-mid));color:var(--accent-text);border-color:#fff}
+  .card .tracebtn.on:hover{filter:brightness(1.04)}
+  .stopdot{transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--accent-hi),var(--accent) 65%,var(--accent-deep));border:1.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;font:700 10px/1 var(--sans);color:var(--accent-text)}
+  .seatri{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid var(--accent-mid);filter:drop-shadow(0 1px 2px rgba(0,0,0,.65))}
+  .leaflet-tooltip.stoptip{background:rgba(8,11,16,.94);border:1px solid var(--line);color:var(--ink);font:600 11.5px var(--sans);padding:3px 8px;border-radius:7px;box-shadow:0 3px 10px rgba(0,0,0,.55)}
+  .leaflet-tooltip.stoptip:before{border-top-color:rgba(8,11,16,.94)}
+  body.tracing .rmarker{opacity:.28;transition:opacity .3s ease}
+  body.tracing .rmarker:hover{opacity:.85}
+  body.tracing .rmarker.route{opacity:1}
+  #routeBack{display:none;position:absolute;z-index:1200;left:50%;bottom:84px;transform:translateX(-50%);align-items:center;gap:7px;padding:10px 17px;border-radius:30px;cursor:pointer;font-size:12.5px;font-weight:700;color:var(--ink);background:var(--panel2);border:1px solid var(--line);box-shadow:var(--shadow);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  @media (max-width:640px){body.tracing .panel.open{transform:translateY(100%) !important}body.tracing #routeBack{display:inline-flex}}
   .panel .cardteaser{display:flex;align-items:center;justify-content:center;gap:7px;margin:12px 16px 0;padding:8px 12px;border:1px dashed var(--accent);border-radius:10px;color:var(--accent);font-size:11.5px;font-weight:600;letter-spacing:.2px;text-align:center;line-height:1.3;opacity:.92}
   .rmarker{position:relative;transform:translate(-50%,-50%);cursor:pointer}
   .rmarker .ring{width:var(--sz,34px);height:var(--sz,34px);border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(232,247,255,.96),rgba(var(--accent-rgb),.92) 58%,rgba(36,104,143,.92));border:2px solid rgba(255,255,255,.85);box-shadow:0 0 0 4px rgba(var(--accent-rgb),.22),0 5px 16px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(--accent-text);transition:.18s}
@@ -245,6 +263,7 @@
   <div class="list" id="pList"></div>
 </section>
 <div class="hint" id="hint">Tap a <b>region pin</b> to see every expedition sailing &middot; filter by line or month on the left</div>
+<div id="routeBack" role="button" tabindex="0">&#8592; Back to results</div>
 <script src="vendor/leaflet.min.js"></script>
 <script type="module">
 import { loadAtlas, logoSources } from './loader.js';
@@ -318,6 +337,247 @@ function boot(a){
     const mk=L.marker(reg.coord,{icon:L.divIcon({className:'',html:el,iconSize:[0,0]}),riseOnHover:true}).addTo(map);
     markers[key]={marker:mk,el};
   });
+
+  /* ── Day-by-day route tracing (mirrors the Luxury Yacht Atlas) ─────────────
+     Routes live in the slim data/itinerary-routes.json, lazy-loaded in the
+     background so the atlas paints instantly. Each route is an ordered list of
+     days: {d:dayNumber, s:1 sea/cruising day, p:[[name,lat,lng],...] stops}. */
+  let ROUTES=null;
+  function loadRoutes(){
+    return fetch('data/itinerary-routes.json').then(r=>{ if(!r.ok) throw new Error('routes HTTP '+r.status); return r.json(); })
+      .then(j=>{ ROUTES=j.routes||{}; })
+      .catch(err=>{ console.warn('Expedition Atlas: day-by-day routes unavailable —',err); ROUTES={}; });
+  }
+  /* Ordered itinerary entries for one sailing: port = {n,ll,day}; sea day = {sea:true}. */
+  function sailingStops(s){
+    const days=ROUTES&&ROUTES[String(s.id)];
+    if(!days||!days.length) return [];
+    const out=[];
+    days.forEach(day=>{
+      const geocoded=(day.p||[]).filter(p=>p[1]!=null&&p[2]!=null);
+      if(day.s&&!geocoded.length){ out.push({sea:true}); return; }
+      geocoded.forEach(p=>out.push({n:p[0],ll:[p[1],p[2]],day:day.d}));
+    });
+    return out;
+  }
+  function portCoords(s){ return sailingStops(s).filter(e=>e.ll).map(e=>e.ll); }
+  function isTraceable(s){
+    const c=portCoords(s);
+    return c.length>=2 && c.some(x=>x[0]!==c[0][0]||x[1]!==c[0][1]);
+  }
+  /* embark = first named port, disembark = last named port (for the card route line) */
+  function sailingEnds(s){
+    const ports=sailingStops(s).filter(e=>e.n);
+    if(!ports.length) return null;
+    return {from:ports[0].n, to:ports.length>1?ports[ports.length-1].n:ports[0].n, count:ports.length};
+  }
+  /* screen heading (deg) for a north-pointing triangle so its apex faces P->Q */
+  function headingDeg(P,Q){
+    const latMid=(P[0]+Q[0])/2*Math.PI/180;
+    const dx=(Q[1]-P[1])*Math.cos(latMid), dy=(Q[0]-P[0]);
+    return Math.atan2(dx,dy)*180/Math.PI;
+  }
+  function unroll(coords){ const out=[coords[0].slice()]; for(let i=1;i<coords.length;i++){ let la=coords[i][0],lo=coords[i][1]; const prevLo=out[i-1][1]; while(lo-prevLo>180)lo-=360; while(lo-prevLo<-180)lo+=360; out.push([la,lo]); } return out; }
+  function arcPts(a,b){ const la1=a[0],lo1=a[1],la2=b[0],lo2=b[1]; const mx=(lo1+lo2)/2,my=(la1+la2)/2,dx=lo2-lo1,dy=la2-la1; const k=0.16; const cx=mx-dy*k,cy=my+dx*k; const p=[]; for(let t=0;t<=1.0001;t+=0.04){ const x=(1-t)*(1-t)*lo1+2*(1-t)*t*cx+t*t*lo2; const y=(1-t)*(1-t)*la1+2*(1-t)*t*cy+t*t*la2; p.push([y,x]); } return p; }
+
+  /* ===== Sea routing: keep ocean legs off land (land mask + A*) =============
+     Ported from the Luxury Yacht Atlas. A coarse 0.1° land bitmap lets us route
+     ocean crossings around continents; legs over rivers/inland waters (Amazon,
+     Mekong, Great Lakes …) aren't in the ocean mask, so they gracefully fall
+     back to a gentle arc. Until the mask loads, every leg uses the arc. */
+  const SEA={mask:null,ocean:null,W:3600,H:1700,RES:10,LAT_MAX:85,ready:false};
+  const _legCache=new Map();
+  (function loadLandMask(){
+    fetch('data/landmask.bin').then(r=>r.ok?r.arrayBuffer():Promise.reject(r.status))
+     .then(buf=>{ SEA.mask=new Uint8Array(buf); buildOcean(); SEA.ready=true; _legCache.clear();
+       if(pinnedSailing) drawRoute(pinnedSailing,false); })
+     .catch(()=>{ SEA.ready=false; });   // routing disabled -> arcs as before
+  })();
+  function buildOcean(){            // flood-fill the open ocean so we never start/end a route in a closed bay
+    const N=SEA.W*SEA.H, ocean=new Uint8Array((N+7)>>3);
+    const getO=i=>(ocean[i>>3]>>(i&7))&1, setO=i=>{ocean[i>>3]|=(1<<(i&7));};
+    const q=new Int32Array(N); let head=0,tail=0;
+    for(const [la,lo] of [[0,-150],[0,-30],[0,80],[40,-45],[60,-180],[-40,60]]){
+      const c=_col(lo), r=_row(la); if(r<0||r>=SEA.H) continue; const i=r*SEA.W+c;
+      if(!isLandCell(c,r)&&!getO(i)){ setO(i); q[tail++]=i; }
+    }
+    while(head<tail){ const i=q[head++], r=(i/SEA.W)|0, c=i-r*SEA.W; let nc,ni;
+      nc=c+1>=SEA.W?0:c+1; ni=r*SEA.W+nc; if(!getO(ni)&&!isLandCell(nc,r)){setO(ni);q[tail++]=ni;}
+      nc=c-1<0?SEA.W-1:c-1; ni=r*SEA.W+nc; if(!getO(ni)&&!isLandCell(nc,r)){setO(ni);q[tail++]=ni;}
+      if(r+1<SEA.H){ni=(r+1)*SEA.W+c; if(!getO(ni)&&!isLandCell(c,r+1)){setO(ni);q[tail++]=ni;}}
+      if(r-1>=0){ni=(r-1)*SEA.W+c; if(!getO(ni)&&!isLandCell(c,r-1)){setO(ni);q[tail++]=ni;}}
+    }
+    SEA.ocean=ocean;
+  }
+  function oceanAt(c,r){ if(!SEA.ocean) return !isLandCell(c,r); if(r<0||r>=SEA.H)return false; if(c<0)c+=SEA.W; if(c>=SEA.W)c-=SEA.W; const i=r*SEA.W+c; return (SEA.ocean[i>>3]>>(i&7))&1; }
+  function _normLng(lng){return ((lng+180)%360+360)%360-180;}
+  function _col(lng){let c=Math.round((_normLng(lng)+180)*SEA.RES);if(c>=SEA.W)c-=SEA.W;if(c<0)c+=SEA.W;return c;}
+  function _row(lat){return Math.round((SEA.LAT_MAX-lat)*SEA.RES);}
+  function _cellLng(c){return -180+c/SEA.RES;}
+  function _cellLat(r){return SEA.LAT_MAX-r/SEA.RES;}
+  function isLandCell(c,r){ if(r<0||r>=SEA.H)return false; if(c<0)c+=SEA.W; if(c>=SEA.W)c-=SEA.W; const i=r*SEA.W+c; return (SEA.mask[i>>3]>>(i&7))&1; }
+  function isLandLL(lat,lng){ if(!SEA.mask)return false; if(lat>SEA.LAT_MAX||lat<-SEA.LAT_MAX)return false; const r=_row(lat); if(r<0||r>=SEA.H)return false; return isLandCell(_col(lng),r); }
+  function nearLandCell(c,r){return isLandCell(c+1,r)||isLandCell(c-1,r)||isLandCell(c,r+1)||isLandCell(c,r-1);}
+  function lineHitsLand(a,b){
+    const dlat=b[0]-a[0], dlng=_normLng(b[1]-a[1]);
+    const steps=Math.max(2,Math.ceil(Math.hypot(dlat,dlng)*SEA.RES*1.5));
+    for(let i=1;i<steps;i++){const f=i/steps; if(isLandLL(a[0]+dlat*f, _normLng(a[1]+dlng*f))) return true;}
+    return false;
+  }
+  function polyHitsLand(pts){for(let i=0;i<pts.length-1;i++)if(lineHitsLand(pts[i],pts[i+1]))return true;return false;}
+  function densify(a,b,n){const p=[];for(let i=0;i<=n;i++){const f=i/n;p.push([a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f]);}return p;}
+  function nearestSeaCell(lat,lng){     // snap to the connected open ocean, not just any sea pixel
+    const c0=_col(lng), r0=_row(lat);
+    if(oceanAt(c0,r0)) return [c0,r0];
+    for(let rad=1;rad<=30;rad++) for(let dy=-rad;dy<=rad;dy++) for(let dx=-rad;dx<=rad;dx++){
+      if(Math.max(Math.abs(dx),Math.abs(dy))!==rad) continue;
+      if(oceanAt(c0+dx,r0+dy)) return [c0+dx,r0+dy];
+    }
+    return null;
+  }
+  function _hPush(h,n){h.push(n);let i=h.length-1;while(i>0){const p=(i-1)>>1;if(h[p].f<=h[i].f)break;const t=h[p];h[p]=h[i];h[i]=t;i=p;}}
+  function _hPop(h){const top=h[0],last=h.pop();if(h.length){h[0]=last;let i=0;const n=h.length;for(;;){let l=2*i+1,r=l+1,s=i;if(l<n&&h[l].f<h[s].f)s=l;if(r<n&&h[r].f<h[s].f)s=r;if(s===i)break;const t=h[s];h[s]=h[i];h[i]=t;i=s;}}return top;}
+  function _searchSea(sa,sb,pad){
+    const minC=Math.min(sa[0],sb[0])-pad, maxC=Math.max(sa[0],sb[0])+pad;
+    const minR=Math.max(0,Math.min(sa[1],sb[1])-pad), maxR=Math.min(SEA.H-1,Math.max(sa[1],sb[1])+pad);
+    const bw=maxC-minC+1, bh=maxR-minR+1;
+    if(bw*bh>1400000) return null;
+    const idx=(c,r)=>(r-minR)*bw+(c-minC);
+    const inBox=(c,r)=>c>=minC&&c<=maxC&&r>=minR&&r<=maxR;
+    const g=new Float64Array(bw*bh).fill(Infinity);
+    const came=new Int32Array(bw*bh).fill(-1);
+    const closed=new Uint8Array(bw*bh);
+    const cosR=r=>Math.max(0.15,Math.cos(_cellLat(r)*Math.PI/180));
+    const hcost=(c,r)=>Math.hypot(Math.abs(c-sb[0])*cosR(r),Math.abs(r-sb[1]));
+    g[idx(sa[0],sa[1])]=0;
+    const heap=[]; _hPush(heap,{c:sa[0],r:sa[1],f:hcost(sa[0],sa[1])});
+    const dirs=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
+    let found=false;
+    while(heap.length){
+      const cur=_hPop(heap), ci=idx(cur.c,cur.r);
+      if(closed[ci]) continue; closed[ci]=1;
+      if(cur.c===sb[0]&&cur.r===sb[1]){found=true;break;}
+      const base=g[ci], cl=cosR(cur.r);
+      for(const [dx,dy] of dirs){
+        const nc=cur.c+dx, nr=cur.r+dy;
+        if(!inBox(nc,nr)||isLandCell(nc,nr)) continue;
+        const ni=idx(nc,nr); if(closed[ni]) continue;
+        let step=(dx&&dy)?Math.hypot(cl,1):(dx?cl:1);
+        if(nearLandCell(nc,nr)) step*=1.6;          // bias ~1 cell offshore
+        const ng=base+step;
+        if(ng<g[ni]){ g[ni]=ng; came[ni]=ci; _hPush(heap,{c:nc,r:nr,f:ng+hcost(nc,nr)}); }
+      }
+    }
+    if(!found) return null;
+    const path=[]; let ci=idx(sb[0],sb[1]);
+    while(ci!==-1){ path.push([_cellLat(minR+Math.floor(ci/bw)), _cellLng(minC+(ci%bw))]); ci=came[ci]; }
+    return path.reverse();
+  }
+  function aStarSea(a,b){
+    const sa=nearestSeaCell(a[0],a[1]), sb=nearestSeaCell(b[0],b[1]);
+    if(!sa||!sb) return null;
+    const span=Math.max(Math.abs(sa[0]-sb[0]),Math.abs(sa[1]-sb[1]));
+    const pads=[Math.max(45,Math.round(span*0.9))];   // direct box, then widen for round-the-land detours
+    for(const p of [140,280,440]) if(p>pads[pads.length-1]) pads.push(p);
+    for(const pad of pads){ const r=_searchSea(sa,sb,pad); if(r) return r; }
+    return null;
+  }
+  function rdp(pts,eps){
+    if(pts.length<3) return pts.slice();
+    const a=pts[0], b=pts[pts.length-1], dx=b[0]-a[0], dy=b[1]-a[1], len=Math.hypot(dx,dy)||1e-9;
+    let dmax=0, k=0;
+    for(let i=1;i<pts.length-1;i++){ const d=Math.abs((pts[i][0]-a[0])*dy-(pts[i][1]-a[1])*dx)/len; if(d>dmax){dmax=d;k=i;} }
+    if(dmax>eps) return rdp(pts.slice(0,k+1),eps).slice(0,-1).concat(rdp(pts.slice(k),eps));
+    return [a,b];
+  }
+  function chaikin(pts,iters){
+    let p=pts;
+    for(let it=0;it<iters&&p.length>=3;it++){
+      const out=[p[0]];
+      for(let i=0;i<p.length-1;i++){ const a=p[i],b=p[i+1];
+        out.push([a[0]*0.75+b[0]*0.25,a[1]*0.75+b[1]*0.25]);
+        out.push([a[0]*0.25+b[0]*0.75,a[1]*0.25+b[1]*0.75]); }
+      out.push(p[p.length-1]); p=out;
+    }
+    return p;
+  }
+  function legGeometry(a,b){
+    if(!SEA.ready||!SEA.mask) return arcPts(a,b);
+    const key=a[0].toFixed(2)+','+a[1].toFixed(2)+'|'+b[0].toFixed(2)+','+b[1].toFixed(2);
+    if(_legCache.has(key)) return _legCache.get(key);
+    let out;
+    if(!lineHitsLand(a,b)){
+      const arc=arcPts(a,b);
+      out = polyHitsLand(arc) ? densify(a,b,14) : arc;
+    } else {
+      const raw=aStarSea(a,b);
+      if(raw && raw.length>=2){
+        let body=chaikin(rdp(raw,0.12),2);
+        if(polyHitsLand(body)) body=rdp(raw,0.12);
+        if(polyHitsLand(body)) body=raw;
+        const off=a[1]-_normLng(a[1]);   // realign A* (normalized lng) to the leg's unrolled frame
+        if(off) body=body.map(p=>[p[0],p[1]+off]);
+        out=[a.slice(),...body,b.slice()];
+      } else { out=arcPts(a,b); }
+    }
+    _legCache.set(key,out);
+    return out;
+  }
+
+  let pinnedSailing=null, routeLocked=false;
+  const routeLayer=L.layerGroup().addTo(map);
+  function clearRoute(){ routeLayer.clearLayers(); Object.values(markers).forEach(o=>o.el.classList.remove('route')); markRoutedCard(null); }
+  function markRoutedCard(s){
+    let hit=null;
+    document.querySelectorAll('.card').forEach(c=>{ const on=s&&c._sailing===s; c.classList.toggle('routed',on); if(on)hit=c; });
+    if(hit) hit.scrollIntoView({block:'nearest'});
+  }
+  const ACC2=getComputedStyle(document.documentElement).getPropertyValue('--accent-mid').trim()||'#8bd3ff';
+  function drawRoute(s,fit){
+    clearRoute();
+    const entries=sailingStops(s);
+    const ports=entries.filter(e=>e.ll);
+    if(ports.length<2) return;
+    const lls=unroll(ports.map(e=>e.ll));           // unrolled port coords
+    const legArcs=[];
+    for(let i=0;i<lls.length-1;i++){
+      const pts=legGeometry(lls[i],lls[i+1]); legArcs.push(pts);
+      L.polyline(pts,{color:'#06121d',weight:6,opacity:.22,lineCap:'round'}).addTo(routeLayer);
+      L.polyline(pts,{color:ACC2,weight:2.2,opacity:.95,lineCap:'round',dashArray:'1 7'}).addTo(routeLayer);
+    }
+    // numbered port dots, tooltip shows the day + port
+    ports.forEach((e,i)=>{
+      const dot=L.divIcon({className:'',html:'<div class="stopdot">'+(i+1)+'</div>',iconSize:[0,0]});
+      const lbl=(e.day?('Day '+e.day+' · '):'')+e.n;
+      const m2=L.marker(lls[i],{icon:dot,riseOnHover:true}).addTo(routeLayer)
+        .bindTooltip((i+1)+'. '+lbl,{direction:'top',offset:[0,-9],className:'stoptip',opacity:1});
+      m2.on('click',()=>m2.openTooltip());
+    });
+    // sea days -> count per leg (between consecutive ports), drawn as triangles
+    const legSeas={}; let portIdx=-1;
+    entries.forEach(e=>{ if(e.ll){ portIdx++; } else if(portIdx>=0&&portIdx<lls.length-1){ legSeas[portIdx]=(legSeas[portIdx]||0)+1; } });
+    Object.keys(legSeas).forEach(key=>{
+      const li=+key, pts=legArcs[li], k=legSeas[li];
+      for(let j=0;j<k;j++){
+        const f=(j+1)/(k+1);
+        const idx=Math.min(pts.length-2,Math.max(1,Math.round(f*(pts.length-1))));
+        const deg=headingDeg(pts[idx],pts[idx+1]);
+        const tri=L.divIcon({className:'',html:'<div class="seatri" style="transform:translate(-50%,-50%) rotate('+deg.toFixed(1)+'deg)"></div>',iconSize:[0,0]});
+        L.marker(pts[idx],{icon:tri,interactive:false,keyboard:false}).addTo(routeLayer);
+      }
+    });
+    if(markers[s.region]) markers[s.region].el.classList.add('route');
+    markRoutedCard(s);
+    if(fit){
+      const small=window.matchMedia('(max-width:640px)').matches;
+      const panelOpen=panel.classList.contains('open')&&!document.body.classList.contains('panel-collapsed');
+      const padR=(!small&&panelOpen)?420:70;
+      map.fitBounds(L.latLngBounds(lls),{paddingTopLeft:[70,90],paddingBottomRight:[padR,70],maxZoom:7,animate:true,duration:.8});
+    }
+  }
+  function stopTracing(){ routeLocked=false; pinnedSailing=null; document.body.classList.remove('tracing'); clearRoute(); document.querySelectorAll('.card .tracebtn').forEach(b=>{ if(b._sync) b._sync(); }); }
+  const routeBack=document.getElementById('routeBack');
+  if(routeBack){ const back=()=>stopTracing(); routeBack.addEventListener('click',back); routeBack.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();back();} }); }
 
   function updateMarkers(){
     const anyFilter=!!activeOps.size||activeMonths.size||activeIds.size||activeSearchTerms.length||activeRegions.size;
@@ -467,15 +727,33 @@ function boot(a){
   }
   function makeCard(s){
     const a0=document.createElement('a');a0.className='card';a0.href=s.url||'#';a0.target='_blank';a0.rel='noopener';
+    a0._sailing=s;
     const meta=document.createElement('div');meta.className='meta';
     const op=OPERATORS[s.operator]?OPERATORS[s.operator].short:s.operator;
     const nights=(typeof s.nights==='number')?(' &middot; '+s.nights+' night'+(s.nights!==1?'s':'')):'';
+    const ends=sailingEnds(s);
+    const rt=ends?('<div class="rt">'+esc(ends.from)+(ends.to!==ends.from?(' &rarr; '+esc(ends.to)):'')+' &middot; '+ends.count+' stop'+(ends.count!==1?'s':'')+'</div>'):'';
     meta.innerHTML='<div class="nm">'+esc(s.name)+'</div>'
       +'<div class="dt">'+esc(s.dates)+'</div>'
-      +'<div class="go">'+esc(op)+nights+' &#8599;</div>';
+      +'<div class="go">'+esc(op)+nights+' &#8599;</div>'+rt;
     const ar=document.createElement('div');ar.className='arrow';ar.textContent='›';
     a0.appendChild(logoEl(s.operator));a0.appendChild(meta);a0.appendChild(ar);
     if(activeOps.size&&activeOps.has(s.operator))a0.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    if(isTraceable(s)){
+      a0.addEventListener('mouseenter',()=>{ if(!routeLocked){ pinnedSailing=s; drawRoute(s,false); } });
+      const trace=document.createElement('span');
+      trace.className='tracebtn';trace.setAttribute('role','button');trace.tabIndex=0;
+      function syncTrace(){ const on=routeLocked&&pinnedSailing===s; trace.classList.toggle('on',on); trace.innerHTML=on?'&#128506; Route shown — tap to hide':'&#128506; Trace day-by-day route'; }
+      syncTrace();trace._sync=syncTrace;
+      const doTrace=e=>{ e.preventDefault();e.stopPropagation();
+        const on=routeLocked&&pinnedSailing===s;
+        if(on){ stopTracing(); }
+        else { pinnedSailing=s; routeLocked=true; document.body.classList.add('tracing'); drawRoute(s,true); document.querySelectorAll('.card .tracebtn').forEach(b=>{ if(b._sync) b._sync(); }); }
+      };
+      trace.addEventListener('click',doTrace);
+      trace.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ')doTrace(e); });
+      meta.appendChild(trace);
+    }
     meta.appendChild(askGuideBtn(
       'I\'m looking at the "'+s.name+'" expedition cruise on the BeVvip Expedition Atlas — '
       +op+(typeof s.nights==='number'?', '+s.nights+' night'+(s.nights!==1?'s':''):'')
@@ -523,6 +801,7 @@ function boot(a){
     document.getElementById('pTitle').textContent=title||'Search results';
     document.getElementById('pSub').innerHTML=list.length+' expedition sailing'+(list.length!==1?'s':'')+' matched this Guide shortlist';
     const L0=document.getElementById('pList');L0.innerHTML='';list.forEach(s=>L0.appendChild(makeCard(s)));
+    if(routeLocked&&pinnedSailing) markRoutedCard(pinnedSailing);
     panel.classList.add('open');
     revealPanel();
     fitSailings(list);
@@ -535,11 +814,12 @@ function boot(a){
     if(activeOps.size&&!list.length)sub='No sailings here with the current filters · tap “Show all” to reset';
     document.getElementById('pSub').textContent=sub;
     const L0=document.getElementById('pList');L0.innerHTML='';list.forEach(s=>L0.appendChild(makeCard(s)));
+    if(routeLocked&&pinnedSailing) markRoutedCard(pinnedSailing);
     panel.classList.add('open');
     revealPanel();
     const c=reg.coord;map.flyTo([c[0],c[1]],Math.max(map.getZoom(),3.2),{duration:.8});
   }
-  function closePanel(){panel.classList.remove('open');activeView=null;datePop.classList.remove('open');}
+  function closePanel(){ if(routeLocked||pinnedSailing) stopTracing(); panel.classList.remove('open');activeView=null;datePop.classList.remove('open');}
   function showAll(){
     activeOps.clear();activeMonths.clear();
     activeIds.clear();activeSearchTerms=[];activeRegions.clear();
@@ -584,6 +864,10 @@ function boot(a){
     else if(activeIds.size||activeOps.size||activeMonths.size||activeRegions.size||activeSearchTerms.length) openSearchResults(activeIds.size?'Guide shortlist':'Filtered sailings');
   }
   applyDeepLink();
+
+  /* Lazy-load day-by-day routes in the background; once ready, re-render the
+     open panel so the "Trace day-by-day route" buttons appear on the cards. */
+  loadRoutes().then(()=>{ if(activeView){ activeView==='__search__'?openSearchResults():openRegion(activeView); } });
 }
 </script>
 
