@@ -362,17 +362,16 @@ L.control.zoom({position:'bottomleft'}).addTo(map);
 window.__atlasMap=map;
 /* ── base-map styles + picker (default / dark / satellite, swappable) ────── */
 const DATA_CREDIT='Expedition data: Brian Harris / Virtuoso';
-const _cr={esri:'Imagery &copy; Esri, Maxar, Earthstar Geographics',relief:'Shaded relief &copy; Esri',carto:'&copy; OpenStreetMap contributors &copy; CARTO'};
+const _cr={esri:'Imagery &copy; Esri, Maxar, Earthstar Geographics',carto:'&copy; OpenStreetMap contributors &copy; CARTO'};
 const BASES={
-  relief:{label:'Relief',sw:'#9caf96',make:()=>L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}',{maxZoom:8,attribution:_cr.relief+' &middot; '+DATA_CREDIT})},
   voyager:{label:'Voyager',sw:'#cfe0ec',make:()=>L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png',{maxZoom:8,subdomains:'abcd',attribution:_cr.carto+' &middot; '+DATA_CREDIT})},
   dark:{label:'Dark',sw:'#10141b',make:()=>L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:8,subdomains:'abcd',attribution:_cr.carto+' &middot; '+DATA_CREDIT})},
   satellite:{label:'Satellite',sw:'#37503a',make:()=>L.layerGroup([
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:8,attribution:_cr.esri+' &middot; '+DATA_CREDIT}),
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:8})])}
 };
-const BASE_ORDER=['relief','voyager','dark','satellite'];
-const DEFAULT_BASE='relief';
+const BASE_ORDER=['voyager','dark','satellite'];
+const DEFAULT_BASE='satellite';
 const _baseCache={}; let _baseKey=null,_baseLayer=null;
 function _mkBase(k){ return _baseCache[k]||(_baseCache[k]=BASES[k].make()); }
 function setBase(key){
