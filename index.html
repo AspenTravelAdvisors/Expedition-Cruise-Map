@@ -190,6 +190,17 @@
   .setupNote[open] summary:before{content:"\25BE "}
   .setupNote p{font-size:12.5px;margin:8px 0}
   @media (max-width:640px){.rail{display:block;top:70px;left:12px;right:12px;width:auto;max-height:none;background:transparent;border:0;box-shadow:none;backdrop-filter:none}.rail h2,.rail .railscroll,.rail .reset{display:none}.filterbtn{margin:0;background:rgba(17,21,29,.94);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.datepop{left:12px;right:12px;top:132px;width:auto;max-width:none}.panel{width:100%}.topbar p{display:none}.partner span{display:none}.logochip.mark{height:42px}.logochip.mark img{height:30px;max-width:120px}.hint{display:none}.leaflet-bottom.leaflet-left{bottom:18px}}
+  /* ── base-map style picker ─────────────────────────────────────────────── */
+  .stylectl{font-family:var(--sans);user-select:none}
+  .stylectl .scmenu{display:none;flex-direction:column;gap:2px;margin-bottom:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:5px;box-shadow:0 10px 28px rgba(0,0,0,.55)}
+  .stylectl.open .scmenu{display:flex}
+  .stylectl .scitem{display:flex;align-items:center;gap:8px;background:transparent;border:0;color:var(--ink);border-radius:7px;padding:7px 10px;font-size:12px;cursor:pointer;text-align:left;font-family:var(--sans);white-space:nowrap}
+  .stylectl .scitem:hover{background:var(--panel2)}
+  .stylectl .scitem.active{color:var(--accent)}
+  .stylectl .scbtn{display:flex;align-items:center;gap:7px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:7px 11px;font-size:12px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.45);font-family:var(--sans)}
+  .stylectl .scbtn:hover{border-color:var(--accent)}
+  .stylectl .scbtn .car{color:var(--muted);font-size:9px}
+  .stylectl .sw{width:13px;height:13px;border-radius:4px;border:1px solid rgba(255,255,255,.22);flex:0 0 auto}
 </style>
 <style id="bvnav-css">
 /* Cross-atlas top nav — copied from Base Camp (The Guide). Self-contained; sits inside the existing .topbar so no map/rail/search offsets change. */
@@ -349,9 +360,43 @@ requestAnimationFrame(stabilize);setTimeout(stabilize,300);setTimeout(stabilize,
 window.addEventListener('resize',stabilize);window.addEventListener('orientationchange',stabilize);
 L.control.zoom({position:'bottomleft'}).addTo(map);
 window.__atlasMap=map;
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
-  attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics &middot; Expedition data: Brian Harris / Virtuoso',maxZoom:8
-}).addTo(map);
+/* ── base-map styles + picker (default / dark / satellite, swappable) ────── */
+const DATA_CREDIT='Expedition data: Brian Harris / Virtuoso';
+const _cr={esri:'Imagery &copy; Esri, Maxar, Earthstar Geographics',relief:'Shaded relief &copy; Esri',carto:'&copy; OpenStreetMap contributors &copy; CARTO'};
+const BASES={
+  relief:{label:'Relief',sw:'#9caf96',make:()=>L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}',{maxZoom:8,attribution:_cr.relief+' &middot; '+DATA_CREDIT})},
+  voyager:{label:'Voyager',sw:'#cfe0ec',make:()=>L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png',{maxZoom:8,subdomains:'abcd',attribution:_cr.carto+' &middot; '+DATA_CREDIT})},
+  dark:{label:'Dark',sw:'#10141b',make:()=>L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:8,subdomains:'abcd',attribution:_cr.carto+' &middot; '+DATA_CREDIT})},
+  satellite:{label:'Satellite',sw:'#37503a',make:()=>L.layerGroup([
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:8,attribution:_cr.esri+' &middot; '+DATA_CREDIT}),
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:8})])}
+};
+const BASE_ORDER=['relief','voyager','dark','satellite'];
+const DEFAULT_BASE='relief';
+const _baseCache={}; let _baseKey=null,_baseLayer=null;
+function _mkBase(k){ return _baseCache[k]||(_baseCache[k]=BASES[k].make()); }
+function setBase(key){
+  if(!BASES[key]||key===_baseKey) return;
+  const next=_mkBase(key); next.addTo(map);
+  if(_baseLayer&&_baseLayer!==next) map.removeLayer(_baseLayer);
+  _baseLayer=next; _baseKey=key;
+  const sc=document.querySelector('.stylectl');
+  if(sc){ sc.querySelectorAll('.scitem').forEach(b=>b.classList.toggle('active',b.dataset.k===key));
+    sc.querySelector('.scbtn .sw').style.background=BASES[key].sw;
+    sc.querySelector('.scbtn .lbl').textContent=BASES[key].label; }
+}
+const StyleCtl=L.Control.extend({options:{position:'bottomright'},onAdd:function(){
+  const c=L.DomUtil.create('div','stylectl');
+  c.innerHTML='<div class="scmenu">'+BASE_ORDER.map(k=>'<button class="scitem" type="button" data-k="'+k+'"><i class="sw" style="background:'+BASES[k].sw+'"></i>'+BASES[k].label+'</button>').join('')+'</div>'+
+    '<button class="scbtn" type="button" title="Map style"><i class="sw"></i><span class="lbl"></span><span class="car">&#9662;</span></button>';
+  L.DomEvent.disableClickPropagation(c); L.DomEvent.disableScrollPropagation(c);
+  c.querySelector('.scbtn').addEventListener('click',function(e){e.stopPropagation();c.classList.toggle('open');});
+  c.querySelectorAll('.scitem').forEach(function(b){b.addEventListener('click',function(){setBase(b.dataset.k);c.classList.remove('open');});});
+  return c;
+}});
+map.addControl(new StyleCtl());
+document.addEventListener('click',function(){var sc=document.querySelector('.stylectl');if(sc)sc.classList.remove('open');});
+setBase(DEFAULT_BASE);
 if(window.setAtlasProgress) window.setAtlasProgress(34,'Rendering the expedition map...');
 
 let atlas=null;
