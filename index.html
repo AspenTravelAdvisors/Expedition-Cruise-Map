@@ -659,6 +659,21 @@ function boot(a){
   let pinnedSailing=null, routeLocked=false;
   const routeLayer=L.layerGroup().addTo(map);
   function clearRoute(){ routeLayer.clearLayers(); Object.values(markers).forEach(o=>o.el.classList.remove('route')); markRoutedCard(null); }
+  /* Keep dateline-crossing routes visible when dragging across the world-copy
+     seam: Leaflet doesn't repaint vector layers in adjacent copies, so re-anchor
+     the whole route layer to whichever copy is now centered. */
+  function reanchorRoutes(){
+    let lo=Infinity,hi=-Infinity;
+    const scan=ll=>{ if(ll.lng<lo)lo=ll.lng; if(ll.lng>hi)hi=ll.lng; };
+    const walk=v=>{ if(Array.isArray(v)) v.forEach(walk); else scan(v); };
+    routeLayer.eachLayer(l=>{ if(l.getLatLngs) walk(l.getLatLngs()); else if(l.getLatLng) scan(l.getLatLng()); });
+    if(lo===Infinity) return;
+    const delta=Math.round((map.getCenter().lng-(lo+hi)/2)/360)*360;
+    if(!delta) return;
+    const bump=v=>Array.isArray(v)?v.map(bump):[v.lat,v.lng+delta];
+    routeLayer.eachLayer(l=>{ if(l.setLatLngs) l.setLatLngs(bump(l.getLatLngs())); else if(l.setLatLng){ const p=l.getLatLng(); l.setLatLng([p.lat,p.lng+delta]); } });
+  }
+  map.on('move',reanchorRoutes);
   function markRoutedCard(s){
     let hit=null;
     document.querySelectorAll('.card').forEach(c=>{ const on=s&&c._sailing===s; c.classList.toggle('routed',on); if(on)hit=c; });
