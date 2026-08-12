@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+<defs>
+<linearGradient id="expedition-bg" x1="0" y1="0" x2="0.35" y2="1">
+<stop offset="0" stop-color="#123a44"/><stop offset="1" stop-color="#04161c"/>
+</linearGradient>
+<linearGradient id="expedition-acc" x1="0.1" y1="0" x2="0.9" y2="1">
+<stop offset="0" stop-color="#a7ecf6"/><stop offset="1" stop-color="#3aa8bd"/>
+</linearGradient>
+<radialGradient id="expedition-sheen" cx="0.28" cy="0.1" r="0.95">
+<stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+<stop offset="0.62" stop-color="#ffffff" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<rect x="32" y="32" width="960" height="960" rx="216" fill="url(#expedition-bg)"/>
+<rect x="32" y="32" width="960" height="960" rx="216" fill="url(#expedition-sheen)"/>
+<rect x="46" y="46" width="932" height="932" rx="202" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="4"/>
+<path d="M686 262l190 322H496z" fill="#ffffff" fill-opacity="0.26"/>
+<path d="M626 430l60-92 58 92z" fill="#ffffff" fill-opacity="0.5"/>
+<rect x="330" y="386" width="286" height="160" rx="20" fill="#ffffff" fill-opacity="0.92"/>
+<g fill="#3a3f46" fill-opacity="0.8">
+<rect x="366" y="424" width="52" height="44" rx="8"/><rect x="440" y="424" width="52" height="44" rx="8"/>
+<rect x="514" y="424" width="52" height="44" rx="8"/>
+</g>
+<path d="M596 300h92v86h-92z" fill="url(#expedition-acc)"/>
+<path d="M188 584h648l-100 168H288z" fill="url(#expedition-acc)"/>
+<path d="M172 812c58 0 58 34 116 34s58-34 116-34 58 34 116 34 58-34 116-34 58 34 116 34" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="22" stroke-linecap="round"/>
+</svg>
